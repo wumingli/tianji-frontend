@@ -4,3 +4,7 @@
 *.jar
 *.war
 *.ear
+
+#Package Directory#
+node_modules
+dist
