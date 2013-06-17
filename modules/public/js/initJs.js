@@ -10,7 +10,7 @@
 **clearCache用来清除启动文件本身的缓存值
 **dynamic=true设置是否启用动态文件合并，接口预留
 =================================================
-<script type="text/javascript" src="http://www.wml.com/frontend/modules/public/publicInit.js?test1=www.wml.com/frontend/modules/test/js/&test2=www.test.com/frontend/modules/test/js/&swfobject=http://static.tianji.com/javascripts/uploadify/&clearCache=randomNumber&dynamic=true" id="pageScriptInit"></script>
+<script type="text/javascript" src="http://www.wml.com/frontend/modules/public/publicInit.js?test1=www.wml.com/frontend/modules/test/js/&test2=www.test.com/frontend/modules/test/js/&swfobject=http://static.tianji.com/javascripts/uploadify/&test3=http://static.tianji.com/javascripts/uploadify/&clearCache=randomNumber&dynamic=true" id="pageScriptInit"></script>
 =================================================
 **参数说明：文件与URL前缀成对出现，如：jquery=www.jquery.com/js/
 */
@@ -19,24 +19,24 @@
     var urlString = document.getElementById('pageScriptInit').src,
         arrFileList = '',
         map = {};
-    if (urlString.indexOf('dynamic') == -1 && urlString.indexOf('?') > -1){
+    //if (urlString.indexOf('dynamic') == -1 && urlString.indexOf('?') > -1){
+    if(urlString.indexOf('?') > -1){
         arrFileList = urlString.substring(urlString.indexOf('?')+1).split('&');
         //版本控制
         map = {
-            'function.min': '?v=1.0.1',
-            'city.min':'?=1.0.1',
-            'industry.min':'?=1.0.1',
-            'initFunction':'?=1.0.1'
+            'test2': '?v=1.0.1',
+            'test3': '?v=1.0.1'
         }
         for (var i=0; i<arrFileList.length; i++){
             var arrFile = arrFileList[i].split('=');
-            if (arrFile[0] == 'clearCache'){
+            if (arrFile[0] == 'clearCache' || arrFile[0] == 'dynamic'){
                 continue;
             }
             var fileName = arrFile[0].indexOf('.js') > 0 ? arrFile[0] : arrFile[0] + '.js';
             var hasHttp = arrFile[1].indexOf('http') > -1 ? '' : 'http://';
             var cacheStr = arrFile[0] in map ? map[arrFile[0]] : '';
-            $LAB.script(hasHttp + arrFile[1] + fileName + cacheStr).wait();
+            //$LAB.script(hasHttp + arrFile[1] + fileName + cacheStr).wait();
+            document.write('<script src="'+hasHttp + arrFile[1] + fileName + cacheStr+'" type="text/javascript"></scr'+'ipt>');
         }
     }
 })();
