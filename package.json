@@ -1,4 +1,12 @@
 {
+  "name": "common",
+  "version": "1.0.3-dev",
+  "description": "tianji common javascript project",
+  "main": "Gruntfile.js",
+  "author": "wumingli",
+  "dependencies": {
+    "jquery": "~1.7.2"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-compress": "~0.5.0",

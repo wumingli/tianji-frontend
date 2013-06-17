@@ -31,11 +31,10 @@ style:{		//可定义部分样式
 */
 
 (function($){
-	$.fn.msIndustryPlugin = function(options)
+	$.fn.msJobPlugin = function(options)
 	{
-	
 		var defaults = {
-			type:'industry',
+			type:'job',
 			check:'checkbox',
 			maxCount:5,
 			column:6,
@@ -65,32 +64,40 @@ style:{		//可定义部分样式
 		msPick.id="";
 		switch(msPick.type)
 		{
-			case 'industry':
-			msPick.id = "msPickindustry";
-			msPick.structure ="<div class='ms-pick' id='"+msPick.id+"'>"+
+			
+			case 'job':
+			msPick.id = "msPickJob";
+			msPick.structure ="<div class='ms-pick' id='"+msPick.id+"' style='width:600px'>"+
 							    "<div class='w-h-tab-component'>"+
 							        "<ul class='h-tab clear'>"+
-							            "<li class='tab-menu-component active'>常用行业</li>"+
-							            "<li class='tab-menu-component'>行业选择</li>"+
+							            "<li class='tab-menu-component'>职能选择</li>"+
 							        "</ul>"+
 							    	"<a class='close-component' href='javascript:;'>删除</a>"+
 							    "</div>"+
 							    "<div class='c-tab'>"+
-							        "<div class='tab-con-component'>"+
-							            "<div class='common'>"+
-							            "</div>"+
-							        "</div>"+
-							    "<div class='tab-con-component tab-con-width' style='display:none'>"+
-							            "<div class='otherAll'>"+
+							    	"<div class='tab-con-component tab-con-width' style='width:583px'>"+
+							            "<div class='otherAll' style='height:300px; overflow-y:auto;'>"+
 							            "</div>"+
 							        "</div>"+
 							    "</div>"+
 							"</div>";
-			msPick.allData = industryData.industry;
+
+			msPick.allData = 
+		  	{
+				"nodes":[]
+			};
 		  	msPick.listData = 
 			{
 				"nodes":[]
 			};
+			for(var i=0;i<jobData.job.length;i++)
+			{
+				for(var j=0;j<jobData.job[i].nodes.length;j++)
+				{
+					msPick.allData.nodes.push(jobData.job[i].nodes[j]);
+				}
+				
+			}
 			for(var i=0;i<msPick.allData.nodes.length;i++)
 			{
 				for(var j=0;j<msPick.allData.nodes[i].nodes.length;j++)
@@ -99,7 +106,7 @@ style:{		//可定义部分样式
 				}
 			}
 			break;
-		
+
 		}
 
 

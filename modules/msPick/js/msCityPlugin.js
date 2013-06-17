@@ -210,10 +210,36 @@ style:{		//可定义部分样式
 			if(msPick.init.length>0)
 			{
 				var arr = [];
-				for(var i=0;i<msPick.init.length;i++)
+				if(msPick.type == "city")
 				{
-					arr.push(msPick.init[i].code);
+					for(var i=0;i<msPick.init.length;i++)
+					{
+
+						for(var j=0;j<msPick.allData.nodes.length;j++)
+						{
+							for(var k=0;k<msPick.allData.nodes[j].nodes.length;k++)
+							{
+								//console.log(msPick.allData.nodes[j].nodes[k].code);
+								//console.log(msPick.init[i].code)
+
+								var tempVal = msPick.allData.nodes[j].nodes[k].code.split("-")[2];
+								//console.log(tempVal);
+								if(msPick.init[i].code == tempVal)
+								{
+									arr.push(msPick.allData.nodes[j].nodes[k].code)
+								}
+							}
+						}
+					}
 				}
+				else
+				{
+					for(var i=0;i<msPick.init.length;i++)
+					{
+						arr.push(msPick.init[i].code);
+					}
+				}
+				
 				return arr;
 			}
 			else
@@ -243,10 +269,10 @@ style:{		//可定义部分样式
 				var codeArr=[];
 				for(var i=0;i<this.init.length;i++)
 				{
-					strA += "<a href='javascript:;' class='ms-selected-item' rel="+this.init[i].code+">"+
+					strA += "<a href='javascript:;' class='ms-selected-item' rel="+conf.msCheckInputArr[i]+">"+
 		                "<span class='text'>"+this.init[i].name+"</span>"+
 		                "<span class='delete-component'>删除</span></a>";
-		            codeArr.push(this.init[i].code);
+		            codeArr.push(conf.msCheckInputArr[i]);
 				}
 
 				$(strA).insertBefore($this.find(".ms-txt-component"));
@@ -254,6 +280,7 @@ style:{		//可定义部分样式
 
 
 				conf.aMsCb = this.createDiv.find(".ms-cb-cb");
+				//alert(conf.msCheckInputArr)
 	        	for(var i =0;i<conf.msCheckInputArr.length;i++)
 	        	{
 	        		for(var j=0;j<conf.aMsCb.length;j++)
@@ -297,12 +324,14 @@ style:{		//可定义部分样式
 			var $msTxt = $this.find(".ms-txt-component");
 			
 
-			$txtBox.on("click",function(){
+			$txtBox.on("click",function(event){
 				$(".ms-pick").hide();
 				msPick.createDiv.show();
 				msPick.mpPosition();
 				$msTxt.focus();
+				event.stopPropagation();
 			})
+
 
 			$msTxt.on("keyup",function(event){
 
@@ -739,7 +768,15 @@ style:{		//可定义部分样式
 		$(window).resize(function() {
 	    	msPick.mpPosition()
 		});
-	
+
+		$(document).on("click",function(event){
+
+			$(".ms-pick").hide();
+		})
+
+		$(".ms-pick").on("click",function(event){
+			event.stopPropagation();
+		})
 
 		return this;
 	}

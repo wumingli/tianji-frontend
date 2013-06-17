@@ -1,0 +1,189 @@
+
+
+.home_left .my_recruitment{width:188px;border:1px solid #E2DCD8; margin-bottom: 15px; _margin-bottom: 0px;}
+.home_left .my_recruitment h4{position:relative; height:32px; background:#F8F7F5; border-bottom:1px solid #E2DCD8;  }
+.home_left .my_recruitment h4 span{height:32px; line-height:32px; display:inline-block;color:#666; font-size:12px; font-weight:bold; padding-left:10px;}
+.home_left .my_recruitment h4 a{position:absolute; top:11px; right:7px; color:#777777; font-size:12px; font-weight: normal;}
+.home_left .my_recruitment .resume_new_post{color:#666; background-color: #ffffff;}
+.home_left .my_recruitment .resume_new_post li{position:relative; height:30px;}
+.home_left .my_recruitment .resume_new_post .get_resume{padding-left:10px; line-height:30px;}
+.home_left .my_recruitment .resume_new_post .get_resume a{ color: #333333;}
+.home_left .my_recruitment .resume_new_post .resume_num{position:absolute; right:13px; top:7px; background-color: #E95C45; width: 21px; height: 15px; text-align: center; line-height: 15px; color: #ffffff;border-radius:5px; white-space:nowrap;}
+
+/* ueser_people */
+.recommend_panel{width: 508px; overflow: hidden; float: left; border: 1px solid #E2DCD8; margin-top: 15px; display: inline; padding-top: 1px; background-color: #ffffff;_padding-bottom: 10px;*padding-bottom: 10px;}
+.recommend_panel h4{position:relative;height:30px; padding-left:10px; line-height:30px; background:#f8f8f8; font-size:12px; font-weight:bold; color:#545454; border-bottom: 1px solid #E2DCD8; border-top: 1px solid #ffffff;}
+
+.recommend_panel h4 .recomm_icon{height: 26px; overflow: hidden; position: absolute; right: 0px; top: 0px;}
+.recommend_panel h4 .recomm_icon img{float: left; margin-right: 10px; margin-top: 4px;}
+.recommend_panel .recomm_list{width: 510px; float: left; border-bottom: 1px solid #DDDDDD; height: 95px;}
+
+
+
+
+.recommend_panel .recomm_list{width: 510px; float: left; border-bottom: 1px dashed #DDDDDD; height: 95px;}
+.recommend_panel .recomm_list li{width: 47px;float: left; margin-left: 14px; margin-top: 10px; margin-bottom: 10px; position: relative; display: inline;}
+.recommend_panel .recomm_list li .poster{width: 45px; height: 50px; float: left;}
+.recommend_panel .recomm_list li .poster img{width: 45px; height: 50px;}
+.recommend_panel .recomm_list li .poster_current{width:49px; height:54px;background:url(/images/home_new/user_img_hover.png) no-repeat; position: absolute; left:-2px; top: -2px;}
+.recommend_panel .recomm_list li .name{width: 43px; height: 20px; line-height: 20px; text-align: center;overflow:hidden; text-align: center; white-space:nowrap; float: left; display: block; margin-top:5px; word-break: all-break;}
+.recommend_panel .add_recomm_btn{width:60px; height:24px; float:left;background:url(/images/home_new/hu_add.jpg) no-repeat;
+ margin: 10px 0px 10px 214px; display: inline; line-height:24px; text-align:left; padding-left:26px;}
+.recommend_panel .add_recomm_btn a{color: #ffffff; text-decoration: none;}
+
+
+/* by liujuan */
+.recommend_panel .recomm_find_list{width:510px; float:left; height:83px;}
+.recommend_panel .recomm_find_list li{width:47px; float:left; margin:10px 0 10px 14px; position:relative; display:inline;}
+.recommend_panel .recomm_find_list li .recomm_add_fri{width:45px; height:50px; float:left;}
+.recommend_panel .recomm_find_list li .poster,.recommend_panel .recomm_find_list li .recomm_add_fri{border:2px solid #e8e4e1;}
+.recommend_panel .recomm_find_list li .poster,.recommend_panel .recomm_find_list li .recomm_add_fri img{width: 45px; height: 50px;}
+.recommend_panel .recomm_find_list li .recomm_add_btn a{background:url(/images/home_new/comm_add_friend.png) no-repeat; width:49px; height:54px; display:inline-block;}
+.recommend_panel .recomm_find_list li .recomm_add_btn a:hover{background:url(/images/home_new/comm_add_now.png) no-repeat;}
+.recommend_panel .recomm_find_list li .border_none{border:none;}
+
+.recommend_panel h4 strong{color:#d20000; font-weight:bold; font-size:14px;}
+.recommend_panel h4 .recomm_icon a{height:32px; line-height:17px;}
+.recommend_panel h4 .recomm_icon a.recomm_find{padding-right:12px;font-weight: normal;}
+
+
+
+
+.feeds_list .data .build_relation{float:left;}
+.feeds_list .data .build_relation .build_relation_img{float:left;}
+.feeds_list .data .build_relation .build_relation_img li{float:left; height:50px; overflow:hidden; padding:2px; width:45px; border:1px solid #ccc; margin-right:14px; display:inline; }
+.feeds_list .data .build_relation .build_right{float:left; width:10px; height:27px; margin-top:12px;}
+.feeds_list .data .build_relation .build_right a{float:left; width:10px; height:27px; background:url(/images/home_new/feed_build_relation.jpg) no-repeat;}
+.feeds_list .data .open_more{float:left; width:100%; margin-top:5px;}
+.feeds_list .data .open_more a{float:left; background:url(/images/home_new/feed_down.jpg) no-repeat right center; width:127px;}
+.feeds_list .data .feed_buddy{width:200px; float:left;}
+.feeds_list .data .feed_buddy .feed_user{float:left; width:45px; height:50px; border:1px solid #e8e4e1; padding:2px;}
+.feeds_list .data .feed_buddy .feed_user img{width:45px; height:50px;}
+.feeds_list .data .feed_buddy dl{float:left; width:140px; line-height:20px; color:#777; text-indent:14px;}
+.feeds_list .data .feed_buddy dt{float:left; width:90px; height:20px; overflow:hidden;}
+.feeds_list .data .feed_buddy dt a{color:#005eac;}
+.feeds_list .data .feed_buddy dd .feed_btn{float:left; background:url(/images/home_new/feed_btn.jpg) no-repeat; margin-left:14px; width:47px; height:20px; display:inline;}
+.feeds_list .data .feed_buddy dl .feed_friend_btn{background:url(/images/home_new/feed_friend_btn.jpg) no-repeat; width:49px; height:22px; color:#959595; margin-left:14px; line-height:22px;}
+.feeds_list .data .feed_buddy dd.add_button{width:49px; height: 22px;background:url(/images/home_new/body_btn_bg.png) no-repeat -25px -501px; font-size: 12px; color: #838A96; line-height: 22px; text-align: left; float: left; margin-left: 12px; }
+.feeds_list .data .feed_buddy dd.add_button a{color: #838A96; text-decoration: none; width:42px; height: 22px; float: left;padding-left: 6px;}
+.feeds_list .data .feed_buddy dd.add_button a:hover{background:url(/images/home_new/body_btn_bg.png) no-repeat -23px -377px; color: #ffffff;}
+.feeds_list .data .feed_buddy dd.feed_pro{width:140px; height:20px; overflow:hidden;}
+
+.verify_btn_upload a,.verify_rightnow a{color:#fff; text-decoration:none;}
+/* end by liujuan */
+
+/* home pop.css */
+.pop{position:absolute; width:390px; height:195px; overflow:hidden; background:url(/images/case1/login/popup_two.gif) repeat-x; border:1px solid #7a7a7a; border-radius:2px; z-index:1112;}
+.pop .pop_head h3{float:left; font-size:16px; color:#2b2b2b; font-weight:bold; line-height:30px; margin-top:3px; text-indent:12px;}
+.pop .pop_head a{float:right; background:url(/images/case1/login/popup_rtop.jpg) no-repeat; width:13px; height:13px; padding-right:12px; margin-top:15px;}
+.pop .pop_text{height:78px; color:#2b2b2b; background:url(/images/case1/login/pop_up_centerbg.jpg) no-repeat 73px 68px; color:#2b2b2b; padding:81px 26px 0 124px; line-height:22px;}
+.pop .pop_btn a{float:left; background:url(/images/case1/login/popup_btnT.jpg) no-repeat; width:72px; height:32px; margin-left:141px; display:inline;}
+/* end home pop.css */
+
+
+.new_check_email {
+    background: none repeat scroll 0 0 #FFFBE8;
+    border: 1px solid #EDE9D3;
+    color: #6D6C6C;
+    height: 38px;
+    margin-bottom:5px;
+    width: 978px;
+}
+.new_check_email p {
+    float: left;
+    line-height: 38px;
+    margin-left: 24px;
+}
+.new_check_email .new_useremail {
+    color: #000000;
+}
+.new_check_email .new_email_btn {
+    background: url("/images/case1/login/new_check_email.gif") no-repeat scroll 0 0 transparent;
+    color: #3E3E3E;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    margin: 0 9px 0 14px;
+    text-align: center;
+    width: 99px;
+}
+.new_check_email .new_send_again {
+    text-decoration: underline;
+}
+.new_check_email .new_close_btn {
+    background: url("/images/close.jpg") no-repeat scroll 0 0 transparent;
+    display: inline;
+    float: right;
+    height: 10px;
+    margin: 13px 8px 0 0;
+    overflow: hidden;
+    width: 12px;
+}
+
+
+ul.interestjoblist {padding-left:12px;}
+ul.interestjoblist a {display:block; height:21px; line-height:21px; overflow: hidden;}
+ul.interestjoblist p {display:block; height:21px; line-height:21px; color:#666; overflow:hidden;}
+.right_panel .more1{position:absolute;right:45px;}
+
+div.tianji_news {background:#ffffff; margin-top:22px; padding:12px 8px; overflow:hidden; width: 232px; margin-top: 10px;border: 1px solid #E2DCD8;}
+div.tianji_news span.poster {display:block; float:left; width:80px; height:60px; overflow:hidden; margin-right:6px; padding:2px; background:#fff; border:1px solid #d8d8d8;}
+div.tianji_news span.poster img {width:80px; height:60px;}
+div.tianji_news h4 {height:21px; line-height:21px; overflow:hidden; width: 140px;float: left;}
+div.tianji_news h4 a {color:#666; font-size:12px;}
+div.tianji_news p { width:140px;  padding-top:4px; max-height:54px;line-height:18px; overflow:hidden; font-size:12px; color:#999;float: left; height: 50px;}
+
+/*new_home*/
+.new_home_poster{width: 190px; height: 123px; float: left;background:url(/images/home_new/home_new.png) no-repeat;outline:none; margin-bottom: -5px;}
+.new_home_profile{width: 190px; height: 90px; float: left;background:url(/images/home_new/home_new3.png) no-repeat;margin: -10px 0px 15px 0px; display: inline; _margin-top: 10px;outline:none;}
+.new_home_jingying{width: 250px; height:95px; float: left;background:url(/images/home_new/home_new2.png) no-repeat; margin-bottom: -10px; display: inline;outline:none;}
+.new_home_recommd{width: 260px; height:80px; float: left;background:url(/images/home_new/firend_pomit.png) no-repeat; margin-bottom: 15px; display: inline;outline:none; margin-left: -10px;}
+.new_home_work{width: 250px; height:124px; float: left;background:url(/images/home_new/home_work.png) no-repeat; margin-top: 15px; display: inline;}
+.new_home_work .work_btn{ width:50px; height: 20px; float: right; font-size: 12px; text-align: center; line-height: 20px; margin: 9px 9px 0px 0px; display: inline; color: #ffffff; text-decoration: none;}
+.new_home_work .school_btn{ width:50px; height: 20px; float: right; font-size: 12px; text-align: center; line-height: 20px; margin: 72px -48px 0px 0px; display: inline; color: #ffffff; text-decoration: none;}
+.new_home_job{width:508px; overflow: hidden; float: left; border: 1px solid #E2DCD8; background-color: #FFFFFF; _padding-bottom: 10px;*padding-bottom: 10px;}
+.new_home_job h4{background: none repeat scroll 0 0 #F8F8F8;border-bottom: 1px solid #E2DCD8;border-top: 1px solid #FFFFFF;color: #545454;font-size: 12px;font-weight: bold;height: 32px;line-height: 32px;padding-left: 10px;position: relative;}
+.new_home_job h4 a{color: #777777;font-size: 12px;font-weight: normal;position: absolute;right: 10px;top: 0;z-index: 2;}
+.new_home_job h4 .edit_btn{height: 14px; overflow: hidden; font-size: 12px; line-height: 14px;font-weight: normal;
+ position: absolute; right: 0px; top: 9px;background:url(/images/home_new/header_icon.png) no-repeat 0px -148px; padding-left: 70px;}
+.new_home_job h4 .edit_btn a{color: #777777; position: none;}
+.new_home_job h4 .edit_btn img{float: left; margin-right:49px;}
+.new_home_job .interestjoblist{width: 498px; overflow: hidden; float: left; margin: 10px 0px 10px 0px; padding: 0px;}
+.new_home_job .interestjoblist li{ width: 233px; overflow: hidden; float: left; border-bottom: 1px dashed #E7E4E0; padding-bottom: 10px; margin-bottom: 10px; margin-left: 15px; display: inline;}
+.new_home_job .interestjoblist li a{width: 230px; height: 20px; line-height: 20px; float: left; font-size: 12px;}
+.new_home_job .interestjoblist li p{width: 230px; height: 20px; line-height: 20px; float: left; font-size: 12px; color: #545454;}
+
+.new_feed{width: 458px; overflow: hidden; float: left; border: 1px dashed #FFCA88; background-color: #FFFBE5; margin-left: 10px; padding: 15px; margin-bottom: 10px;display: inline;}
+.new_feed h3{ height: 20px; line-height: 20px; float: left; color: #545454; font-weight: normal; font-size: 12px;}
+.new_feed h3 span{ color: #E65A44;}
+.new_feed .feed_input{ float: left; width: 360px; height: 30px;background:url(/images/home_new/new_feeds_input.jpg) no-repeat; line-height: 30px; color: #A9A9A9; padding-left:10px; margin: 10px 0px 0px 0px;_background: fixed; _border: 1px solid #cccccc;*background: fixed;*border: 1px solid #cccccc; _background-color: #ffffff;*background-color: #ffffff; }
+.new_feed .feed_submit{ width: 65px; height: 30px; float: left;background:url(/images/home_new/feed_new_sch.jpg) no-repeat; line-height: 30px; color: #ffffff; font-size: 16px; font-family: '微软雅黑'; margin: 10px 0px 0px 5px; cursor:pointer;}
+.job_nomel{text-align: center; line-height: 20px; color: #545454; overflow: hidden; border: 1px dashed #FFCA88; background-color: #FFFBE5;  padding: 15px;margin: 10px auto; margin-left: 10px; margin-right: 10px;  }
+.job_nomel .font_z{color: #545454; text-decoration: none;}
+
+
+.new_home_job .add_pop_list{width: 485px; overflow: hidden; float: left; margin: 15px 0px 0px 10px; display: inline;border-bottom: 1px dashed #E5E4DF; padding-bottom: 3px;}
+.new_home_job .add_pop_list li{width: 160px; height:60px; float: left; overflow: hidden; margin-bottom: 7px; position: relative; }
+.new_home_job .add_pop_list li .poster{width: 45px; height: 50px; float: left; border: 2px solid #CCCCCC; margin-right: 10px;}
+.new_home_job .add_pop_list li .poster img{width: 100%; height: 100%; float: left;}
+.new_home_job .add_pop_list li .name{width: 90px; height: 20px; float: left; font-size: 12px; color: #777777; line-height: 20px; overflow: hidden;}
+.new_home_job .add_pop_list li .poster_current{width:49px; height:54px;background:url(/images/home_new/user_img_hover.png) no-repeat; position: absolute; left:0px; top: 0px;}
+.new_home_job .add_firend_btn{width: 86px; height: 24px; float: left;background:url(/images/home_new/add_firend_btn.jpg) no-repeat; line-height: 24px; font-size: 12px; color: #ffffff; margin: 20px 0px 20px 215px; display: inline; }
+.new_home_job .add_firend_btn a{ width: 61px; height: 24px;padding-left: 25px; float: left;color: #ffffff; text-decoration: none; }
+.new_home_job .add_firend_btn a:hover{background:url(/images/home_new/add_firend_btn_hover.jpg) no-repeat;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
