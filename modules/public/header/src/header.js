@@ -14,6 +14,9 @@ define(function (require, exports, module){
                 data: {'user_id':curUID,'skip_ajax':true},
                 success: function (data){
                     $("#j_box_vistors .contacts_main").append(data);
+                    $("#j_box_vistors .contacts_main a").each(function (){
+                        $(this).attr('href','http://www.tianji.com'+$(this).attr('href'))
+                    });
                     var num = $("#j_box_vistors :hidden[name=new_visitors]").val();
                     $("#j_box_vistors .messages_list li:lt("+num+") img.none").show();
                 }
@@ -152,13 +155,13 @@ define(function (require, exports, module){
       
       //notices
       window.TIANJI_NOTICE_FORMATS = {
-        unread_messages_count : "您有#{v}条新私信,<a href='/messages'>查看</a>",
-        unread_comments_count : "您有#{v}条新评论,<a href='/comments'>查看</a>",
-        unread_fans_count : "您有#{v}个新粉丝,<a href='/contacts/fans'>查看</a>",
-        unread_walls_count : "您有#{v}条新留言,<a href='/p/walls'>查看</a>",
-        unread_friend_requests_count : "您有#{v}条新邀请,<a href='/contacts/invitation'>查看</a>",
-        unread_notices_count : "您有#{v}条新通知,<a href='/notices'>查看</a>",
-        unread_dmails_count: "",
+        unread_messages_count : "您有#{v}条新私信,<a href='http://www.tianji.com/messages'>查看</a>",
+        unread_comments_count : "您有#{v}条新评论,<a href='http://www.tianji.com/comments'>查看</a>",
+        unread_fans_count : "您有#{v}个新粉丝,<a href='http://www.tianji.com/contacts/fans'>查看</a>",
+        unread_walls_count : "您有#{v}条新留言,<a href='http://www.tianji.com/p/walls'>查看</a>",
+        unread_friend_requests_count : "您有#{v}条新邀请,<a href='http://www.tianji.com/contacts/invitation'>查看</a>",
+        unread_notices_count : "您有#{v}条新通知,<a href='http://www.tianji.com/notices'>查看</a>",
+        unread_dmails_count: "您有#{v}条新直邮,<a href='http://m.tianji.com/inbox/mrd'>查看</a>",
         unread_views_count : ""
       }
       window.TIANJI_NOTICES = [];
@@ -217,14 +220,6 @@ define(function (require, exports, module){
         });
 
         $("#j_box_pop .j_fork").live("click", function() {
-          //$.post("http://www.tianji.com/ajax/home/hide_notice");
-          /*var frame = document.createElement('iframe');
-          frame.src = 'http://www.tianji.com/ajax/home/hide_notice';
-          frame.style.display = 'none';
-          $.ajax({
-            url:'http://www.tianji.com/ajax/home/hide_notice',
-            dataType:'jsonp'
-          });*/
           $('#hideNotice').remove();
           $('<iframe />').attr({'src':'http://www.tianji.com/ajax/home/hide_notice','id':'hideNotice'})
                          .css('display','none')
@@ -266,6 +261,7 @@ define(function (require, exports, module){
       var url = window.location.href;
       var urlPath = window.location.pathname;
       var aUrlSplit = urlPath.split('/');
+      var sUrlReturn = '';
       var chanel = {
         'home': 0,
         'p': 1,
@@ -274,7 +270,6 @@ define(function (require, exports, module){
       };
       var isRemoveCur = (aUrlSplit[1] == 'p' && aUrlSplit.length > 2 && aUrlSplit[2] != curUID) 
           || url.indexOf('m.tianji') > 0 || url.indexOf('bbs.tianji') > 0 || url.indexOf('search.tianji') > 0;
-      console.log(isRemoveCur);
       var urlIndex = url.indexOf('job.tianji') > 0 ? 3 : chanel[aUrlSplit[1]];
       //是否标识当前
       if (isRemoveCur){
@@ -284,7 +279,8 @@ define(function (require, exports, module){
         $('.header_menu .left_menu li').eq(urlIndex).addClass('current').siblings().removeClass('current');
       }
       //修改切换语言URL
-      $('[the-id=look_see2] .message_main li:eq(1) span a').attr('href','http://www.tianji.com/setting/locale/'+$('#header').attr('the-to-Lan')+'?return_to='+url);
+      sUrlReturn = url.indexOf('search.tianji') > 0 ? '' : '?return_to='+url;
+      $('[the-id=look_see2] .message_main li:eq(1) span a').attr('href','http://www.tianji.com/setting/locale/'+$('#header').attr('the-to-Lan')+sUrlReturn);
     }
     exports.initHeader = initHeader;
 });
