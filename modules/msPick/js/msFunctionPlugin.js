@@ -150,32 +150,42 @@ style:{		//可定义部分样式
 
 		    $("#"+this.id).find(".otherAll").append($(foldHeadStr));
 
+		    var allCityTopStr = "";
+		    var allCityStr="";
 		    for(var i=0;i<totalLine;i++)
 		    {
-		        var allCityTopStr = "";
-		        var allCityStr="";
+		        var _allCityTopStr = "";
+		        var _allCityStr="";
 		        for(var j=i*this.column;j<(i+1)*this.column&&j<allDataLength;j++)
 		        {
 		        	
-		            allCityTopStr += "<span order="+j+" style='width:"+this.style.foldHeadWidth+"'><label>"+this.allData.nodes[j].name+"</label></span>";
-		            allCityStr +="<div class='fold-con-component' order="+j+"></div>";
+		            _allCityTopStr += "<span style='width:"+this.style.foldHeadWidth+"'><label>"+this.allData.nodes[j].name+"</label></span>";
+		            _allCityStr +="<div class='fold-con-component' ></div>";
 
 		        }
-		        $("#"+this.id).find(".foldable").eq(i).find(".fold-head-component").append($(allCityTopStr));
-		        $("#"+this.id).find(".foldable").eq(i).append($(allCityStr));
+
+		        allCityTopStr +=_allCityTopStr;
+		        allCityStr +=_allCityStr;
 		    }
 
+		    $("#"+this.id).find(".foldable").eq(i).find(".fold-head-component").append($(allCityTopStr));
+		    $("#"+this.id).find(".foldable").eq(i).append($(allCityStr));
+
+		    
 		    //将数据插入到每行
 		    var afoldCon = $("#"+this.id).find(".fold-con-component");
+
+		    var cityStr = "";
 		    for(var i=0;i<afoldCon.length;i++)
 		    {
-		        var cityStr = "";
+		        var _cityStr = "";
 		        for(var j=0;j<this.allData.nodes[i].nodes.length;j++)
 		        {
-		            cityStr +="<label class='ms-cb-component' style='width:"+this.style.msCbComponent+"'><input type="+this.check+" class='ms-cb-cb' name="+this.type+" value="+this.allData.nodes[i].nodes[j].code+" ms-cb-data="+this.allData.nodes[i].nodes[j].name+" />"+this.allData.nodes[i].nodes[j].name+"</label>";
+		            _cityStr +="<label class='ms-cb-component' style='width:"+this.style.msCbComponent+"'><input type="+this.check+" class='ms-cb-cb' name="+this.type+" value="+this.allData.nodes[i].nodes[j].code+" ms-cb-data="+this.allData.nodes[i].nodes[j].name+" />"+this.allData.nodes[i].nodes[j].name+"</label>";
 		        }
-		        afoldCon.eq(i).append($(cityStr));
+		        cityStr +=_cityStr;
 		    }
+		    afoldCon.eq(i).append($(cityStr));
 
 		    var aProvince = $("#"+this.id).find(".fold-head-component").find("span");
 		    //省会切换效果

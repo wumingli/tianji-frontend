@@ -18,14 +18,9 @@
 
 (function (){
     var urlString = document.getElementById('pageCssInit').src,
-        arrFileList = '',
-        map = {};
+        arrFileList = '';
     if (urlString.indexOf('?') > -1){
         arrFileList = urlString.substring(urlString.indexOf('?')+1).split('&');
-        //版本控制
-        map = {
-            'landinpage': '?v=1.0.0'
-        }
         for (var i=0; i<arrFileList.length; i++){
             var arrFile = arrFileList[i].split('=');
             if (arrFile[0] == 'clearCache'){

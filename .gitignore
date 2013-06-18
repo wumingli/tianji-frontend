@@ -5,7 +5,7 @@ target
 bin
 .bak
 .DS_Store	
-#dist
+dist
 node_modules
 compress
 .build

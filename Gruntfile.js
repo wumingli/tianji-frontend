@@ -1,6 +1,16 @@
 module.exports = function(grunt) {
+    var pkg = grunt.file.readJSON('package.json');
+    var mapStr = "/*dynamic generate js content for mapping version at  "+ grunt.template.today("yyyy-mm-dd hh:MM:ss") +" */\n" 
+                 + "var map = {\n" 
+                 + "'function.min': '?v=" + pkg.version+"'," 
+                 + "\n'city.min': '?v=" + pkg.version+"'," 
+                 + "\n'industry.min': '?v=" + pkg.version+"'," 
+                 //you can copy the line below ,and replace industry.min with your fileName
+                 //+ "\n'industry.min': '?v=" + pkg.version+"'," 
+                 + "\n'initFunction': '?v=" + pkg.version+"'"  
+                 + "\n};";
+    //map
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
         //拷贝
         copy :{
             msPick:{
@@ -56,6 +66,14 @@ module.exports = function(grunt) {
             industry : {
                 src : ['modules/msPick/js/industryData.js', 'modules/msPick/js/msIndustryPlugin.js'],
                 dest: 'dist/msPick/js/industry.min.js'
+            },
+            jsInit : {
+                src : ['modules/public/js/mapVersion.js', 'modules/public/js/initJs.js'],
+                dest: 'dist/common/initJs.min.js'
+            },
+            cssInit :  {
+                src : ['modules/public/js/mapVersion.js', 'modules/public/js/initCss.js'],
+                dest: 'dist/common/initCss.min.js'
             }
         },
         //JS文件压缩
@@ -67,7 +85,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'dist/',
-                    src: ['**/*.js', '!**/*-debug.js', '!**/*.html', '!**/*.css'],
+                    src: ['**/*.js', '!**/*-debug.js', '!**/*.html', '!**/*.css', '!common/mapVersion.js'],
                     dest: 'dist/'
                 }]
             }
@@ -100,7 +118,7 @@ module.exports = function(grunt) {
         compress: {
           zip: {
             options: {
-              archive: 'compress/tianji-frontend-<%= pkg.version %>.zip'
+              archive: 'compress/tianji-frontend-' + pkg.version + '.zip'
             },
             files: [
               {expand: true, cwd: 'dist/', src: ['**/*']},
@@ -122,7 +140,7 @@ module.exports = function(grunt) {
                     src: '*.zip',
                     filter: 'isFile',
                     // path on the server
-                    dest: '/home/jsrepository/js/tianji-frontend/<%= pkg.version %>'
+                    dest: '/home/jsrepository/js/tianji-frontend/' + pkg.version
                 }]
             },            
             deploy: {
@@ -168,8 +186,22 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-release');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   
-  grunt.registerTask('clear', ['clean']);
-  grunt.registerTask('build', ['clean', 'copy', 'concat', 'uglify', 'cssmin']);
-  grunt.registerTask('deploy',['clean', 'copy', 'concat', 'uglify', 'cssmin','compress','scp:deploy']);
-  grunt.registerTask('rel',['clean', 'copy', 'concat', 'uglify', 'cssmin','compress','release', 'scp:release']);
+  grunt.registerTask('clear', ['clean']);  
+
+  grunt.registerTask('build','build source files',function (){
+    grunt.file.write( 'modules/public/js/mapVersion.js', mapStr);
+    grunt.task.run(['clean', 'copy', 'concat', 'uglify', 'cssmin']);
+  });
+
+  
+  grunt.registerTask('deploy','build source files',function (){
+    grunt.file.write( 'modules/public/js/mapVersion.js', mapStr);
+    grunt.task.run(['clean', 'copy', 'concat', 'uglify', 'cssmin','compress','scp:deploy']);
+  });
+
+  grunt.registerTask('rel','build source files',function (){
+    grunt.file.write( 'modules/public/js/mapVersion.js', mapStr);
+    grunt.task.run(['clean', 'copy', 'concat', 'uglify', 'cssmin','compress','release','scp:release']);
+  });
+
 }
