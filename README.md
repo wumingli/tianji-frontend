@@ -27,9 +27,12 @@
 
 ## Instructions
     * "compress" contains .zip&.tar files with their version.
-    * "dist" is a local dir and created automatic,contains files be concated and uglified.
-    * "gallery" folder will be containing seajs and other libary like jquery etc.
-    * "modules" will be containing the independent module of ourselfs,like msPickPlugin developed by zhiwei;
+    * "dist" is a local dir and created automatic,contains files be 
+      concated and uglified.
+    * "gallery" folder will be containing seajs and other libary 
+      like jquery etc.
+    * "modules" will be containing the independent module of ourselfs,
+      like msPickPlugin developed by zhiwei;
       and it will be contains their css/images/pages/source.
       ** "public" contains public plugins and sources.
       ** "msPick"&"test1" is demo modules.
