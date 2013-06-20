@@ -136,13 +136,6 @@ style:{		//可定义部分样式
 		    var totalLine = Math.ceil(allDataLength/this.column);
 		    var foldHeadStr="";
 
-		    for(var i=0;i<totalLine;i++)
-		    {
-		       foldHeadStr += "<div class='foldable'><div class='fold-head-component'></div></div>";
-		    }
-
-		    $("#"+this.id).find(".otherAll").append($(foldHeadStr));
-
 		    var allCityTopStr = "";
 		    var allCityStr="";
 		    for(var i=0;i<totalLine;i++)
@@ -153,35 +146,26 @@ style:{		//可定义部分样式
 		        {
 		        	
 		            _allCityTopStr += "<span style='width:"+this.style.foldHeadWidth+"'><label>"+this.allData.nodes[j].name+"</label></span>";
-		            _allCityStr +="<div class='fold-con-component' ></div>";
+		            
+
+		            var _cityStr = "";
+			        for(var k=0;k<this.allData.nodes[j].nodes.length;k++)
+			        {
+			            _cityStr +="<label class='ms-cb-component' style='width:"+this.style.msCbComponent+"'><input type="+this.check+" class='ms-cb-cb' name="+this.type+" value="+this.allData.nodes[j].nodes[k].code+" ms-cb-data="+this.allData.nodes[j].nodes[k].name+" />"+this.allData.nodes[j].nodes[k].name+"</label>";
+			        }
+
+		            _allCityStr +="<div class='fold-con-component' >"+_cityStr+"</div>";
 
 		        }
 
-		        allCityTopStr +=_allCityTopStr;
-		        allCityStr +=_allCityStr;
+		        allCityTopStr += "<div class='foldable'><div class='fold-head-component'>"+_allCityTopStr+"</div>"+_allCityStr+"</div>";
 		    }
-
-		    $("#"+this.id).find(".foldable").eq(i).find(".fold-head-component").append($(allCityTopStr));
-		    $("#"+this.id).find(".foldable").eq(i).append($(allCityStr));
+		    $("#"+this.id).find(".otherAll").append($(allCityTopStr));
 
 		    
-		    //将数据插入到每行
-		    var afoldCon = $("#"+this.id).find(".fold-con-component");
-
-		    var cityStr = "";
-		    for(var i=0;i<afoldCon.length;i++)
-		    {
-		        var _cityStr = "";
-		        for(var j=0;j<this.allData.nodes[i].nodes.length;j++)
-		        {
-		            _cityStr +="<label class='ms-cb-component' style='width:"+this.style.msCbComponent+"'><input type="+this.check+" class='ms-cb-cb' name="+this.type+" value="+this.allData.nodes[i].nodes[j].code+" ms-cb-data="+this.allData.nodes[i].nodes[j].name+" />"+this.allData.nodes[i].nodes[j].name+"</label>";
-		        }
-		        cityStr +=_cityStr;
-		    }
-		    afoldCon.eq(i).append($(cityStr));
-
-		    var aProvince = $("#"+this.id).find(".fold-head-component").find("span");
 		    //省会切换效果
+		    var afoldCon = $("#"+this.id).find(".fold-con-component");
+		    var aProvince = $("#"+this.id).find(".fold-head-component").find("span");
 		    aProvince.on("click",function(){
 
 		        aProvince.removeClass("active");
@@ -280,11 +264,12 @@ style:{		//可定义部分样式
 	        
 	    };
 
+	    var $txtBox = $this.find(".txt-box-component");
+		var $msTxt = $this.find(".ms-txt-component");
+
 		msPick.txt = function()
 		{
 			var _this = this;
-			var $txtBox = $this.find(".txt-box-component");
-			var $msTxt = $this.find(".ms-txt-component");
 			
 
 			$txtBox.on("click",function(event){
@@ -519,7 +504,6 @@ style:{		//可定义部分样式
 			};
 
 		}
-		msPick.txt();
 
 		//ms-pick
 		msPick.ckBox = function()
@@ -668,7 +652,20 @@ style:{		//可定义部分样式
 		    })
 		};
 
-		msPick.ckBox();
+		$txtBox.on("click",function(event){
+			$(".ms-pick").hide();
+			msPick.createDiv.show();
+			msPick.mpPosition();
+			$msTxt.focus();
+			
+			event.stopPropagation();
+		})
+		setTimeout(function(){
+			
+			msPick.txt();
+			msPick.ckBox();
+
+		},100)
 
 		$(document).click(function(){
 			if($this.find(".ms-ok-component")) $this.find(".ms-ok-component").remove();
