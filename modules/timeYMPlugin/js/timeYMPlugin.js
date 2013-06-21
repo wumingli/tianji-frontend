@@ -31,21 +31,26 @@
         return timeArray;
     }
     function createTimeBox($target, type, cfg){
+        $('.timeYM_box').remove();
         var $timeBox = $('<div />'),
             titHtml = '',
             sinceNowStr = '',
             timeArray = [],
             timeSort = '年';
+        //元素非法
         if ($target.length == 0){
             alert('ID不存在，请检查');
             return false;
         }
+        //获取输入框位置
         var targetOffset = $target.offset();
+        //添加属性
         $timeBox.attr({
             'id': $target.attr('id') + '_box',
             'class': 'timeYM_box',
             'data-box-for': $target.attr('id')
         });
+        //添加样式
         $timeBox.css({
             left: targetOffset.left,
             top: targetOffset.top + $target.height()
@@ -53,13 +58,33 @@
         //Box不存在，则创建
         if ($(cfg.name + '_box').length == 0){
             if (cfg.type == 'month'){
-                timeArray = timeData(1, 12, 'month');
+                //开始月份，开始年份和结束年份相同
+                if(cfg.name == '#start_date_m' && $('#start_date_y').val() != '' && 
+                    $('#start_date_y').val() == $('#end_date_y').val() && $('#end_date_y').val() != ''){
+                    timeArray = timeData(1, $('#end_date_m').val(), 'month');
+                }
+                else if(cfg.name == '#end_date_m' && $('#start_date_y').val() != '' && 
+                    $('#start_date_y').val() == $('#end_date_y').val() && $('#start_date_m').val() != ''){
+                    timeArray = timeData($('#start_date_m').val(), 12, 'month');
+                }
+                else{
+                    timeArray = timeData(1, 12, 'month');
+                }
                 titHtml = '<div class="tit">请选择' + cfg.title + '</div>';
                 timeSort = '月';
             }
             else {
-                timeArray = timeData(false, false ,'year');
-                titHtml = '<div class="tit"><em class="prev disable">&lt;&lt; </em>请选择' + cfg.title + '<em class="next"> &gt;&gt;</em></div>';
+                if(cfg.name == '#start_date_y' && $('#end_date_y').val() != ''){
+                    timeArray = timeData(1949, $('#end_date_y').val(), 'year');
+                }
+                else if(cfg.name == '#end_date_y' && $('#start_date_y').val() != ''){
+                    timeArray = timeData($('#start_date_y').val(), 2013, 'year');
+                }
+                else{
+                    timeArray = timeData(1949, 2013, 'year');
+                }
+                titHtml = '<div class="tit"><em class="prev disable">&lt;&lt; </em>请选择' + cfg.title + 
+                        '<em class="next"> &gt;&gt;</em></div>';
             }
             titHtml += '<div class="timeCon">';
             titHtml += '<div class="oneBlock">';
@@ -76,11 +101,12 @@
             if (cfg.name == '#end_date_y' || cfg.name == '#end_date_m' ){
                 sinceNowStr = '<a class="btnSinceNow" href="javascript:void(0);">至今</a> ';
             }
-            titHtml += '<div class="btns">' + sinceNowStr + '<a href="javascript:void(0);" class="clear">清空</a> <a href="javascript:void(0);" class="btnClose">关闭</a></div>';
+            titHtml += '<div class="btns">' + sinceNowStr + '<a href="javascript:void(0);" class="clear">清空</a>' + 
+                    ' <a href="javascript:void(0);" class="btnClose">关闭</a></div>';
             $timeBox.append($(titHtml));
             $('body').append($timeBox);
         }
-        $(cfg.name + '_box').show().siblings('.timeYM_box').hide();
+        //$(cfg.name + '_box').show().siblings('.timeYM_box').hide();
     }
     $.fn.timeYM = function (options){
         $this = $(this);
@@ -113,33 +139,29 @@
     });
     //为年份左右箭头添加事件
     $('.timeYM_box .tit em.prev').live('click', function (){
-        if (curPage > 0){
-            if (!$('.timeYM_box .timeCon').is(':animated')){
-                curPage--;
-                $('#' + $(this).parents('.timeYM_box').attr('id') +' .timeCon').animate({
-                    left: -$('.timeYM_box').width()*curPage
-                },function (){
-                    $('.timeYM_box .tit em.next').removeClass('disable');
-                    if (curPage == 0){
-                        $('.timeYM_box .tit em.prev').addClass('disable');
-                    }
-                });
-            }
+        if (curPage > 0 && !$('.timeYM_box .timeCon').is(':animated')){
+            curPage--;
+            $('#' + $(this).parents('.timeYM_box').attr('id') +' .timeCon').animate({
+                left: -$('.timeYM_box').width()*curPage
+            },function (){
+                $('.timeYM_box .tit em.next').removeClass('disable');
+                if (curPage == 0){
+                    $('.timeYM_box .tit em.prev').addClass('disable');
+                }
+            });
         }
     });
     $('.timeYM_box .tit em.next').live('click', function (){
-        if ((curPage + 1) < yearPage){
-            if (!$('.timeYM_box .timeCon').is(':animated')){
-                curPage++;
-                $('#' + $(this).parents('.timeYM_box').attr('id') +' .timeCon').animate({
-                    left: -$('.timeYM_box').width()*curPage
-                },function (){
-                    $('.timeYM_box .tit em.prev').removeClass('disable');
-                    if ((curPage + 1) == yearPage){
-                        $('.timeYM_box .tit em.next').addClass('disable');
-                    }
-                });
-            }
+        if ((curPage + 1) < yearPage && !$('.timeYM_box .timeCon').is(':animated')){
+            curPage++;
+            $('#' + $(this).parents('.timeYM_box').attr('id') +' .timeCon').animate({
+                left: -$('.timeYM_box').width()*curPage
+            },function (){
+                $('.timeYM_box .tit em.prev').removeClass('disable');
+                if ((curPage + 1) == yearPage){
+                    $('.timeYM_box .tit em.next').addClass('disable');
+                }
+            });
         }
     });
     //时间点击
@@ -148,7 +170,26 @@
         var theTimeTxt = $theBox.attr('data-box-for');        
         $('#' + theTimeTxt).val($(this).text().replace(/年|月/,''));
         $(this).addClass('cur').siblings().removeClass('cur');
-        $theBox.hide();
+        $theBox.remove();
+        switch (theTimeTxt){
+            case 'start_date_y':
+                if($('#start_date_m').val() == ''){
+                    $('#start_date_m').trigger('click').focus();
+                }
+                break;
+            case 'start_date_m':
+                if($('#end_date_y').val() == ''){
+                    $('#end_date_y').trigger('click').focus();
+                }
+                break;
+            case 'end_date_y':
+                if($('#end_date_m').val() == ''){
+                    $('#end_date_m').trigger('click').focus();
+                }
+                break;
+            default:
+                break;
+        }
         /**/
     });
     //清空
@@ -159,6 +200,6 @@
     });
     //关闭
     $('.timeYM_box .btns .btnClose').live('click', function (){
-        $(this).parents('.timeYM_box').hide();
+        $(this).parents('.timeYM_box').remove();
     });
 })(jQuery);

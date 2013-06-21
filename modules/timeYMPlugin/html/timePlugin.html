@@ -9,24 +9,24 @@
 <body>
 <div class="wrap">
     <input type="text" id="start_date_y" class="date_input" /> 年
-    <input type="text" id="start_date_m" class="date_input" /> 月 —— 
+    <input type="text" id="start_date_m" class="date_input" /> 月　<span style="font-family:Arial;">———</span>　
     <input type="text" id="end_date_y" class="date_input" /> 年
     <input type="text" id="end_date_m" class="date_input" /> 月
 </div>
 <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../js/timeYMPlugin.js"></script>
 <script type="text/javascript">
-$('#end_date_y').timeYM({});
-$('#end_date_m').timeYM({
-    title: '开始月份',
-    type: 'month'
-});
-$('#start_date_y').timeYM({
-    title: '结束年份',
-});
+$('#start_date_y').timeYM();
 $('#start_date_m').timeYM({
     type: 'month',
-    title: '结束月份'
+    title: '开始月份'
+});
+$('#end_date_y').timeYM({
+    title: '结束年份'
+});
+$('#end_date_m').timeYM({
+    title: '结束月份',
+    type: 'month'
 });
 </script>
 </body>
