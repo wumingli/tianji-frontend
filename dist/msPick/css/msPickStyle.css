@@ -53,6 +53,7 @@
 .p-data-wrap a.ms-selected-item {
 	height:20px;
 	line-height:20px;
+	_line-height:normal;
 	display:inline-block;
 	white-space:nowrap;
 	background:transparent url(http://image.tianji.com/ideal/job/new/images/resume/pickpad.gif) no-repeat left top;
@@ -125,4 +126,6 @@
 .ms-pick .c-tab .tab-con-component.tab-con-width .fold-head-component span.active label{ background-position: right 3px;}
 .ms-pick .c-tab .tab-con-component.tab-con-width .fold-con-component{background: #daeaf2; padding-left: 10px; padding-bottom: 10px; color: #333; display: none;}
 
-
+.g_industryChoice{ z-index: 5;}
+.g_jobChoice{ z-index: 4;}
+.g_cityChoice{ z-index: 3;}

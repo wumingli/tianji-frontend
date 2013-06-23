@@ -1,6 +1,6 @@
 /*
 *author:Wumingli
-*for:time plugin,only contains year and month.auto select month when year selected.
+*for:time plugin,only contains year and month
 *jQuery:1.7.2
 *developed at :2013/6/21 10:02:34
 *Copyright 2011. All rights reserved.
@@ -123,6 +123,7 @@
             type: 'year'
         };
         var timePlugin = $.extend(config, options);
+        console.log(timePlugin);
         $this.bind(timePlugin.method,function (event){
             (event || window.event).stopPropagation();
             $this.keydown(function (event){

@@ -125,55 +125,6 @@ module.exports = function(grunt) {
               {expand: true, cwd: '.', src: ['gallery/**/*']}
             ]
           }
-        },
-        //文件部署
-        scp: {
-            release: {
-                options: {
-                    host: 'repository.tianji.com',
-                    username: 'root',
-                    privateKey: grunt.file.read(global.process.env.HOME + '/.ssh/id_rsa'),
-                    passphrase: ''
-                },
-                files: [{
-                    cwd: 'compress',
-                    src: '*.zip',
-                    filter: 'isFile',
-                    // path on the server
-                    dest: '/home/jsrepository/js/tianji-frontend/' + pkg.version
-                }]
-            },            
-            deploy: {
-                options: {
-                    host: 'www11.qa.tianji.com',
-                    username: 'root',
-                    privateKey: grunt.file.read(global.process.env.HOME + '/.ssh/id_rsa'),
-                    passphrase: ''
-                },
-                files: [{
-                    cwd: 'compress',
-                    src: '*.zip',
-                    filter: 'isFile',
-                    // path on the server
-                    dest: '/var/front/deploy'
-                }]
-            }
-        },
-        //发布
-        release: {
-            options: {
-              bump: false, //default: true
-              file: 'package.json', //default: package.json
-              add: true, //default: true
-              commit: true, //default: true
-              tag: true, //default: true
-              push: true, //default: true
-              pushTags: true, //default: true
-              npm: false, //default: true
-              tagName: 'tianji-frontend-<%= version%>', //default: '<%= version %>'
-              commitMessage: 'release <%= version%>', //default: 'release <%= version %>'
-              tagMessage: 'Version <%= version%>' //default: 'Version <%= version %>'
-            }
         }
     })
 
@@ -182,15 +133,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-scp');
-  grunt.loadNpmTasks('grunt-release');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   
   grunt.registerTask('clear', ['clean']);  
 
   grunt.registerTask('build','build source files',function (){
     grunt.file.write( 'modules/public/js/mapVersion.js', mapStr);
-    grunt.task.run(['clean', 'copy', 'concat', 'uglify', 'cssmin']);
+    grunt.task.run(['clean', 'copy', 'concat', 'uglify', 'cssmin', 'compress']);
   });
 
   
