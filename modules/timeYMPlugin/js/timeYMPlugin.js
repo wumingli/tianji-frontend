@@ -21,6 +21,7 @@
             seType: 'start'
         };
         var timePlugin = $.extend(config, options);
+        var oPages = {};
         boxId = timePlugin.txtId;
         $this.attr({
             'date-type': timePlugin.type,
@@ -38,33 +39,10 @@
             if (type && type == 'month'){
                 start = st > 12 ? 1 : st || 1;
                 end = et >= 12 ? 12 : et || 12;
-<<<<<<< HEAD
             }
             var timeArray = [];
             dft = dft || end;
-            curPage = Math.ceil((end - dft) / 12) + 1;
-            //curPage = curPage == 0 ? 1 : curPage;
-            timeArray.curPage = curPage;
-            while (end >= start){
-                timeArray.push(end);
-                end--;
-            }
-            //
-            if (type && type == 'month'){
-                timeArray = timeArray.sort(function (a, b){
-                    return a-b;
-                });
-            }
-            //年份页数
-            if (type == 'year'){
-                //pageLen中保存年份月数
-                timeArray.pageLen = Math.ceil(timeArray.length/12);
-            }
-=======
-            }
-            var timeArray = [];
-            dft = dft || end;
-            curPage = Math.ceil((end - dft) / 12);
+            curPage = Math.ceil((end - dft + 1) / 12);
             curPage = curPage == 0 ? 1 : curPage;
             timeArray.curPage = curPage;
             while (end >= start){
@@ -82,7 +60,6 @@
                 //pageLen中保存年份月数
                 timeArray.pageLen = Math.ceil(timeArray.length/12);
             }
->>>>>>> 4e086ac304e39928c54cb4fd02cc9f8f84ac45fe
             return timeArray;
         }
         //生成控件
@@ -143,6 +120,9 @@
                     } else if (!isStart && $tarSibling.val() != ''){
                         timeArray = getTimeData($tarSibling.val(), timePlugin.maxDate);
                     }
+                    else {
+                        timeArray = getTimeData();
+                    }
                 } else {
                     timeArray = getTimeData(timePlugin.minDate, timePlugin.maxDate);
                 }
@@ -158,33 +138,24 @@
             }
             boxHtml += '</div>';
             boxHtml += '</div>';
-<<<<<<< HEAD
-            //清空
+            //结束年份/月份输出至今
             if (timePlugin.seType == 'end'){
                 sinceNowStr = '<a class="btnSinceNow" href="javascript:void(0);">至今</a> ';
             }
             boxHtml += '<div class="btns">' + sinceNowStr + '<a href="javascript:void(0);" class="clear">清空</a>' + 
                     ' <a href="javascript:void(0);" class="btnClose">关闭</a></div>';
-=======
->>>>>>> 4e086ac304e39928c54cb4fd02cc9f8f84ac45fe
             $timeBox.append($(boxHtml));
             $('body').append($timeBox);
             //
             if (timePlugin.type == 'year'){
                 timePage = timeArray.pageLen;
                 curPage = timeArray.curPage;
-                var boxWidth = $(boxId +'_box').width();
                 /* oPages用于存放两个年份的页数信息
                    time_page: 年份页数
                    cur_page: 当前页
                  */
-                var oPages = {};
                 oPages[boxId.substring(1) + '_time_page'] = timePage;
                 oPages[boxId.substring(1) + '_cur_page'] = curPage;
-<<<<<<< HEAD
-=======
-                console.log(oPages);
->>>>>>> 4e086ac304e39928c54cb4fd02cc9f8f84ac45fe
                 if (timePage == 1){
                     $(boxId + '_box .tit em.prev, ' + boxId + '_box .tit em.next').addClass('disable');
                 } else {
@@ -195,61 +166,7 @@
                         $(boxId + '_box .tit em.next').addClass('disable');
                     }
                 }
-<<<<<<< HEAD
-                $(boxId +'_box .timeCon').css('left',-boxWidth * (oPages[boxId.substring(1) + '_cur_page']+1));
-=======
-                $(boxId +'_box .timeCon').css('left',-boxWidth * (curPage-1));
->>>>>>> 4e086ac304e39928c54cb4fd02cc9f8f84ac45fe
-                //左箭头点击事件
-                $(boxId +'_box .tit em.prev').live('click', function (){
-                    if ((oPages[boxId.substring(1) + '_cur_page'] - 1) > 0 && !$(boxId +'_box .timeCon').is(':animated')){
-                        oPages[boxId.substring(1) + '_cur_page'] -= 1;
-                        console.log(oPages[boxId.substring(1) + '_cur_page']);
-                        console.log(oPages[boxId.substring(1) + '_time_page']);
-                        $(boxId +'_box .timeCon').animate({
-                            left: -boxWidth * (oPages[boxId.substring(1) + '_cur_page'] - 1)
-                        },function (){
-                            -$(boxId +'_box .tit em.next').removeClass('disable');
-                            if (oPages[boxId.substring(1) + '_cur_page'] - 1 == 0){
-                                $(boxId +'_box .tit em.prev').addClass('disable');
-                            }
-                        });
-                    }
-                });
-                //右箭头点击事件
-                $(boxId +'_box .tit em.next').live('click', function (){
-<<<<<<< HEAD
-                        console.log(oPages[boxId.substring(1) + '_cur_page']);
-                        console.log(oPages[boxId.substring(1) + '_time_page']);
-                    if (oPages[boxId.substring(1) + '_cur_page'] < oPages[boxId.substring(1) + '_time_page'] && !$(boxId +'_box .timeCon').is(':animated')){
-=======
-                    if (oPages[boxId.substring(1) + '_cur_page'] < oPages[boxId.substring(1) + '_time_page'] && !$(boxId +'_box .timeCon').is(':animated')){
-                        console.log(oPages[boxId.substring(1) + '_cur_page']);
-                        console.log(oPages[boxId.substring(1) + '_time_page']);
->>>>>>> 4e086ac304e39928c54cb4fd02cc9f8f84ac45fe
-                        $(boxId +'_box .timeCon').animate({
-                            left: -boxWidth * oPages[boxId.substring(1) + '_cur_page']
-                        },function (){
-                            $(boxId +'_box .tit em.prev').removeClass('disable');
-                            if (oPages[boxId.substring(1) + '_cur_page'] == oPages[boxId.substring(1) + '_time_page']){
-                                $(boxId +'_box .tit em.next').addClass('disable');
-                            }
-                        });
-                        oPages[boxId.substring(1) + '_cur_page'] += 1;
-                    }
-                });
-<<<<<<< HEAD
-            }
-            //输入框已有值，标识当前
-            if ($target.val() != ''){
-                $(boxId +'_box .timeCon span').each(function (){
-                    if ($(this).text().replace(/年|月/,'') == $target.val()){
-                        $(this).addClass('cur');
-                        return false;
-                    }
-                });
-=======
->>>>>>> 4e086ac304e39928c54cb4fd02cc9f8f84ac45fe
+                $(boxId +'_box .timeCon').css('left',-$(boxId +'_box').width() * (curPage-1));
             }
             //输入框已有值，标识当前
             if ($target.val() != ''){
@@ -260,13 +177,8 @@
                     }
                 });
             }
-            //清空
-            if (timePlugin.seType == 'end'){
-                sinceNowStr = '<a class="btnSinceNow" href="javascript:void(0);">至今</a> ';
-            }
-            boxHtml += '<div class="btns">' + sinceNowStr + '<a href="javascript:void(0);" class="clear">清空</a>' + 
-                    ' <a href="javascript:void(0);" class="btnClose">关闭</a></div>';
         }
+        //绑定事件
         $this.bind(timePlugin.method,function (event){
             (event || window.event).stopPropagation();
             $this.keydown(function (event){
@@ -276,26 +188,50 @@
                 }
                 return true;
             });
-<<<<<<< HEAD
-            //if($(timePlugin.boxId + '_box').length == 0){
-            createTimeBox($(timePlugin.txtId), timePlugin.type);
-            //}
-=======
-            if($(timePlugin.boxId + '_box').length == 0){
+            if($(boxId + '_box').length == 0){
                 createTimeBox($(timePlugin.txtId), timePlugin.type);
             }
->>>>>>> 4e086ac304e39928c54cb4fd02cc9f8f84ac45fe
         });
         
         $(document).click(function (){
-            $('.timeYM_box').remove();
+            $('.' + timePlugin.boxCssClass).remove();
         });
-        $('.timeYM_box').live('click', function (event){
+        $(boxId +'_box').live('click', function (event){
             (event || window.event).stopPropagation();
+        });
+        //左箭头点击事件
+        $(boxId +'_box .tit em.prev').live('click', function (){
+            var boxWidth = $(boxId +'_box').width();
+            if ((oPages[boxId.substring(1) + '_cur_page'] - 1) > 0 && !$(boxId +'_box .timeCon').is(':animated')){
+                oPages[boxId.substring(1) + '_cur_page'] -= 1;
+                $(boxId +'_box .timeCon').animate({
+                    left: -boxWidth * (oPages[boxId.substring(1) + '_cur_page'] - 1)
+                },function (){
+                    -$(boxId +'_box .tit em.next').removeClass('disable');
+                    if (oPages[boxId.substring(1) + '_cur_page'] - 1 == 0){
+                        $(boxId +'_box .tit em.prev').addClass('disable');
+                    }
+                });
+            }
+        });
+        //右箭头点击事件
+        $(boxId +'_box .tit em.next').live('click', function (){
+            var boxWidth = $(boxId +'_box').width();
+            if (oPages[boxId.substring(1) + '_cur_page'] < oPages[boxId.substring(1) + '_time_page'] && !$(boxId +'_box .timeCon').is(':animated')){
+                $(boxId +'_box .timeCon').animate({
+                    left: -boxWidth * oPages[boxId.substring(1) + '_cur_page']
+                },function (){
+                    $(boxId +'_box .tit em.prev').removeClass('disable');
+                    if (oPages[boxId.substring(1) + '_cur_page'] == oPages[boxId.substring(1) + '_time_page']){
+                        $(boxId +'_box .tit em.next').addClass('disable');
+                    }
+                });
+                oPages[boxId.substring(1) + '_cur_page'] += 1;
+            }
         });
         //时间点击
         $(boxId +'_box .timeCon .oneBlock span').live('click',function (){
-            var $theBox = $(this).parents('.timeYM_box');
+            var $theBox = $(boxId +'_box');
             var theTimeTxt = $theBox.attr('data-box-for');
             var $nextTxts = $(theTimeTxt).nextAll('[date-type]');
             $(theTimeTxt).val($(this).text().replace(/年|月/,''));
@@ -307,13 +243,13 @@
         });
         //清空
         $(boxId +'_box .btns .clear').live('click', function (){
-            var $theBox = $(this).parents('.timeYM_box');
+            var $theBox = $(boxId +'_box');
             var theTimeTxt = $theBox.attr('data-box-for'); 
             $(theTimeTxt).val('').focus();
         });
         //关闭
         $(boxId +'_box .btns .btnClose').live('click', function (){
-            $(this).parents('.timeYM_box').remove();
+            $(boxId +'_box').remove();
         });
     }
 })(jQuery);
