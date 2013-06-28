@@ -8,12 +8,14 @@
 </head>
 <body>
 <div class="wrap">
-    <input type="text" id="start_date_y" class="date_input" /> 年
-    <input type="text" id="start_date_m" class="date_input" /> 月　<span style="font-family:Arial;">———</span>　
-    <input type="text" id="end_date_y" class="date_input" /> 年
-    <input type="text" id="end_date_m" class="date_input" /> 月
+    <input type="text" id="start_date_y" maxlength="4" size="4" /> 年
+    <input type="text" id="start_date_m" maxlength="2" size="4" /> 月 
+    
+    至 
+    <input type="text" id="end_date_y" maxlength="4" size="4" /> <span class="txt">年</span>
+    <input type="text" id="end_date_m" maxlength="2" size="4" /> <span class="txt">月</span>
 </div>
-<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../gallery/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../js/timeYMPlugin.js"></script>
 <script type="text/javascript">
 $('#start_date_y').timeYM();
