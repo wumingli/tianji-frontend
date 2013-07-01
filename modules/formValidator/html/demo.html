@@ -14,9 +14,14 @@ $(function (){
 </head>
 <body>
 <form method="post" action="" data-validation="true" class="valForm">
-    <label>用户名：</label><input type="text" id="name" name="name" placeholder="用户名" validation-config="type=required&max=size10&name=用户名" /><br />
-    <label>密　码：</label><input type="text" id="password" name="password" placeholder="密码" validation-config="type=required&maxsize=20&minsize=6&name=密码" /><br />
-    <label>邮　箱：</label><input type="text" id="password" name="password" placeholder="邮箱" validation-config="type=email" />
+    <label>用户名：</label><input type="text" id="name" name="name" placeholder="用户名" validation-config="{'checking':['required', 'maxSize', 'minSize'],'init':[true, 20, 5],'name':'用户名'}" class="vFormText" /><br />
+    <label>密　码：</label><input type="password" id="password" name="password" placeholder="密码" validation-config="{'checking':['maxSize', 'required', 'minSize'],'init':[20,true,  6],'name':'密码'}" class="vFormText" /><br />
+    <label>邮　箱：</label><input type="text" id="email" name="email" placeholder="邮箱" validation-config="{'checking':['email'],'init':[true],'name':'电子邮箱'}" class="vFormText" /><br />
+    <label>地　址：</label><input type="text" id="address" name="address" placeholder="地址" class="vFormText" /><br />
+    <label>年　龄：</label><input type="text" id="old" name="old" placeholder="年龄" class="vFormText" validation-config="{'checking':['max', 'min'],'init':[110, 10],'name':'年龄'}" /><br />
+    <label>电　话：</label><input type="text" id="phone" name="phone" placeholder="电话" class="vFormText" validation-config="{'checking':['phone'],'init':[true],'name':'电话'}" /><br />
+    <label>手　机：</label><input type="text" id="mobilePhone" name="mobilePhone" placeholder="手机" class="vFormText" validation-config="{'checking':['mobilePhone'],'init':[true],'name':'手机'}" /><br />
+    <label>兴趣爱好：</label><input type="checkbox" id="hobby1" name="hobby" validation-config="{'checking':['maxSize'],'init':[2],'name':'兴趣爱好'}" /><label for="hobby1">台球</label> <input type="checkbox" id="hobby2" name="hobby" validation-config="{'checking':['maxSize'],'init':[2],'name':'兴趣爱好'}" /><label for="hobby2">足球</label> <input type="checkbox" id="hobby3" name="hobby" validation-config="{'checking':['maxSize'],'init':[2],'name':'兴趣爱好'}" /><label for="hobby3">羽毛球</label>
 </form>
 </body>
 </html>
