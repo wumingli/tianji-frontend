@@ -24,10 +24,10 @@ $(function (){
     <label>手　机：</label><input type="text" id="mobilePhone" name="mobilePhone" placeholder="手机" class="vFormText" validation-config="{'checking':['mobilePhone'],'init':[true],'name':'手机'}" /><br />
     <label>兴趣爱好：</label><input type="checkbox" id="hobby1" name="hobby" validation-config="{'checking':['maxSize','minSize'],'init':[3,1],'name':'兴趣爱好','leftTop':'290 0'}" /><label for="hobby1">台球</label> <input type="checkbox" id="hobby2" name="hobby" /><label for="hobby2">足球</label> <input type="checkbox" id="hobby3" name="hobby" /><label for="hobby3">羽毛球</label> <input type="checkbox" id="hobby4" name="hobby" /><label for="hobby4">篮球</label> <input type="checkbox" id="hobby5" name="hobby" /><label for="hobby5">高尔夫球</label>
     <br />
-    <label>性别：</label><input type="radio" id="male" name="sex" validation-config="{'checking':['required','minSize'],'init':[true,1],'name':'性别','leftTop':'290 0'}" /><label for="male">男</label> <input type="radio" id="female" name="sex" /><label for="female">女</label>
+    <label>性别：</label><input type="radio" id="male" name="sex" validation-config="{'checking':['minSize'],'init':[1],'name':'性别','leftTop':'80 0'}" /><label for="male">男</label> <input type="radio" id="female" name="sex" /><label for="female">女</label>
     <br />
     <label>职业职能：</label>
-    <select name="zn" id="zn">
+    <select name="zn" id="zn" validation-config="{'checking':['required'],'init':[true],'name':'职业职能'}">
         <option>请选择职业职能</option>
         <option value="00101">这是啥啊？！</option>
         <option value="00101">aaaaaaaaaaaaaaaaaaaaaa</option>

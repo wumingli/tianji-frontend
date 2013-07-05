@@ -15,7 +15,7 @@ define(function(require, exports, modules){
                     'code': 'famale',
                     'name': '女'
                 }],
-            title: '性别'
+            'title': '性别'
         },
         'salary':{
             'data': [{
@@ -153,6 +153,122 @@ define(function(require, exports, modules){
                 'name': '其他'
             }],
             'title': '学历'
+        },
+        'lan':{
+            'data': [{
+                'code': '501',
+                'name': '英语'
+            },{
+                'code': '502',
+                'name': '日语'
+            },{
+                'code': '503',
+                'name': '法语'
+            },{
+                'code': '504',
+                'name': '德语'
+            },{
+                'code': '505',
+                'name': '俄语'
+            },{
+                'code': '506',
+                'name': '韩语'
+            },{
+                'code': '507',
+                'name': '西班牙语'
+            },{
+                'code': '508',
+                'name': '葡萄牙语'
+            },{
+                'code': '509',
+                'name': '阿拉伯语'
+            },{
+                'code': '510',
+                'name': '意大利语'
+            },{
+                'code': '511',
+                'name': '中文普通话'
+            },{
+                'code': '512',
+                'name': '粤语'
+            },{
+                'code': '513',
+                'name': '上海话'
+            },{
+                'code': '514',
+                'name': '闽南语'
+            },{
+                'code': '515',
+                'name': '朝鲜语'
+            },{
+                'code': '516',
+                'name': '其他语种'
+            }],
+            'title': '语言'
+        },
+        'lanLS':{
+            'data': [{
+                'code': '601',
+                'name': '一般'
+            },{
+                'code': '602',
+                'name': '良好'
+            },{
+                'code': '603',
+                'name': '精通'
+            }],
+            'title': '听说'
+        },
+        'lanRW':{
+            'data': [{
+                'code': '701',
+                'name': '一般'
+            },{
+                'code': '702',
+                'name': '良好'
+            },{
+                'code': '703',
+                'name': '精通'
+            }],
+            'title': '读写'
+        },
+        'salarySingle':{
+            'data': [{
+                    'code': '1000',
+                    'name': '1000'
+                },{
+                    'code': '0100002000',
+                    'name': '2000'
+                },{
+                    'code': '0200104000',
+                    'name': '4000'
+                },{
+                    'code': '0600108000',
+                    'name': '8000'
+                },{
+                    'code': '0800110000',
+                    'name': '10000'
+                },{
+                    'code': '1000115000',
+                    'name': '15000'
+                },{
+                    'code': '1500125000',
+                    'name': '25000'
+                },{
+                    'code': '2500199999',
+                    'name': '以上'
+                }],
+            'title': '职位薪资'
         }
     }
 });
+
+
+
+
+
+
+
+
+
+

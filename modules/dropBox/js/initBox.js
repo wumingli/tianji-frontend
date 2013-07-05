@@ -12,10 +12,9 @@ define(function(require, exports, modules){
     });
     $('#p-data-wrap1').dropBox({
         name: 'salary',
-        init: [{
-            code: '0600108000',
-            name: '6001-8000元/月'
-        }]
+        init: {
+            code: '0600108000'
+        }
     });
     $('#p-data-wrap2').dropBox({
         name: 'companyProperty',
@@ -30,10 +29,52 @@ define(function(require, exports, modules){
     });
     $('#p-data-wrap5').dropBox({
         name: 'eduBackground',
-        init: [{
-            code: '404',
-            name: '本科'
-        }]
+        init: {
+            code: '404'
+        },
+        required: true
+    });
+    $('#p-data-wrap6').dropBox({
+        name: 'lan',
+        init: {
+            code: '511'
+        }
+    });
+    $('#p-data-wrap7').dropBox({
+        name: 'lanLS'
+    });
+    $('#p-data-wrap8').dropBox({
+        name: 'lanRW'
+    });
+    $('#p-data-wrap9').dropBox({
+        name: 'custom',
+        customData: {
+            'custom': {
+                'data': [{
+                    'code': '901',
+                    'name': '自定义数据1'
+                },{
+                    'code': '902',
+                    'name': '自定义数据2222'
+                },{
+                    'code': '903',
+                    'name': '自定义数据自定义数据自定义数据'
+                }],
+                'title': '自定义数据'
+            }
+        },
+        init: {
+            code: '901'
+        },
+        required: true
+    });
+    $('#p-data-wrap10').dropBox({
+        name: 'salarySingle',
+        linkage: '#p-data-wrap11'
+    });
+    $('#p-data-wrap11').dropBox({
+        name: 'salarySingle',
+        linkage: '#p-data-wrap10'
     });
     $('#testForm').submit(function (){
         return $(this).subDropList();

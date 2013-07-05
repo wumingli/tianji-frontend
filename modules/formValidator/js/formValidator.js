@@ -28,27 +28,29 @@
         if ($form.is('[' + pluginCfg.testAttr + ']') && $form.attr(pluginCfg.testAttr) == 'true'){
             //$vs.filter(':text,:password').addClass('vFormText');
             $form.on(pluginCfg.triggerMethod, '[' + pluginCfg.btnData + ']', function (){
-                checkData($(this), pluginCfg.triggerMethod);
+                checkData($(this));
             });
             $form.on('click', ':checkbox,:radio', function (){
-                $(this).focus();
-                return checkData($(this), 'click');
+                //$(this).focus();
+                return checkData($(this));
             });
-            $form.on('blur', ':checkbox,:radio', function (){
-                //console.log(0);
+            $form.on('change', 'select', function (){
+                //$(this).focus();
+                //return checkData($(this), 'click');
+                console.log($(this).find(':selected').text());
             });
         } else {
             alert('not found attribute of ' + pluginCfg.testAttr);
         }
         //数据检查
-        function checkData(element, type){
+        function checkData(element){
             var elmOffset = element.offset();
             $('#' + element.attr('name') + '_error_tip').remove();
             if (element.attr('type') == 'checkbox' || element.attr('type') == 'radio'){
                 element = element.parent().find('[name='+element.attr('name')+']:first');
                 elmOffset = element.offset();
             }
-            //try{
+            try{
                 var cfg = eval('(' + element.attr(pluginCfg.btnData) + ')');
                 var checkingArray = cfg.checking;
                 var initArray = cfg.init;
@@ -70,7 +72,7 @@
                 }
                 else {
                     for (i = 0, len = checkingArray.length; i < len; i++){
-                        var oGetRule = rules[checkingArray[i]]['fnValidation'](element, initArray[i], cfg.name);
+                        var oGetRule = rules[checkingArray[i]]['fnValidation'](element, initArray[i], cfg.name, element.attr('type'));
                         var res = oGetRule && oGetRule['result'];
                         oResults[checkingArray[i] + cfg.name] = res;
                         if (oGetRule && !res){
@@ -81,10 +83,10 @@
                         }
                     }
                 }
-            //}
-            //catch (e){
-            //    alert('"' + $(this).attr(pluginCfg.btnData) + '" \n数据格式错误，请检查');
-            //}
+            }
+            catch (e){
+                alert('"' + $(this).attr(pluginCfg.btnData) + '" \n数据格式错误，请检查');
+            }
         }
         //rules
         var rules = {
@@ -93,17 +95,14 @@
                 alertText: '请输入',
                 alertTextSelect: '请选择',
                 alertTextCheckbox: '必须勾选',
-                fnValidation: function (element, need, name){
-                    if ($.trim(element.val()) == '' && need){
+                fnValidation: function (element, need, name, type){
+                    if (type === 'radio'){
+                        console.log(type);
+                    } else {
                         return {
                             msg: this.alertText + name,
-                            result: false
-                        }
-                    }
-                    else {
-                        return {
-                            result: true
-                        }
+                            result: !($.trim(element.val()) == '' && need)
+                        }                        
                     }
                 }
             },
@@ -111,22 +110,16 @@
                 regex: 'none',
                 alertText: '最少',
                 alertText2: '个字符',
-                fnValidation: function (element, mLen, name){
+                fnValidation: function (element, mLen, name, type){
                     var len = 0,
-                        text1 = '',
-                        text2 = '';
-                    if (element.attr('type') == 'checkbox'){
+                        text1 = this.alertText,
+                        text2 = this.alertText2;
+                    if (type == 'checkbox' || type == 'radio'){
                         len = element.parent().find('[name=' + element.attr('name') + ']:checked').size();
-                        text1 = '最少选择';
-                        text2 = '项';
-                    } else if (element.attr('type') == 'radio'){
-                        len = element.parent().find('[name=' + element.attr('name') + ']:selected').size();
                         text1 = '最少选择';
                         text2 = '项';
                     } else {
                         len = element.val().length;
-                        text1 = this.alertText;
-                        text2 = this.alertText2;
                     }
                     if (len < mLen){
                         return {
@@ -303,15 +296,13 @@
             var canSub = true;
             $form.find('input:text,input:password').trigger(pluginCfg.triggerMethod);
             checkData($form.find('input:checkbox'), 'submit');
+            checkData($form.find('input:radio'), 'submit');
             for (var k in oResults){
                 if (!oResults[k]){
                     canSub = false;
                 }
             }
-            console.log('===============');
-            console.log(oResults);
             return canSub;
-            //return false;
         });
     }
 })(jQuery);

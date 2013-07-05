@@ -1,17 +1,19 @@
 /*
-*author:武明礼
-*email:wumingli@sina.cn
-*for:tianji drop box widget
-*developed at :2013/5/16 21:17
-*Copyright 2013. All rights reserved.
-*/
-define(function(require, exports, modules){
+ * author:武明礼
+ * email:wumingli@tianji.com
+ * for:tianji drop box plugin
+ * developed at :2013/5/16 21:17
+ * not by seajs
+ * rewrite at : 2013/6/27 17:24
+ * Copyright 2013. All rights reserved.
+ */
+(function($){
     var curBox = '';
     $.fn.dropBox = function (options){
         var config = {
             name: 'sex',
             baseJsUrl: '../js/',
-            baseJs: 'boxData.js',
+            baseJs: 'boxData1.js',
             css: {
                 width: 100
             },
@@ -27,7 +29,7 @@ define(function(require, exports, modules){
         rqUrl = sel.baseJsUrl + sel.baseJs;
 
         //读取数据字典中的Title，若初始化时有默认值，则默认选择
-        require.async(rqUrl,function (json){
+        $.getJSON('../js/boxData1.js',function (json){
             var reqStr = '',
                 init = [],
                 dftVal = '',
@@ -36,17 +38,19 @@ define(function(require, exports, modules){
             if (sel['customData']){
                 json = sel['customData'];
             }
+            console.log(sel['name']);
+            
 
             //是否必选项，若是，添加data-required属性为true
             reqStr = sel.required ? 'data-required="true"' : '';
 
             //是否传入默认值
             if (sel['init']){
-                dftVal = getNameByCode(json[sel['name']]['data'], sel['init']['code']);
+                dftVal = getNameByCode(json[0][sel['name']]['data'], sel['init']['code']);
                 dftHidVal = sel['init']['code'];
             }
             else {
-                dftVal = '请选择'+json[sel.name]['title'];
+                dftVal = '请选择'+json[0][sel.name]['title'];
                 dftHidVal = '-1';
             }
             //操作DOM
@@ -88,7 +92,7 @@ define(function(require, exports, modules){
                         (sel.baseJsUrl + sel.baseJs + '.js?v=' + sel.version);//无.js扩展名
             }
             //异步读取数据
-            require.async(rqUrl,function (json){
+            $.getJSON(rqUrl,function (json){
                 var data = null,
                     sType = sel.type,
                     classStr = '';
@@ -97,9 +101,9 @@ define(function(require, exports, modules){
                     json = sel['customData'];
                 }
 
-                data = json[sel.name]['data'];
+                data = json[0][sel.name]['data'];
                 html += '<ul>';
-                html += '<li data-code="-1" class="cur">请选择' + json[sel.name]['title'] + '</li>';
+                html += '<li data-code="-1" class="cur">请选择' + json[0][sel.name]['title'] + '</li>';
                 for(var i=0 ;i<data.length ;i++ ){
                     classStr = i % 2 == 0 ? 'class="even"' : '';
                     var isSelected = !!sel['init'];
@@ -174,4 +178,4 @@ define(function(require, exports, modules){
             $('#' + curBox).addClass('data-sub-error');
         }
     });
-});
+})(jQuery);

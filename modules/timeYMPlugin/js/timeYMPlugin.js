@@ -196,7 +196,12 @@
             }
             return false;
         });
-        
+        //页面上有至今
+        if ($('.modifyEndYM').length != 0 && $('#sinceNow').length != 0){
+            $('#sinceNow').val(new Date().getTime());
+            $('[se-type=end]').attr('disabled',true).hide()
+                              .next('span.txt').hide();            
+        }
         $(document).click(function (){
             $('.' + timePlugin.boxCssClass).remove();
         });
@@ -258,14 +263,15 @@
         //至今
         $(boxId + '_box .btns .btnSinceNow').live('click', function (){
             var now = new Date().getTime();
-            var html = '<span class="modifyEndYM" title="修改结束年月">[现在]</span><input type="hidden" value="" name="since-now" />';
-            $this.parents().find('[se-type=end],span').hide().val('');
+            var html = '<span class="modifyEndYM" title="修改结束年月">[现在]</span><input type="hidden" value="" id="sinceNow" />';
+            $this.parents().find('[se-type=end]').hide().val('')
+                                                 .next('span.txt').hide();
             if ($('span.modifyEndYM').length == 0){
                 $this.parents().find('span.txt:last').after(html).hide();
             } else {
                 $('span.modifyEndYM').show();
             }
-            $('[name=since-now]').val(now);
+            $('#sinceNow').val(now);
             $('[se-type=end]').attr('disabled',true);
             $(boxId + '_box').remove();
         });
@@ -274,7 +280,7 @@
             $this.parents().find('[se-type=end],span').show();
             $('[se-type=end]').removeAttr('disabled');
             $this.parents().find('[se-type=end]').eq(0).trigger(timePlugin.method).focus().val('');
-            $('[name=since-now]').val('');
+            $('#sinceNow').val('');
             $(this).hide();
             return false;
         });
