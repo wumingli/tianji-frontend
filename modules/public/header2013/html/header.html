@@ -1,0 +1,151 @@
+<link href="http://image.tianji.com/tjs/styles/reset.min.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://image.tianji.com/tjs/styles/all.min.css" media="screen" rel="stylesheet" type="text/css" />
+<!--<link href="http://image.tianji.com/tjs/header2013/css/new_header.css" rel="stylesheet" type="text/css" />-->
+<link href="http://www.wml.com/workspace/tianji-frontend/modules/public/header2013/css/new_header.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/DD_belatedPNG.min.js"></script>
+<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/jquery-tipsy.min.js"></script>
+<script type="text/javascript" src="http://www.wml.com/workspace/tianji-frontend/modules/public/header2013/js/header2013.js"></script>
+<!--<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/header2013.js"></script>-->
+
+<script type="text/javascript">
+	$(function(){
+		DD_belatedPNG.fix('.png_ie6');
+		$('.auther_icon').tipsy({gravity: 's'});
+	});
+</script>
+<style type="text/css">
+body {height:2000px;}
+</style>
+<div id="header">
+  <div class="header_menu_bg">
+    <div class="header_menu"> <span class="logo png_ie6"><a href="http://www.tianji.com/home">天际网</a></span>
+      <div class="top_search">
+        <div class="search_home"> <span class="search_icon"></span> <span class="search_up"></span> </div>
+        <form action="http://search.tianji.com/psearch">
+            <input type="text" value="搜索" class="find_people" name="header_keyword" />
+            <input name="header_destination" type="hidden" value="name">
+            <input type="submit" class="find_people_button" value="" />
+            <div class="search_list bottom_bg" style="display: none;" >
+              <ul class="search_main">
+                <li class="current"> <a class="current" href="javascript:void(0);" data-range="name">按姓名搜索“<b>软件工程师</b>”</a> </li>
+                <li> <a href="javascript:void(0);" data-range="company">按公司搜索“<b>软件工程师</b>”</a> </li>
+                <li> <a href="javascript:void(0);" data-range="title">按职位搜索“<b>软件工程师</b>”</a> </li>
+                <li> <a href="javascript:void(0);" data-range="school">按学校搜索“<b>软件工程师</b>”</a> </li>
+              </ul>
+            </div>
+        </form>
+      </div>
+      <div class="user_info">
+        <span class="user_poster"><a href="javascript:void(0);"><img src="http://www.tianji.com/images/logos/user/medium_logo.png"></a></span>
+        <div class="user_name"> <span class="zi">登录中……</span><b class="arrow-ud png_ie6 "></b>
+          <ul class="user_item" style="display: none;">
+            <li><a href="http://www.tianji.com/setting/account" target="_self">帐号设置</a></li>
+            <li><a href="http://www.tianji.com/setting/locale/en_US?return_to=/" target="_self">English</a></li>
+            <li><a href="http://www.tianji.com/Logout" target="_self">退出</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="header_menu_two">
+      <div class="header_menus">
+        <ul class="left_menu" >
+          <li> <a href="http://www.tianji.com/home">首页</a> </li>
+          <li> <a href="http://www.tianji.com/groups">我的档案</a> </li>
+          <li> <a href="http://www.tianji.com/pub">人脉</a> </li>
+          <li> <a href="http://job.tianji.com/sr/home?from=tianji">职位</a> </li>
+          <li> <a href="/jobs" class="current">公司</a> </li>
+          <li> <a href="http://www.tianji.com/mba">教育培训</a> </li>
+          <li> <a href="/news">互动</a> </li>
+        </ul>
+        <ul class="right_menu">
+          <li id="contacts_one" class="contacts"> <a href="javascript:void(0);" class="icon_01"></a>
+            <div class="clear"></div>
+            <div class="span_promit">0</div>
+            <div class="messages_list" id="contacts_one_list" >
+              <span class="list_c"></span>
+              <span class="title_renmai">人脉邀请</span>
+              <span class="promit_no">暂时没有收到人脉请求</span>
+              <div class="loding_notice mg_r125">正在加载.....</div>
+              <ul class="contacts_main" id="new_header">
+              </ul>
+              <span class="title_renmai border_t">可能认识的人</span>
+              <div class="hd_scroll_box">
+                <ul class="contacts_main" id="people_kone">
+                </ul>
+                <div class="clear"></div>                    
+                  <div class="emails_panel" style="">
+                    <h6>邀请你的邮箱联系人，更好的使用天际网</h6>
+                    <a href="javascript:void(0);" class="list_itme"> <img src="http://image.tianji.com/tjs/header2013/images/gmail.jpg" />Gmail </a> <a href="javascript:void(0);" class="list_itme"> <img src="http://image.tianji.com/tjs/header2013/images/wangyi.jpg" />网易邮箱 </a> <a href="javascript:void(0);" class="list_itme"> <img src="http://image.tianji.com/tjs/header2013/images/qq.jpg" />QQ邮箱 </a> <a href="javascript:void(0);" class="list_itme"> <img src="http://image.tianji.com/tjs/header2013/images/qota.jpg" />其他 </a> 
+                  </div>
+                </div>
+              </div>
+          </li>
+          <li id="look_see1" class="message"> <span class="icon_01"></span>
+            <div class="clear"></div>
+            <div class="span_promit">99+</div>
+            <div class="messages_list" style="display: none;" id="look_list1" > <span class="list_c"></span> <span class="title_renmai">私信 <a href="javascript:void(0);" class="wirte_info">写信</a> </span>
+              <div class="no_notice" style="">还没有收到私信</div>
+              <div class="loding_notice mg_r125">正在加载.....</div>
+              <div class="hd_scroll_box">
+                <ul class="contacts_main" id="new_header_message">
+                  <!--
+                  <li> <a href="http://www.tianji.com/messages"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="times">05-28</span> <span class="name1_companies">你今天怎么样？</span> <span class="bi_x" style="display: none"></span> </a> </li>
+                  <li> <a href="javascript:void(0);"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="times">05-28</span> <span class="name1_companies">你今天怎么样？</span> <span class="bi_x" style="display: none"></span> </a> </li>
+                  <li> <a href="javascript:void(0);"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="times">05-28</span> <span class="name1_companies">你今天怎么样？</span> <span class="bi_x" style="display: none"></span> </a> </li>
+                  <li> <a href="javascript:void(0);"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="times">05-28</span> <span class="name1_companies">Only know you love her when you let ...</span> <span class="bi_x" style="display: none"></span> </a> </li>
+                  <li class="bg_c"> <a href="javascript:void(0);"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="times">05-28</span> <span class="name1_companies"><strong>你去草莓么？我们有车</strong></span> <span class="bi_x" style="display: none"></span> </a> </li>
+                  <li> <a href="javascript:void(0);"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="times">05-28</span> <span class="name1_companies"><b class="yi_icon"></b>Only know you love her when you let ...</span> <span class="bi_x" style="display: none"></span> </a> </li>
+                  -->
+                </ul>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </li>
+          <li id="notices_see3" class="notices" style="display:none;"> <span class="icon_01"></span>
+            <div class="clear"></div>
+            <div class="span_promit">1</div>
+            <div class="messages_list" style="display:none;" data-role="notices_list1" > <span class="list_c"></span> <span class="notices_title">职场机遇</span> <span class="promit_zcjy_no" style="display: none;">还没有收到邀请哦，完善你的<a href="javascript:void(0);">个人档案</a>会收到更多邀请</span>
+              <div class="hd_scroll_box">
+                <ul class="contacts3_main" id="new_header_work">
+                  <li> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="name1_companies">天际网 - 产品经理</span> <span class="times">今天 12:14</span> <span class="notice_con"><b class="yi_icon postion_01"></b>邀请你投递 <a href="javascript:void(0);">天际网 行业拓展助理</a> 职位</span> </li>
+                  <li> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="name1_companies">天际网 - 产品经理</span> <span class="times">05-28</span> <span class="notice_con"><b class="yi_icon postion_01"></b>邀请你投递 <a href="javascript:void(0);">天际网 行业拓展助理</a> 职位</span> <span class="bi_x" style="display: none"></span> </li>
+                  <li> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="name1_companies">天际网 - 产品经理</span> <span class="times">05-28</span> <span class="notice_con"><b class="yi_icon postion_02"></b>邀请你投递 <a href="javascript:void(0);">天际网 行业拓展助理</a> 职位</span> <span class="bi_x" style="display: none"></span> </li>
+                  <li> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="name1_companies">天际网 - 产品经理</span> <span class="times">05-28</span> <span class="notice_con"><b class="yi_icon postion_01"></b>邀请你投递 <a href="javascript:void(0);">天际网 行业拓展助理</a> 职位</span> <span class="bi_x" style="display: none"></span> </li>
+                  <li class="bg_c"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title strong">郑瑞</span> <span class="name1_companies strong">天际网 - 产品经理</span> <span class="times">05-28</span> <span class="notice_con strong"><b class="yi_icon postion_03"></b>邀请你参加 <a href="javascript:void(0);">华尔街英语培训</a></span> <span class="bi_x" style="display: none"></span> </li>
+                  <li> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="name1_companies">天际网 - 产品经理</span> <span class="times">05-28</span> <span class="notice_con"><b class="yi_icon postion_01"></b>邀请你投递 <a href="javascript:void(0);">天际网 行业拓展助理</a> 职位</span> <span class="bi_x" style="display: none"></span> </li>
+                </ul>
+                <div class="clear"></div>
+                <div class="scroll_panel">
+                  <div class="hd_scroll_bg" style="display: none;" > <span class="hd_scroll_bar"></span> </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="tool" id="look_see2"> <span class="icon_01"></span>
+            <div class="clear"></div>
+            <div class="span_promit">10</div>
+            <div class="messages_list" style="display:none;" data-role="look_list2" > <span class="list_c png_ie6"></span> <span class="notices_title">通知</span>
+              <div class="no_notice mg_r125" style="display: none;">还没有收到通知</div>
+              <div class="loding_notice mg_r125" style="display: none;">正在加载.....</div>
+              <div class="hd_scroll_box">
+                <ul class="contacts2_main">
+                  <li> <a href="www.tianji.com"  class="bg_new"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="name1_companies">天际网 - 产品经理</span> <span class="times">今天 12:14</span> <span class="notice_con">最近访问了你的档案</span> </a> </li>
+                  <li> <a href="www.tianji.com"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="name1_title">郑瑞</span> <span class="name1_companies bg_hui">已成为你的联系人</span> <span class="times">05-28</span> </a> </li>
+                  <li> <a href="www.tianji.com"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="notice_info_con">截止现在您已经在天际 “职男职女百秀”活动中获得了215张支持票</span> <span class="times">05-28</span> </a> </li>
+                  <li> <a href="www.tianji.com"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="notice_info_con">王小菲  喜欢了你的状态“If you wanna go fast, go alone; if you wanna go deep, ...</span> <span class="times">05-28</span> </a> </li>
+                  <li> <a href="www.tianji.com"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="notice_info_con">王小菲  喜欢了你的状态“If you wanna go fast, go alone; if you wanna go deep, ...</span> <span class="times">05-28</span> </a> </li>
+                  <li> <a href="www.tianji.com"> <span class="logo1"><img src="http://image.tianji.com/tjs/header2013/images/2788248-s.jpg" /></span> <span class="notice_info_con">王小菲  喜欢了你的状态“If you wanna go fast, go alone; if you wanna go deep, ...</span> <span class="times">05-28</span> </a> </li>
+                </ul>
+                <div class="clear"></div>
+                <div class="scroll_panel">
+                  <div class="hd_scroll_bg" style="display: none;" > <span class="hd_scroll_bar"></span> </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

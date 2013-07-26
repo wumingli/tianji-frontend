@@ -26,14 +26,6 @@ define(function (require, exports, module){
           $(this).removeClass('contacts_hover');
           $('[data-role=look_list]').css('display', 'none');
         });
-        /* Normandy PK in nav */
-        $('[data-role=pk_sai]').hover(function(){
-          $(this).addClass('hot_nord');
-          $('[data-role=pk_com]').css('display','block');
-        }, function () {
-          $(this).removeClass('hot_nord');
-          $('[data-role=pk_com]').css('display','none');
-        });
       }
       $('[the-id=look_see1]').hover(function() {
         $(this).addClass('message_hover');
@@ -76,6 +68,7 @@ define(function (require, exports, module){
         },
         _bind: function(){
           this.selectors.input.bind("blur", this._hide).bind("keyup", this._keyup);
+          this.selectors.box.bind("click", this._hide);
           this.selectors.box.hover(function(){
             SearchBox.selectors.input.unbind("blur");
           },function(){
@@ -229,21 +222,6 @@ define(function (require, exports, module){
         });
 
       }
-      //PK大赛
-      $.ajax({
-        url:'http://www.tianji.com/pk/'+curUID+'/nav',
-        dataType:'jsonp',
-        success:function(item){
-            $('.header_menu .left_menu').append(item);
-            $('[data-role=pk_sai]').hover(function(){
-                $(this).addClass('hot_nord');
-                $('[data-role=pk_com]').css('display','block');
-            },function(){
-                $(this).removeClass('hot_nord');
-                $('[data-role=pk_com]').css('display','none');
-            });
-        }
-      });
       //用户信息
       $.ajax({
         url:'http://www.tianji.com/jsonp/nav/user_infos/'+curUID,

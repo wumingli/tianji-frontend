@@ -17,19 +17,26 @@
 */
 
 (function (){
-    var urlString = document.getElementById('pageCssInit').src,
-        arrFileList = '';
-    if (urlString.indexOf('?') > -1){
-        arrFileList = urlString.substring(urlString.indexOf('?')+1).split('&');
-        for (var i=0; i<arrFileList.length; i++){
-            var arrFile = arrFileList[i].split('=');
-            if (arrFile[0] == 'clearCache'){
-                continue;
+    if (document.getElementById('pageCssInit') == null){
+        alert('未找到ID为pageCssInit的CSS启动文件，请为script添加该ID！');
+    } else {
+        var urlString = document.getElementById('pageCssInit').src,
+            arrFileList = '';
+        if (urlString.indexOf('?') > -1){
+            arrFileList = urlString.substring(urlString.indexOf('?')+1).split('&');
+            for (var i=0; i<arrFileList.length; i++){
+                var arrFile = arrFileList[i].split('=');
+                if (arrFile[0] != 'clearCache'){
+                    var fileName = arrFile[0].indexOf('.css') > -1 ? arrFile[0] : arrFile[0] + '.css';
+                    var hasHttp = arrFile[1].indexOf('http') > -1 ? '' : 'http://';
+                    var cacheStr = arrFile[0] in cssMap ? cssMap[arrFile[0]] : '';
+                    var style = document.createElement('link');
+                    style.rel = 'stylesheet';
+                    style.type = 'text/css';
+                    style.href = hasHttp + arrFile[1] + fileName + cacheStr;
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                }
             }
-            var fileName = arrFile[0].indexOf('.css') > -1 ? arrFile[0] : arrFile[0] + '.css';
-            var hasHttp = arrFile[1].indexOf('http') > -1 ? '' : 'http://';
-            var cacheStr = arrFile[0] in map ? map[arrFile[0]] : '';
-            document.write('<link rel="stylesheet" type="text/css" href="'+hasHttp + arrFile[1] + fileName + cacheStr+'" />');
         }
     }
 })();

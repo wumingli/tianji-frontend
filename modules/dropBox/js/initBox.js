@@ -7,46 +7,46 @@
 */
 define(function(require, exports, modules){
     var sel = require('./dropBox');
-    $('#p-data-wrap').dropBox({
+    $('#wml-p-data-wrap').dropBox({
         name: 'sex'
     });
-    $('#p-data-wrap1').dropBox({
+    $('#wml-p-data-wrap1').dropBox({
         name: 'salary',
         init: {
             code: '0600108000'
         }
     });
-    $('#p-data-wrap2').dropBox({
+    $('#wml-p-data-wrap2').dropBox({
         name: 'companyProperty',
         required: true
     });
-    $('#p-data-wrap3').dropBox({
+    $('#wml-p-data-wrap3').dropBox({
         name: 'workExperience',
         required: true
     });
-    $('#p-data-wrap4').dropBox({
+    $('#wml-p-data-wrap4').dropBox({
         name: 'companyLevel'
     });
-    $('#p-data-wrap5').dropBox({
+    $('#wml-p-data-wrap5').dropBox({
         name: 'eduBackground',
         init: {
             code: '404'
         },
         required: true
     });
-    $('#p-data-wrap6').dropBox({
+    $('#wml-p-data-wrap6').dropBox({
         name: 'lan',
         init: {
             code: '511'
         }
     });
-    $('#p-data-wrap7').dropBox({
+    $('#wml-p-data-wrap7').dropBox({
         name: 'lanLS'
     });
-    $('#p-data-wrap8').dropBox({
+    $('#wml-p-data-wrap8').dropBox({
         name: 'lanRW'
     });
-    $('#p-data-wrap9').dropBox({
+    $('#wml-p-data-wrap9').dropBox({
         name: 'custom',
         customData: {
             'custom': {
@@ -68,13 +68,17 @@ define(function(require, exports, modules){
         },
         required: true
     });
-    $('#p-data-wrap10').dropBox({
+    $('#wml-p-data-wrap10').dropBox({
         name: 'salarySingle',
-        linkage: '#p-data-wrap11'
+        linkage: '#wml-p-data-wrap11',
+        linkageType: 'from',
+        required: true
     });
-    $('#p-data-wrap11').dropBox({
+    $('#wml-p-data-wrap11').dropBox({
         name: 'salarySingle',
-        linkage: '#p-data-wrap10'
+        linkage: '#wml-p-data-wrap10',
+        linkageType: 'to',
+        required: true
     });
     $('#testForm').submit(function (){
         return $(this).subDropList();

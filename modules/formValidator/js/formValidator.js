@@ -31,13 +31,14 @@
                 checkData($(this));
             });
             $form.on('click', ':checkbox,:radio', function (){
-                //$(this).focus();
+                $(this).focus();
+                return checkData($(this));
+            });
+            $form.on('blur', ':checkbox,:radio', function (){
                 return checkData($(this));
             });
             $form.on('change', 'select', function (){
-                //$(this).focus();
-                //return checkData($(this), 'click');
-                console.log($(this).find(':selected').text());
+                return checkData($(this));
             });
         } else {
             alert('not found attribute of ' + pluginCfg.testAttr);
@@ -45,15 +46,27 @@
         //数据检查
         function checkData(element){
             var elmOffset = element.offset();
+            var type = element.attr('type');
+            var checkingArray = [],
+                initArray = [];
+            var cfg;
+            var fstNode;
             $('#' + element.attr('name') + '_error_tip').remove();
-            if (element.attr('type') == 'checkbox' || element.attr('type') == 'radio'){
-                element = element.parent().find('[name='+element.attr('name')+']:first');
-                elmOffset = element.offset();
+            if (type == 'checkbox' || type == 'radio'){
+                //element = element.parent().find('[name='+element.attr('name')+']:first');
+                fstNode = element.parent().find('[name='+element.attr('name')+']:eq(0)');
+                cfg = eval('(' + fstNode.attr(pluginCfg.btnData) + ')');
+                elmOffset = fstNode.offset();
             }
-            try{
-                var cfg = eval('(' + element.attr(pluginCfg.btnData) + ')');
-                var checkingArray = cfg.checking;
-                var initArray = cfg.init;
+            else {
+                cfg = eval('(' + element.attr(pluginCfg.btnData) + ')');
+            }
+            checkingArray = cfg.checking;
+            initArray = cfg.init;
+            if (element.is('select')){
+                type = 'select';
+            }
+            //try{
                 var left = 0,
                     top = 0,
                     i,
@@ -72,7 +85,7 @@
                 }
                 else {
                     for (i = 0, len = checkingArray.length; i < len; i++){
-                        var oGetRule = rules[checkingArray[i]]['fnValidation'](element, initArray[i], cfg.name, element.attr('type'));
+                        var oGetRule = rules[checkingArray[i]]['fnValidation'](element, initArray[i], cfg.name, type);
                         var res = oGetRule && oGetRule['result'];
                         oResults[checkingArray[i] + cfg.name] = res;
                         if (oGetRule && !res){
@@ -83,10 +96,10 @@
                         }
                     }
                 }
-            }
-            catch (e){
-                alert('"' + $(this).attr(pluginCfg.btnData) + '" \n数据格式错误，请检查');
-            }
+            //}
+            //catch (e){
+            //    alert('"' + $(this).attr(pluginCfg.btnData) + '" \n数据格式错误，请检查');
+            //}
         }
         //rules
         var rules = {
@@ -96,13 +109,38 @@
                 alertTextSelect: '请选择',
                 alertTextCheckbox: '必须勾选',
                 fnValidation: function (element, need, name, type){
-                    if (type === 'radio'){
-                        console.log(type);
+                    var len = 0,
+                        text1 = this.alertText,
+                        text2 = '';
+                    if (type == 'checkbox' || type == 'radio'){
+                        len = element.parent().find('[name=' + element.attr('name') + ']:checked').size();
+                        if (len < 1){
+                            return {
+                                msg: name + '为必选项',
+                                result: false
+                            }
+                        }
+                        else {
+                            return {
+                                result: true
+                            }
+                        }
+                    } else if(type == 'select'){
+                        if (element.find(':selected').text().indexOf('请选择') != -1){
+                            return {
+                                msg: name + '为必选项',
+                                result: false
+                            }
+                        } else {
+                            return {
+                                result: true
+                            }
+                        }
                     } else {
                         return {
                             msg: this.alertText + name,
                             result: !($.trim(element.val()) == '' && need)
-                        }                        
+                        }
                     }
                 }
             },
@@ -114,13 +152,22 @@
                     var len = 0,
                         text1 = this.alertText,
                         text2 = this.alertText2;
+                    len = element.val().length;
                     if (type == 'checkbox' || type == 'radio'){
                         len = element.parent().find('[name=' + element.attr('name') + ']:checked').size();
                         text1 = '最少选择';
                         text2 = '项';
+                    } else if(type == 'select'){
+                        if (element.find(':selected').text().indexOf('请选择') != -1){
+                            len = 0;
+                        } else {
+                            len = mLen;
+                        }
+                        text1 = '最少选择';
+                        text2 = '项';
                     } else {
                         len = element.val().length;
-                    }
+                    }/**/
                     if (len < mLen){
                         return {
                             msg: name + text1 + mLen + text2,
@@ -152,6 +199,7 @@
                         text2 = this.alertText2;
                     }
                     if (len > mLen){
+                        element.attr('checked',false);
                         return {
                             msg: name + text1 + mLen + text2,
                             result: false
@@ -295,12 +343,16 @@
         $('body').on('submit', $form, function (){
             var canSub = true;
             $form.find('input:text,input:password').trigger(pluginCfg.triggerMethod);
-            checkData($form.find('input:checkbox'), 'submit');
-            checkData($form.find('input:radio'), 'submit');
+            checkData($form.find('input:checkbox'));
+            checkData($form.find('input:radio'));
+            checkData($form.find('select'));
             for (var k in oResults){
                 if (!oResults[k]){
                     canSub = false;
                 }
+            }
+            if (typeof $(this).subDropList === 'function'){
+                typeof $(this).subDropList();
             }
             return canSub;
         });

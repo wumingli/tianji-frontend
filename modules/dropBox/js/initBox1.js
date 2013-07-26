@@ -33,7 +33,7 @@ $('#p-data-wrap5').dropBox({
     required: true
 });
 $('#p-data-wrap6').dropBox({
-    name: 'lan',
+    name: 'language',
     init: {
         code: '511'
     }
@@ -45,9 +45,9 @@ $('#p-data-wrap8').dropBox({
     name: 'lanRW'
 });
 $('#p-data-wrap9').dropBox({
-    name: 'customdemo',
-    customData: [{
-        'customdemo': {
+    name: 'custom',
+    customData: {
+        'custom': {
             'data': [{
                 'code': '901',
                 'name': '自定义数据1'
@@ -60,7 +60,7 @@ $('#p-data-wrap9').dropBox({
             }],
             'title': '自定义数据'
         }
-    }],
+    },
     init: {
         code: '901'
     },
