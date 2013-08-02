@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>天际弹窗登录</title>
+<link href="http://image.tianji.com/tjs/styles/base.min.css" rel="stylesheet" type="text/css" />
+<link href="../css/popup-login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../js/tj-popup-login.js"></script>
+</head>
+<body>
+<div style="padding:50px;line-height:30px;">
+    <h1>这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容</h1>
+    <a href="javascript:void(0);" class="popup-login">登录</a> <br />
+    <input type="text" id="aaaaaaaa" value="" /><br />
+    <select name="">
+        <option>测试IE6遮挡.........</option>
+    </select>
+</div>
+<div id="tianji-popup-login">
+    <div class="pop-left">
+        <div class="pop-left-con">
+            <div class="pop-reg">
+                <h3>立即登录</h3>
+                <ul>
+                    <li>
+                        <input type="text" placeholder="邮箱/手机" name="userName" class="txt" regtype="email_telphone,notnull" />
+                    </li>
+                    <li>
+                        <input type="password" placeholder="密码" name="userPwd" class="txt" regtype="notnull" />
+                    </li>
+                    <li><input type="hidden" id="keepLogin" /><label for="keepLogin">保持登录状态</label> <a href="http://www.tianji.com/account/account_password_backs/new" class="get-back-password" target="_blank" title="找回密码">找回密码</a></li>
+                    <li><input type="button" id="tianji-popup-login-btn" value="" />　　　　<a href="http://www.tianji.com/join" class="fblue reg-now" target="_blank">没有帐号，立即注册</a></li>
+                </ul>
+            </div>
+            <div class="pop-login">
+                <h3>快速注册天际网</h3>
+                <ul>
+                    <li><input type="text" placeholder="真实姓名" name="userName" class="txt" regType="chinese,notnull" /></li>
+                    <li><input type="text" placeholder="邮箱/手机" name="userEmail" class="txt" regtype="email_telphone,notnull" /></li>
+                    <li><input type="password" placeholder="密码" name="userPwd" class="txt" regtype="notnull" /></li>
+                    <li><input type="button" id="tianji-popup-reg-btn" value="" />　　　　<a href="http://www.tianji.com/join" class="fblue login-now" target="_blank">已有帐号，直接登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="pop-right">
+        <div class="pop-right-con">
+            <p>用你的社交帐号登录</p>
+            <a href="http://www.tianji.com/auth/weibo" class="weiboLogin" title="用新浪微博登录">用新浪微博登录</a>
+        </div>
+    </div>
+    <b class="close" title="关闭"></b>
+</div>
+<div id="tianji-popup-login-outer-shade"></div>
+<div id="tianji-popup-login-shade">
+    
+</div>
+</body>
+</html>

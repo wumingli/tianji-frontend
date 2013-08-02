@@ -15,6 +15,7 @@
  */
 var msPublic = function (msPick,$this)
 {
+	
 	/**
 	 * [创建DOM元素]
 	 */
@@ -138,6 +139,14 @@ var msPublic = function (msPick,$this)
 	}
 
 	msPick.createDom();
+
+	if(msPick.init.length>0)
+	{
+		
+		$this.find(".txt-box-tip").hide();
+
+	}
+
 	/**
 	 * [ 为解决IE6 select遮挡问题 给隐藏iframe设置宽高]
 	 */
@@ -148,6 +157,36 @@ var msPublic = function (msPick,$this)
 		$("#"+this.id).find("iframe").css({"width":msPickWidth,"height":msPickHeight});
 
 	}
+
+	msPick.getCodeOrName = function(str){
+
+		switch(this.type)
+		{
+			case "city":
+				return str.split("-")[2];
+				break;
+			case "job":
+				return jobDataMap[str];
+				break;
+			case "industry":
+				var name=""
+				switch(str.length)
+				{
+					case 3:
+						name = industryDataMap.MapTwo[str.substring(0,1)][str];
+						break;
+					case 4:
+						name = industryDataMap.MapTwo[str.substring(0,2)][str];
+						break;		
+				}
+				return name;
+				break;
+		}
+
+	}
+
+
+
 	/**
 	 * [ 对city的默认值做单独处理]
 	 * @return {[type:Array]} [description:因为city传的是城市名,我们为了保证和下面统一都是code,所以此处找到对应code存入数组]
@@ -212,6 +251,7 @@ var msPublic = function (msPick,$this)
 			var strA ="";
 			var codeArr=conf.msCheckInputArr;
 			var tempArr = [];
+			var tempArrName = [];
 			_.each(codeArr,function(value){
 				
 				var name = "";
@@ -232,6 +272,7 @@ var msPublic = function (msPick,$this)
 						break;
 				}
 				tempArr.push(code);
+				tempArrName.push(name);
 				strA += "<span class='ms-selected-item' rel="+code+">"+
 	                "<span class='text'>"+name+"</span>"+
 	                "<span class='delete-component'>删除</span></span>";
@@ -243,19 +284,21 @@ var msPublic = function (msPick,$this)
 				case "city":
 					
 					$this.find(".ms_checkInput").val(tempArr.join(","));
+					$this.attr("title",tempArrName.join(","));
 					break;
 				case "job":
 					
 					$this.find(".ms_checkInput").val(codeArr.join(","));
+					$this.attr("title",tempArrName.join(","));
 					break;
 				default:
 					
 					$this.find(".ms_checkInput").val(codeArr.join(","));
+					$this.attr("title",tempArrName.join(","));
 					break;
 			}
 
-			$(strA).insertBefore($this.find(".ms-txt-component"));
-			
+			$this.find(".txt-box-component").append($(strA));
 			addDefaultFn()
 
 		}
@@ -270,7 +313,7 @@ var msPublic = function (msPick,$this)
 	msPick.mpPosition = function()
     {
     	var left = $this.offset().left;
-        var top = $this.find(".ms-txt-component").offset().top+25;
+        var top = $this.find(".txt-box-component").offset().top+38;
          
         switch(this.align)
         {
@@ -286,275 +329,12 @@ var msPublic = function (msPick,$this)
     };
 
 	var $txtBox = $this.find(".txt-box-component");
-	var $msTxt = $this.find(".ms-txt-component");
+	
 
 	/**
 	 * [ 所有对文本框的操作，手输和删除]
 	 */
-	msPick.txt = function()
-	{
-		var _this = this;		
-		/**
-		 * [ 所有的手输操作]
-		 */
-		$msTxt.on("keyup",function(event){
-
-    		var keyWords = $(this).val();
-	        var aResult = [];//构建li所存的过滤出来的一个json。
-	        var strLi="";//构建li时拼li的字符串。
-	        var str="";//存放msok/mserror字符串
-	        var $msOk = $("body").find(".ms-ok-component");
-	        var $msError = $("body").find(".ms-error-component");
-
-	        var strA = "";
-	        var bKey = false; //判断输入内容是否为功能键
-	        for(var i=0;i<conf.keyArray.length;i++)
-	        {
-	            if(event.keyCode==conf.keyArray[i])
-	            {
-	                bKey=true;
-	            }
-	        }
-
-	        _this.createDiv.hide();
-
-	        if(!bKey)
-	        {
-	            for(var i in _this.listData)
-	            {
-	            	if((_this.listData[i].indexOf(keyWords)>-1)&&(keyWords!=""))
-	                {
-	                	var json = "";
-	                	switch(_this.type)
-	                	{
-	                		case "city":
-	                			json = {"code":_this.listData[i],"name":i}
-	                			break;
-	                			
-	                		case "job":
-	                			json = {"code":i,"name":_this.listData[i]}
-	                			break;
-
-	                		default:
-	                			json = {"code":i,"name":_this.listData[i]}
-	                			break;
-	                	}
-	                	
-	                	aResult.push(json);
-	                }
-	            }
-	            //console.log(aResult);
-
-	            if($msOk) $msOk.remove();
-	            if($msError) $msError.remove();
-
-	            if(_.size(aResult)>0)
-	            { 
-	                if(aResult.length>conf.max) aResult.length = conf.max;
-
-					_.each(aResult,function(obj){
-						strLi += "<li rel="+obj.code+"><a href='javascript:;'>"+obj.name+"</a></li>";
-					})
-
-	                str = "<div class='ms-ok-component' style='width:"+_this.style.msOkWidth+"'>"+
-	                      "<ul class='ms-list-component'>"+
-	                      strLi+
-	                      "</ul>"+
-	                      "<iframe border='0' frameborder='0' style='position: absolute; z-index: -1; left: 0px; top: 0px; width:100%; height:100%'></iframe>"+
-	                      "</div>";
-	            }
-	            
-	            if((aResult.length==0)&&(keyWords!=""))
-	            {
-	                str = "<div class='ms-error-component'>"+
-	                		"您输入的信息不存在，请重新输入"+
-	                		"<iframe border='0' frameborder='0' style='position: absolute; z-index: -1; left: 0px; top: 0px; width:100%; _width:230px; height:100%;'></iframe>"+
-	                	  "</div>"; 
-	            }
-
-	            //$this.append($(str));
-	            $("body").append($(str));
-
-	            var msPickOkWidth = $(".ms-ok-component").width();
-				var msPickOkHeight = $(".ms-ok-component").height();
-				$(".ms-ok-component").find("iframe").css({"width":msPickOkWidth,"height":msPickOkHeight});
-
-	            conf.index=0;//每次都要重置索引号。因为列表有按键等操作，不重置，有些时候会选中下面的。
-	            $(".ms-ok-component").find("li").eq(conf.index).addClass("active");
-
-	            msTipPosition()
-	            
-	        }
-
-	        
-			var aLi = $(".ms-ok-component").find("li");
-            aLi.on("mouseover",function(){
-
-	            aLi.removeClass("active");
-	            $(this).addClass("active");
-	            conf.index = $(this).index();
-
-	        });
-
-            var addA = function(maxnum)
-            {	
-            	var keyWordsSelected=$("body").find(".ms-ok-component").find('.active').text();
-             	var keyWordsId = $("body").find(".ms-ok-component").find('.active').attr("rel");
-             	strA = "<span class='ms-selected-item' rel="+keyWordsId+">"+
-                        "<span class='text'>"+keyWordsSelected+"</span>"+
-                        "<span class='delete-component'>删除</span></span>";
-
-             	if(_this.check=="radio")
-             	{	
-	                $this.find(".txt-box-component").find(".ms-selected-item").remove();
-
-	                msPick.createDiv.find(".ms-cb-cb").attr("checked",false);
-
-	                $this.find(".ms_checkInput").val(keyWordsId);     
-	                conf.msCheckInputArr=[keyWordsId];
-             	}
-
-             	if(_this.check=="checkbox")
-             	{
-             		conf.selectLenght = conf.msCheckInputArr.length; 
-		            if(conf.selectLenght>=maxnum)
-		            {
-		                $this.find(".ms-txt-component").val("");
-		                if($msOk) $msOk.remove();
-		                alert("最多选择"+msPick.maxCount+"项");
-		                return;
-		            }
-
-	             	var allA = $this.find(".txt-box-component").find(".ms-selected-item");
-	             	var bCunZai = false;
-	             	for(var i=0;i<allA.length;i++)
-		            {
-		                if(allA[i].getAttribute("rel")==keyWordsId)
-		                {
-		                    bCunZai =true;
-		                }
-		            }
-
-		            if(bCunZai)
-		            {
-		                $this.find(".ms-txt-component").val("");
-		                return;
-		            } 
-	                conf.msCheckInputArr.push(keyWordsId);
-	                $this.find(".ms_checkInput").val(conf.msCheckInputArr.join(",")); 
-             	}
-
-             	$(strA).insertBefore($this.find(".ms-txt-component"));
-             	$this.find(".ms-txt-component").val("");
-             	conf.aMsCb = _this.createDiv.find(".ms-cb-cb");
-             	
-            	conf.aMsCb.each(function(){
-
-	                if($(this).attr("value")==keyWordsId)
-	                {
-	                    $(this).attr("checked",true);
-	                }
-	            })
-	            if($msOk) $msOk.remove();
-
-             	msPick.mpPosition()
-
-       
-            };
-
-            if(event.keyCode==13)
-            {	
-            	if(aLi.length==0)
-	            {
-	                $(this).val("");
-
-	                return;
-	            }
-	            addA(msPick.maxCount);        
-            }
-
-            aLi.on("click",function()
-            {
-	            addA(msPick.maxCount);
-            })
-            
-            switch(event.keyCode)
-	        {
-	            case 38:
-	                conf.index--;
-	                if(conf.index==-1) conf.index=aLi.length-1;
-	                aLi.removeClass("active");
-	                aLi.eq(conf.index).addClass("active");
-	                break;                
-	            case 40:
-	                conf.index++;
-	                if(conf.index==aLi.length) conf.index=0;
-	                aLi.removeClass("active");
-	                aLi.eq(conf.index).addClass("active");
-	                break;
-	        }
-
-    	})
-		/**
-		 * [ 删除A操作]
-		 */
-		$this.find(".ms-txt-component").on("keydown",function(event){
-
-			var lastA = $this.find(".txt-box-component").find(".ms-selected-item:last");
-	        if(event.keyCode==8)
-	        {
-	            if($(this).val()=="")
-	            {
-	                
-	                if(_this.check=="radio")
-	                {
-	                	lastA.remove();
-		                $this.find(".ms-txt-component").val("");
-		                $this.find(".ms_checkInput").val("");
-		                _this.createDiv.find(".ms-cb-cb").attr("checked",false);
-
-	                }
-
-	                if(_this.check=="checkbox")
-	                {
-	                	conf.aMsCb = _this.createDiv.find(".ms-cb-cb");
-		                for(var i=0;i<conf.msCheckInputArr.length;i++)
-		                {
-		                	if(lastA.attr("rel")==conf.msCheckInputArr[i])
-		                	{
-		                		conf.msCheckInputArr.pop();
-		                	}
-		                }
-		                $this.find(".ms_checkInput").val(conf.msCheckInputArr.join(","));
-
-		                for(var i=0;i<conf.aMsCb.length;i++)
-		                {
-		                    if(lastA.attr("rel")==conf.aMsCb[i].value)
-		                    {
-		                        conf.aMsCb[i].checked = false;
-		                    }
-		                }
-		                lastA.remove();
-	                }
-
-	                msPick.mpPosition()
-	            }
-	        }
-
-		})
-
-		/**
-		 * [ 计算 ms-ok/ms-error 提示框的位置]
-		 */
-		var msTipPosition = function()
-		{
-			var left = $this.find(".ms-txt-component").offset().left;
-        	var top = $this.find(".ms-txt-component").offset().top+26;
-            $(".ms-ok-component").css({"left":left,"top":top});
-            $(".ms-error-component").css({"left":left,"top":top});
-		};
-
-	}
+	
 
 	/**
 	 * [ 所有对msPick下拉框的操作]
@@ -635,9 +415,8 @@ var msPublic = function (msPick,$this)
             {
             	
             	$this.find(".ms-selected-item").remove();
-                $(strA).insertBefore($this.find(".ms-txt-component"));
+                $this.find(".txt-box-component").append($(strA));
                 $this.find(".txt-box-component").val(keyWordsId);
-                $this.find(".ms-txt-component").val("");
 
                 conf.aMsCb = _this.createDiv.find(".ms-cb-cb");
                 conf.aMsCb.attr("checked",false);
@@ -649,7 +428,7 @@ var msPublic = function (msPick,$this)
 	                }
 	            })
 	            $this.find(".ms_checkInput").val(keyWordsId);
-
+	            $this.attr("title",name);
 	            conf.msCheckInputArr=[keyWordsId];
             }
 
@@ -665,10 +444,20 @@ var msPublic = function (msPick,$this)
 			        	if(oCheckBox.val()!=conf.msCheckInputArr[i])
 			        	{
 			        		tempArr.push(conf.msCheckInputArr[i]);
+
 			        	}
 			        }
 			        conf.msCheckInputArr=tempArr;
-			        $this.find(".ms_checkInput").val(tempArr.join(","));
+			        $this.find(".ms_checkInput").val(conf.msCheckInputArr.join(","));
+
+			        var tempNameArr = [];
+			        for(var i=0;i<conf.msCheckInputArr.length;i++)
+			        {
+
+			        	tempNameArr.push(msPick.getCodeOrName(conf.msCheckInputArr[i]));
+			        	
+			        }
+			        $this.attr("title",tempNameArr.join(","));
 		    	}
 
 		    	if(selectCityLenght>= _this.maxCount)
@@ -699,10 +488,21 @@ var msPublic = function (msPick,$this)
 		                    conf.aMsCb[i].checked = true;
 		                }
 		            }
-		                        
-		            $(strA).insertBefore($this.find(".ms-txt-component"));   
+ 
+		            $this.find(".txt-box-component").append($(strA));
+
 		            conf.msCheckInputArr.push(keyWordsId); 
 		            $this.find(".ms_checkInput").val(conf.msCheckInputArr.join(","));
+
+		            var tempNameArr = [];
+			        for(var i=0;i<conf.msCheckInputArr.length;i++)
+			        {
+			        	
+			        	tempNameArr.push(msPick.getCodeOrName(conf.msCheckInputArr[i]));
+			        	
+			        }
+			        $this.attr("title",tempNameArr.join(","));
+
 		        }
 		        else
 		        {
@@ -826,12 +626,9 @@ var msPublic = function (msPick,$this)
 	var initFn = function (event)
 	{
 		$(".ms-pick").hide();
-		$(".ms-error-component").hide();
-		$(".ms-ok-component").hide();
 		msPick.createDiv.show();
 		msPick.mpPosition();	
-		$msTxt.focus();	
-		$msTxt.val("");
+		$this.find(".txt-box-tip").hide();
 		event.stopPropagation();
 	}
 
@@ -851,7 +648,7 @@ var msPublic = function (msPick,$this)
 	 * [ 延时执行函数]
 	 */
 	setTimeout(function(){
-		msPick.txt();
+		
 		msPick.ckBox();
 		msPick.iframeWH();
 
@@ -872,6 +669,7 @@ var msPublic = function (msPick,$this)
 	    		$(this).parent(".ms-selected-item").remove();
 	    		_this.createDiv.find(".ms-cb-cb").attr("checked",false);
 	    		$this.find(".ms_checkInput").val("");
+	    		$this.attr("title","");
 	    		msPick.mpPosition();
 	    		conf.msCheckInputArr = [];
 	    	}
@@ -901,6 +699,16 @@ var msPublic = function (msPick,$this)
 		        }
 		        conf.msCheckInputArr=tempArr;
 		        $this.find(".ms_checkInput").val(tempArr.join(","));
+
+		        var tempNameArr = [];
+		        for(var i=0;i<conf.msCheckInputArr.length;i++)
+		        {
+		        	
+		        	tempNameArr.push(msPick.getCodeOrName(conf.msCheckInputArr[i]));
+		        	
+		        }
+		        $this.attr("title",tempNameArr.join(","));
+
 		        $(this).parent(".ms-selected-item").remove();
 		        msPick.mpPosition();
 		        return false;
@@ -934,6 +742,7 @@ var msPublic = function (msPick,$this)
 	$(".ms-pick").on("click",function(event){
 		event.stopPropagation();
 	})
+
 
 
 }

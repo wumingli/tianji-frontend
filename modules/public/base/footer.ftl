@@ -1,33 +1,3 @@
-<#--  
-<#assign ftnav=[{
-	"text":"关于天际",
-	"url":"http://www.tianji.com/help/zh-gb/about.htm"
-},	{
-	"text":"联系方式",
-	"url":"http://www.tianji.com/help/zh-gb/contact.htm"
-},	{
-	"text":"合作伙伴",
-	"url":"http://www.tianji.com/corp/links.html"
-}	,	{
-	"text":"天际Blog",
-	"url":"http://blog.tianji.com/"
-},	{
-	"text":"天际职场",
-	"url":"http://job.tianji.com/sr/home/"
-},	{
-	"text":"职业测评",
-	"url":"http://www.tianji.com/ceping/default.jsp"
-},	{
-	"text":"常见问题",
-	"url":"http://www.tianji.com/help/faqs/help.htm"
-},	{
-	"text":"隐私政策",
-	"url":"http://www.tianji.com/help/zh-gb/privacy.html"
-},	{
-	"text":"问题建议",
-	"url":"http://www.tianji.com/Report"
-}]/>
--->
 <#if !(globalData.locale)??>
 	<#assign globalData={
 		"locale":"zh_CN"

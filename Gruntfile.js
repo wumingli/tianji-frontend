@@ -21,17 +21,16 @@ module.exports = function(grunt) {
 
     //industry json file create
     var jsonIndustry = grunt.file.read('modules/msPickMap/js/industryDataMap.js');
-    jsonIndustry = jsonIndustry.replace(/var *industryDataMap *= */,'{"list":').replace(/(\s+)/g,'')+'}';
-    var list = eval('(' + jsonIndustry + ')')["list"];
+    eval(jsonIndustry);
     var arr = [];
-    for (var v in list){
-        for(v_1 in list[v]){
-            if(typeof list[v][v_1] === 'string'){
-                arr.push('{"name":"' + list[v][v_1] + '","code":"' + v_1 + '"}');
+    for (var v in industryDataMap){
+        for(v_1 in industryDataMap[v]){
+            if(typeof industryDataMap[v][v_1] === 'string'){
+                arr.push('{"name":"' + industryDataMap[v][v_1] + '","code":"' + v_1 + '"}');
             }
-            if(typeof list[v][v_1] === 'object'){
-                for(v_1_1 in list[v][v_1]){
-                arr.push('{"name":"' + list[v][v_1][v_1_1] + '","code":"' + v_1_1 + '"}');
+            if(typeof industryDataMap[v][v_1] === 'object'){
+                for(v_1_1 in industryDataMap[v][v_1]){
+                arr.push('{"name":"' + industryDataMap[v][v_1][v_1_1] + '","code":"' + v_1_1 + '"}');
                 }
             }
         }
@@ -49,6 +48,18 @@ module.exports = function(grunt) {
     }
     var jobStr = '{"list":[' + arrJob.join(',') + ']}';
     grunt.file.write( '.build/job.json', jobStr);
+
+    //city json file create
+    var jsonCity = grunt.file.read('modules/msPickMap/js/cityDataMap.js');
+    eval(jsonCity);
+    var arrCity = [];
+    var cdm = cityDataMap['MapTwo'];
+
+    for (var v in cdm){
+        arrCity.push('{"name":"' + cdm[v] + '","code":"' + v + '"}');
+    }
+    var cityStr = '{"list":[' + arrCity.join(',') + ']}';
+    grunt.file.write( '.build/city.json', cityStr);
 
     //grunt config
     grunt.config.init({
@@ -78,6 +89,15 @@ module.exports = function(grunt) {
                     cwd: 'modules/timeYMPlugin/',
                     src: ['**/*.*'],
                     dest: 'dist/timeYMPlugin/',
+                    filter: 'isFile'
+                }]
+            },
+            dropBox:{
+                files :[{
+                    expand: true,
+                    cwd: 'modules/dropBox/',
+                    src: ['**/*.*'],
+                    dest: 'dist/dropBox/',
                     filter: 'isFile'
                 }]
             },
@@ -174,6 +194,18 @@ module.exports = function(grunt) {
                 src : ['modules/msPickMap/js/industryDataMap.js', 'modules/msPickMap/js/defaultMapFn.js'],
                 dest: 'dist/msPickMap/js/industry.js'
             },
+            newReJobMap : {
+                src : ['modules/msPickMap/js/jobDataMap.js', 'modules/msPickMap/js/newReJobFn.js'],
+                dest: 'dist/msPickMap/js/newReFunction.js'
+            },
+            newReCityMap : {
+                src : ['modules/msPickMap/js/cityDataMap.js', 'modules/msPickMap/js/newReCityFn.js'],
+                dest: 'dist/msPickMap/js/newReCity.js'
+            },
+            newReIndustryMap : {
+                src : ['modules/msPickMap/js/industryDataMap.js', 'modules/msPickMap/js/newReIndustryFn.js'],
+                dest: 'dist/msPickMap/js/newReIndustry.js'
+            },
             jsInit : {
                 src : ['dist/common/mapVersion.js', 'modules/public/js/initJs.js'],
                 dest: 'dist/common/initJs.min.js'
@@ -192,7 +224,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'dist/',
-                    src: ['**/*.js', '!common/*.js', 'common/*.min.js', '!gallery/*.js'],
+                    src: ['**/*.js', '!common/*.js', '!**/*.min.js', 'common/*.min.js', '!gallery/*.js'],
                     dest: 'dist/',
                     ext: '.min.js'
                 }]
@@ -254,7 +286,8 @@ module.exports = function(grunt) {
             },            
             deploy: {
                 options: {
-                    host: 'www11.qa.tianji.com',
+                    //host: 'web1.env-40-6.dev.tianji.com',
+                    host: 'web1.env-40-7.dev.tianji.com',
                     username: 'root',
                     privateKey: grunt.file.read(global.process.env.HOME + '/.ssh/id_rsa'),
                     passphrase: ''
@@ -264,7 +297,7 @@ module.exports = function(grunt) {
                     src: '*.war',
                     filter: 'isFile',
                     // path on the server
-                    dest: '/var/front/deploy'
+                    dest: '/opt/tianji/apps/'
                 }]
             }
         },

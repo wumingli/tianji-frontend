@@ -18,7 +18,7 @@
 
 (function (){
     if (document.getElementById('pageCssInit') == null){
-        alert('未找到ID为pageCssInit的CSS启动文件，请为script添加该ID！');
+        alert('未找到ID为pageCssInit的css启动文件，请为script添加该ID！');
     } else {
         var urlString = document.getElementById('pageCssInit').src,
             arrFileList = '';

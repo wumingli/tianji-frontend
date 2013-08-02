@@ -7,13 +7,108 @@
  * Contact: wangzhiwei@tianji.com
  */
 
+(function($){
+	
+	$.fn.msSkillCerPlugin = function(options)
+	{
+	
+		var defaults = {
+			type:'default',
+			check:'checkbox',
+			maxCount:5,
+			column:6,
+			comData:[],
+			init:[],
+			name:'defaultCode',
+			defaultValue:'请选择技能',
+			style:{
+				"foldHeadWidth":"78px",
+				"msCbComponent":"88px",
+				"msOkWidth":"150px"
+			},
+			align:"left"
+		};
+		var msPick = $.extend(defaults, options);
+		if(msPick.init.length>0)
+		{
+			msPick.defaultValue="";
+		}
+		var strInput = "<div class='ms-btn-component ms-btn-canhover'></div>"+
+						"<div class='txt-box-component'>"+
+						    "<input type='text' class='ms-txt-component' maxlengh='20' name='' value='"+msPick.defaultValue+"' />"+
+						"</div>"+
+						"<input type='hidden' class='ms_checkInput' value='' name='"+msPick.name+"' />";
 
-/**
- * [ 为行业、城市、职能的公共函数]
- * @param  {[type:Object]} msPick [description:此对象拥有外部一切为其配置的属性]
- * @param  {[type:jqueryObject]} $this  [description:此对象是这个自定义的文本框]
- */
-var msPublic = function (msPick,$this)
+		$(this).append($(strInput));
+
+		msPick.structure ="";
+
+		msPick.allData = {};
+		
+		msPick.listData = {};
+
+		msPick.DataMap = {};
+
+		msPick.id="";
+
+		switch(msPick.type)
+		{	
+			case "certificate":
+			msPick.tabName = "常用证书";
+			msPick.tabNameChoice = "证书选择";
+			break;
+
+			case "skill":
+			msPick.tabName = "常用技能";
+			msPick.tabNameChoice = "技能选择";
+			
+			break;
+		}
+
+		msPick.id = "msPickDefault"+parseInt(Math.random()*1000000);
+		msPick.structure ="<div class='ms-pick' id='"+msPick.id+"'>"+
+							"<div class='ms-pick-nei'>"+
+							    "<div class='w-h-tab-component'>"+
+							        "<ul class='h-tab clearfix'>"+
+							            "<li class='tab-menu-component'>"+msPick.tabNameChoice+"</li>"+
+							        "</ul>"+
+							    	"<a class='close-component' href='javascript:;'>删除</a>"+
+							    "</div>"+
+							    "<div class='c-tab'>"+
+							    "<div class='tab-con-component tab-con-width' style='display:none'>"+
+							            "<div class='otherAll'>"+
+							            "</div>"+
+							        "</div>"+
+							    "</div>"+
+						    "</div>"+
+						    "<iframe border='0' frameborder='0' style='position: absolute; z-index: -1; left: 0px; top: 0px; width:100%; height:100%'></iframe>"+
+						"</div>";
+
+		msPick.allData = msPick.allDataMap.MapOne;
+		msPick.DataMap = msPick.allDataMap.MapTwo;
+		_.each(msPick.allDataMap.MapTwo,function(obj){
+			_.each(obj,function(value,key){
+				//console.log(key+","+value);
+				msPick.listData[key] = value;
+			})
+		})
+
+
+
+
+		$("body").append($(msPick.structure));
+			
+		var $this = $(this);
+
+		skillCerPubFn(msPick,$this);
+
+		return this;
+	}
+
+	
+})(jQuery)
+
+var skillCerPubFn = function (msPick,$this)
 {
 	/**
 	 * [创建DOM元素]
@@ -22,33 +117,18 @@ var msPublic = function (msPick,$this)
 	{
 		/*常用*/
 		var _this = this;
+
 		if(this.comData.length>0)
 		{
 
 			var comStr="";
 			switch(this.type)
 			{
-				case "city":
-					_.each(this.comData,function(name){
-
-						var code = msPick.DataMap[name];
-						comStr += "<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" name='"+_this.type+"com' class='ms-cb-cb' value="+code+" ms-cb-data="+code+" />"+name+"</label>";
-
-					});
-					break;
-
-				case "job":
-					_.each(this.comData,function(value){
-	
-						comStr += "<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" name='"+_this.type+"com' class='ms-cb-cb' value="+value+" ms-cb-data="+value+" />"+msPick.allData[value]+"</label>";
-					
-					})
-					break;
-
+				
 				default:
 					_.each(this.comData,function(value){
-						var name = msPick.getName(value);
-						comStr += "<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" name='"+_this.type+"com' class='ms-cb-cb' value="+value+" ms-cb-data="+value+" />"+name+"</label>";
+						
+						comStr += "<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" name='"+_this.type+"com' class='ms-cb-cb' value="+value+" ms-cb-data="+value+" />"+value+"</label>";
 					
 					})
 					break;
@@ -90,7 +170,7 @@ var msPublic = function (msPick,$this)
 			{
 				_.each(this.allData,function(value,key){
 	
-						allCityTopStr += "<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" name='"+_this.type+"otherAll' class='ms-cb-cb' value="+key+" ms-cb-data="+key+" />"+value+"</label>";
+						allCityTopStr += "<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" name='"+_this.type+"otherAll' class='ms-cb-cb' value="+key+" ms-cb-data="+value+" />"+value+"</label>";
 					
 				})
 			}
@@ -157,13 +237,7 @@ var msPublic = function (msPick,$this)
 		var arr = [];
 		switch(msPick.type)
 		{
-			case "city":
-				_.each(msPick.init,function(obj){
-
-					arr.push(msPick.DataMap[obj]);
-
-				})
-				break;
+			
 			default :
 				arr = msPick.init;
 				break;
@@ -218,36 +292,21 @@ var msPublic = function (msPick,$this)
 				var code = "";
 				switch(_this.type)
 				{
-					case "city":
-						name = value.split("-")[2];
-						code = value;
-						break;
-					case "job":
-						code = value;
-						name = msPick.listData[code];
-						break;
 					default:
-						name = msPick.getName(value);
+						//name = msPick.getName(value);
 						code = value;
 						break;
 				}
 				tempArr.push(code);
-				strA += "<span class='ms-selected-item' rel="+code+">"+
-	                "<span class='text'>"+name+"</span>"+
+				strA += "<span class='ms-selected-item' rel='"+code+"'>"+
+	                "<span class='text'>"+code+"</span>"+
 	                "<span class='delete-component'>删除</span></span>";
 	
 			})
 
 			switch(this.type)
 			{
-				case "city":
-					
-					$this.find(".ms_checkInput").val(tempArr.join(","));
-					break;
-				case "job":
-					
-					$this.find(".ms_checkInput").val(codeArr.join(","));
-					break;
+				
 				default:
 					
 					$this.find(".ms_checkInput").val(codeArr.join(","));
@@ -327,14 +386,7 @@ var msPublic = function (msPick,$this)
 	                	var json = "";
 	                	switch(_this.type)
 	                	{
-	                		case "city":
-	                			json = {"code":_this.listData[i],"name":i}
-	                			break;
-	                			
-	                		case "job":
-	                			json = {"code":i,"name":_this.listData[i]}
-	                			break;
-
+	                		
 	                		default:
 	                			json = {"code":i,"name":_this.listData[i]}
 	                			break;
@@ -353,7 +405,8 @@ var msPublic = function (msPick,$this)
 	                if(aResult.length>conf.max) aResult.length = conf.max;
 
 					_.each(aResult,function(obj){
-						strLi += "<li rel="+obj.code+"><a href='javascript:;'>"+obj.name+"</a></li>";
+
+						strLi += "<li rel='"+obj.name+"'><a href='javascript:;'>"+obj.name+"</a></li>";
 					})
 
 	                str = "<div class='ms-ok-component' style='width:"+_this.style.msOkWidth+"'>"+
@@ -368,16 +421,15 @@ var msPublic = function (msPick,$this)
 	            {
 	                str = "<div class='ms-error-component'>"+
 	                		"您输入的信息不存在，请重新输入"+
-	                		"<iframe border='0' frameborder='0' style='position: absolute; z-index: -1; left: 0px; top: 0px; width:100%; _width:230px; height:100%;'></iframe>"+
+	                		"<iframe border='0' frameborder='0' style='position: absolute; z-index: -1; left: 0px; top: 0px; width:100%; height:100%;'></iframe>"+
 	                	  "</div>"; 
 	            }
 
-	            //$this.append($(str));
 	            $("body").append($(str));
-
 	            var msPickOkWidth = $(".ms-ok-component").width();
 				var msPickOkHeight = $(".ms-ok-component").height();
 				$(".ms-ok-component").find("iframe").css({"width":msPickOkWidth,"height":msPickOkHeight});
+
 
 	            conf.index=0;//每次都要重置索引号。因为列表有按键等操作，不重置，有些时候会选中下面的。
 	            $(".ms-ok-component").find("li").eq(conf.index).addClass("active");
@@ -400,7 +452,7 @@ var msPublic = function (msPick,$this)
             {	
             	var keyWordsSelected=$("body").find(".ms-ok-component").find('.active').text();
              	var keyWordsId = $("body").find(".ms-ok-component").find('.active').attr("rel");
-             	strA = "<span class='ms-selected-item' rel="+keyWordsId+">"+
+             	strA = "<span class='ms-selected-item' rel='"+keyWordsId+"'>"+
                         "<span class='text'>"+keyWordsSelected+"</span>"+
                         "<span class='delete-component'>删除</span></span>";
 
@@ -614,20 +666,13 @@ var msPublic = function (msPick,$this)
             
             switch(_this.type)
 			{
-				case "city":
-					name = keyWordsSelected.split("-")[2]
-					break;
-
-            	case "job":
-            		name = msPick.allData[keyWordsSelected];
-            		break;
-
+				
             	default:
-            		name = msPick.getName(keyWordsSelected);
+            		name = keyWordsSelected;
             		break;
             }
 
-            strA = "<span class='ms-selected-item' rel="+keyWordsId+">"+
+            strA = "<span class='ms-selected-item' rel='"+name+"'>"+
                         "<span class='text'>"+name+"</span>"+
                         "<span class='delete-component'>删除</span></span>";
             
@@ -728,7 +773,6 @@ var msPublic = function (msPick,$this)
 			}
 	    	
 			if($("body").find(".ms-ok-component")) $("body").find(".ms-ok-component").remove();
-
 	        msPick.mpPosition()
 	        
 	    })
@@ -770,25 +814,12 @@ var msPublic = function (msPick,$this)
 					
 					switch(_this.type)
 					{
-						case "city":
-							for(var i in msPick.DataMap)
-							{	
-								var tempCode = msPick.DataMap[i];
-								//console.log(msPick.DataMap[i].split("-")[1]);
-								if(code == tempCode.split("-")[1])
-								{
-									cityStr +="<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" class='ms-cb-cb' name="+_this.type+" value="+tempCode+" ms-cb-data="+tempCode+" />"+i+"</label>";	
-									//console.log(msPick.DataMap[i].split("-")[2]);
-								}
-								//cityStr +="<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" class='ms-cb-cb' name="+_this.type+" value="+i+" ms-cb-data="+i+" />"+json[i]+"</label>";			
-							}
-							break;
-							
+	
 						default:
 							json = msPick.DataMap[code];
 							for(var i in json)
 							{
-								cityStr +="<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" class='ms-cb-cb' name="+_this.type+" value="+i+" ms-cb-data="+i+" />"+json[i]+"</label>";			
+								cityStr +="<label class='ms-cb-component' style='width:"+_this.style.msCbComponent+"'><input type="+_this.check+" class='ms-cb-cb' name="+_this.type+" value='"+json[i]+"' ms-cb-data='"+json[i]+"' />"+json[i]+"</label>";			
 							}
 							break;
 					}
@@ -826,8 +857,6 @@ var msPublic = function (msPick,$this)
 	var initFn = function (event)
 	{
 		$(".ms-pick").hide();
-		$(".ms-error-component").hide();
-		$(".ms-ok-component").hide();
 		msPick.createDiv.show();
 		msPick.mpPosition();	
 		$msTxt.focus();	
@@ -937,3 +966,4 @@ var msPublic = function (msPick,$this)
 
 
 }
+

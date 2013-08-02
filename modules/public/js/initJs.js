@@ -17,7 +17,7 @@
 
 (function (){
     if (document.getElementById('pageScriptInit') == null){
-        alert('未找到ID为pageScriptInit的CSS启动文件，请为script添加该ID！');
+        alert('未找到ID为pageScriptInit的js启动文件，请为script添加该ID！');
     } else {
         var urlString = document.getElementById('pageScriptInit').src,
             arrFileList = '';

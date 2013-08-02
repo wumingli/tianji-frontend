@@ -1,17 +1,18 @@
 /*
-*author:武明礼
-*email:wumingli@sina.cn
-*for:tianji drop box widget
-*developed at :2013/5/16 21:17
-*Copyright 2013. All rights reserved.
-*/
-define(function(require, exports, modules){
+ * author:武明礼
+ * email:wumingli@tianji.com
+ * for:tianji drop box plugin
+ * developed at :2013/5/16 21:17
+ * not by seajs
+ * rewrite at : 2013/6/27 17:24
+ * Copyright 2013. All rights reserved.
+ */
+(function($){
     var curBox = '';
     $.fn.dropBox = function (options){
         var config = {
             name: 'sex',
-            baseJsUrl: '../js/',
-            baseJs: 'boxData.js',
+            dataBase: '../js/boxData.json',
             css: {
                 width: 100
             },
@@ -25,10 +26,8 @@ define(function(require, exports, modules){
             rqUrl = '',
             isLinkage = sel.linkage && sel.linkageType;
 
-        rqUrl = sel.baseJsUrl + sel.baseJs;
-
         //读取数据字典中的Title，若初始化时有默认值，则默认选择
-        require.async(rqUrl,function (json){
+        $.getJSON(sel.dataBase,function (json){
             var reqStr = '',
                 init = [],
                 dftVal = '',
@@ -43,13 +42,19 @@ define(function(require, exports, modules){
             reqStr = sel.required ? 'data-required="true"' : '';
 
             //是否传入默认值
-            dftVal = '请选择'+json[name]['title'];
             dftHidVal = '-1';
-            if ('init' in sel){
-                var dv = getNameByCode(json[name]['data'], sel['init']['code']);
-                if (dv != ''){
-                    dftVal = dv;
-                    dftHidVal = sel['init']['code'];
+            if (typeof json[name] == 'undefined'){
+                dftVal = 'Name出错，请检查';
+                $this.addClass('name_error data-sub-error');
+            }
+            else {
+                dftVal = '请选择' + json[name]['title'];
+                if ('init' in sel){
+                    var dv = getNameByCode(json[name]['data'], sel['init']['code']);
+                    if (dv != ''){
+                        dftVal = dv;
+                        dftHidVal = sel['init']['code'];
+                    }
                 }
             }
             //操作DOM            
@@ -61,7 +66,9 @@ define(function(require, exports, modules){
         $(this).on('click', function (event){
             event = event || window.event;
             event.stopPropagation();
-            format();
+            if (!$this.hasClass('name_error')){
+                format();
+            }
         });
         //取Code对应的Name
         function getNameByCode(data, code){
@@ -79,20 +86,13 @@ define(function(require, exports, modules){
         }
         //格式化输出
         function format(){
-            var html = '',rd = '', rqUrl = '';
+            var html = '',rd = '';
             curBox = $this.attr('id');
             //箭头改变
             $this.find('em.dropArr').addClass('dropArrUp').end()
                  .siblings().find('em.dropArr').removeClass('dropArrUp');
-            if (!sel.clearCache){
-                rqUrl = sel.baseJsUrl + sel.baseJs;
-            }else {
-                rqUrl = sel.baseJs.indexOf('.js') > -1 ? 
-                        (sel.baseJsUrl + sel.baseJs + '?v=' + sel.version) : //本身自带扩展名
-                        (sel.baseJsUrl + sel.baseJs + '.js?v=' + sel.version);//无.js扩展名
-            }
-            //异步读取数据
-            require.async(rqUrl,function (json){
+            //读取数据
+            $.getJSON(sel.dataBase,function (json){
                 var data = null,
                     sType = sel.type,
                     classStr = '';
@@ -236,4 +236,4 @@ define(function(require, exports, modules){
             $('#' + curBox).addClass('data-sub-error');
         }
     });
-});
+})(jQuery);

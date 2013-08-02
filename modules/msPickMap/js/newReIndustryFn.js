@@ -7,7 +7,7 @@
  */
 
 (function($){
-	$.fn.msDefaultPlugin = function(options)
+	$.fn.msIndustryPlugin = function(options)
 	{
 	
 		var defaults = {
@@ -18,7 +18,6 @@
 			comData:[],
 			init:[],
 			name:'defaultCode',
-			defaultValue:'请选择行业',
 			style:{
 				"foldHeadWidth":"78px",
 				"msCbComponent":"88px",
@@ -28,16 +27,13 @@
 		};
 		var msPick = $.extend(defaults, options);
 
-		if(msPick.init.length>0)
-		{
-			msPick.defaultValue="";
-		}
-
 		var strInput = "<div class='ms-btn-component ms-btn-canhover'></div>"+
-						"<div class='txt-box-component'>"+
-						    "<input type='text' class='ms-txt-component' maxlengh='20' name='' value='"+msPick.defaultValue+"' />"+
-						"</div>"+
-						"<input type='hidden' class='ms_checkInput' value='' name='"+msPick.name+"' />";
+						"<div class='txt-box-com-W'>"+
+							"<div class='txt-box-component'>"+
+							    "<div class='txt-box-tip'>请选择行业</div>"+
+							"</div>"+
+							"<input type='hidden' class='ms_checkInput' value='' name='"+msPick.name+"' />"+
+						"</div>";
 
 		$(this).append($(strInput));
 

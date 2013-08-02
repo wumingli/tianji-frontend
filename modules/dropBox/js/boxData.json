@@ -114,34 +114,34 @@
     },
     "eduBackground":{
         "data": [{
-            "code": "学士",
-            "name": "学士"
-        },{
-            "code": "MBA/EMBA",
-            "name": "MBA/EMBA"
-        },{
-            "code": "博士/博士后",
+            "code": "90",
             "name": "博士/博士后"
         },{
-            "code": "硕士",
+            "code": "80",
+            "name": "MBA/EMBA"
+        },{
+            "code": "70",
             "name": "硕士"
         },{
-            "code": "大专",
+            "code": "60",
+            "name": "学士"
+        },{
+            "code": "50",
             "name": "大专"
         },{
-            "code": "高中",
+            "code": "40",
             "name": "高中"
         },{
-            "code": "中技",
+            "code": "30",
             "name": "中技"
         },{
-            "code": "初中",
+            "code": "20",
             "name": "初中"
         },{
-            "code": "小学",
+            "code": "10",
             "name": "小学"
         },{
-            "code": "其他学历",
+            "code": "0",
             "name": "其他学历"
         }],
         "title": "学历"

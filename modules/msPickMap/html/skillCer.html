@@ -20,6 +20,10 @@ id="pageCssInit"></script>
 		.divstyle{ border: 1px solid #efefef; margin-bottom: 20px; background: #f9f9f9; padding: 20px; border-radius:5px; }
 		h1{background: #ccc;}
 	</style>
+
+	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/underscore-min.js"></script>
+
 </head>
 <body>
 
@@ -47,8 +51,7 @@ id="pageCssInit"></script>
 	3、在body结束之前用script标签引入js文件：<br/>
 
 	src="http://image.tianji.com/tjs/common/initJs.min.js?
-	publicFn.min=image.tianji.com/tjs/msPickMap/js/&function.min=image.tianji.com/tjs/msPickMap/js/&city.min=image.tianji.com/tjs/msPickMap/js/&indu
-	stry.min=image.tianji.com/tjs/msPickMap/js/&clearCache=日期" id="pageScriptInit"
+publicFn.min=image.tianji.com/tjs/msPickMap/js/&skillDataMap.min=image.tianji.com/tjs/msPickMap/js/&certificateDataMap.min=image.tianji.com/tjs/msPickMap/js/&defaultMapFn.min=image.tianji.com/tjs/msPickMap/js/&clearCache=1.0.8-dev" id="pageScriptInit"
 
 	<br/><br/>
 	注释：<br/>
@@ -61,10 +64,13 @@ id="pageCssInit"></script>
 	
 	插件调用的公共js文件<br/>
 	publicFn.min.js<br/><br/>
-	插件文件<br/>
-	城市：http://image.tianji.com/tjs/msPickMap/js/city.min.js<br/>
-	职能：http://image.tianji.com/tjs/msPickMap/js/function.min.js<br/>
-	行业：http://image.tianji.com/tjs/msPickMap/js/industry.min.js<br/>
+	数据文件<br/>
+	证书：http://image.tianji.com/tjs/msPickMap/js/certificateDataMap.min.js<br/>
+	技能：http://image.tianji.com/tjs/msPickMap/js/skillDataMap.min.js<br/><br/>
+	
+	证书、技能公用文件<br/>
+	http://image.tianji.com/tjs/msPickMap/js/defaultMapFn.min.js<br/>
+
 	<p style="color:red">页面中请按需要引入相应的js文件</p>
 	<!-- 
 	证书：证书data.js + defaultMapFn.js<br/>
@@ -99,6 +105,7 @@ $("#p-data-wrap1").msDefaultPlugin({
 	comData:industryComData,	//配置常用数据可删除
 	init:industryDefault,	//配置默认值，无默认值可删除
 	name:'industryCode_',//设置隐藏input的name属性值。
+	defaultValue:'自定义', //默认是 请选择技能 可自定义,大于5个字时需要调input宽度。
 	style:{	//设置部分元素样式
 		"foldHeadWidth":"120px",
 		"msCbComponent":"165px",
@@ -147,145 +154,61 @@ $("#p-data-wrap1").msDefaultPlugin({
 
 
 
-
-
-
-
-
-
-	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/underscore-min.js"></script>
-<!-- 
-	<script type="text/javascript" src="../js/cityDataMap.js"></script>
-	<script type="text/javascript" src="../js/industryDataMap.js"></script>
-	<script type="text/javascript" src="../js/jobDataMap.js"></script>
+	<script type="text/javascript" src="http://image.tianji.com/tjs/common/initJs.min.js?certificateDataMap.min=image.tianji.com/tjs/msPickMap/js/&skillDataMap.min=image.tianji.com/tjs/msPickMap/js/&skillCerFn.min=image.tianji.com/tjs/msPickMap/js/&clearCache=1.0.8-dev" id="pageScriptInit"></script>
+	<!-- 
+	<script type="text/javascript" src="../js/skillCerFn.js"></script>
 	
-	<script type="text/javascript" src="../js/publicFn.js"></script>
-	
-	<script type="text/javascript" src="../js/defaultMapFn.js"></script>
-	<script type="text/javascript" src="../js/cityMapFn.js"></script>
-	<script type="text/javascript" src="../js/jobMapFn.js"></script>
- -->
- <!-- 
- 	<script type="text/javascript" src="../js/certificateDataMap.js"></script>
- 	<script type="text/javascript" src="../js/skillDataMap.js"></script>
- -->
- 
-	<script type="text/javascript" src="http://image.tianji.com/tjs/common/initJs.min.js?
-publicFn.min=image.tianji.com/tjs/msPickMap/js/&skillDataMap.min=image.tianji.com/tjs/msPickMap/js/&certificateDataMap.min=image.tianji.com/tjs/msPickMap/js/&defaultMapFn.min=image.tianji.com/tjs/msPickMap/js/&clearCache=1.0.8-dev" id="pageScriptInit"></script>
-
-
-
-
+	 -->
 
 	<script type="text/javascript">
 	$(function(){
 
 		var certificateComData = [],certificateDefault = [];
-	certificateComData = ["101","102","103","104"];
-	certificateDefault = ["101","102"];
-	
-	$("#p-data-wrap5").msDefaultPlugin({
+		certificateComData = ["托福","托业","GRE","uuuuuuuuuuu"];
+		//certificateDefault = ["托福","托业"];
 		
-		type:'certificate',	
-		check:'checkbox',	//单选/多选
-		maxCount:5,		//多选下的最多选择条数
-		column:3,		//列数
-		allDataMap:certificateDataMap,	//配置不同的数据map
-		comData:certificateComData,
-		init:certificateDefault,
-		name:'certificateCode_',//设置隐藏input的name属性值。
-		style:{
-			"foldHeadWidth":"150px",
-			"msCbComponent":"260px",
-			"msOkWidth":"270px"
-		}
-	});
-
-
-
-	var industryComData = [],industryDefault = [];
-	industryComData = ["101","102","103","104"];
-	industryDefault = ["101","102"];
-	
-	$("#p-data-wrap1").msDefaultPlugin({
-		
-		type:'industry',	
-		column:4,		
-		allDataMap:industryDataMap,	
-		comData:industryComData,	
-		init:industryDefault,	
-		name:'industryCode_',
-		style:{
-			"foldHeadWidth":"120px",
-			"msCbComponent":"165px",
-			"msOkWidth":"250px"
-		}
-	});
-
-
-	var skillComData = [],skillDefault = [];
-	skillComData = ["101","102","103","104"];
-	skillDefault = ["101","102"];
-	
-	$("#p-data-wrap3").msDefaultPlugin({
-		
-		type:'skill',	
-		check:'checkbox',	//单选/多选
-		maxCount:5,		//多选下的最多选择条数
-		column:4,		//列数
-		allDataMap:skillDataMap,	//配置不同的数据map
-		comData:skillComData,
-		init:skillDefault,
-		name:'skillCode_',//设置隐藏input的name属性值。
-		style:{
-			"foldHeadWidth":"120px",
-			"msCbComponent":"165px",
-			"msOkWidth":"250px"
-		}
-	});
-
-	var cityComData=[],cityDefault=[];
-	
-	cityComData = ["北京","天津","上海","重庆","石家庄","唐山"];
-	cityDefault = ["石家庄","北京"];
-
-
-	$("#p-data-wrap").msCityPlugin({
-			maxCount:3,		
-			allDataMap:cityDataMap,
-			comData:cityComData,
-			init:cityDefault,
-			name:'cityCode_'
-	});
-
-
-	var jobDefault = [],jobComData=[];
-	jobDefault = ["1","2"];
-	//jobComData = ["1","2"];
-	$("#p-data-wrap2").msJobPlugin({
-			column:3,
-			allDataMap:jobDataMap,	
-			comData:jobComData,
-			init:jobDefault,
-			name:'jobCode_',
+		$("#p-data-wrap5").msSkillCerPlugin({
+			
+			type:'certificate',	
+			check:'checkbox',	
+			maxCount:5,		
+			column:3,		
+			allDataMap:certificateDataMap,	
+			comData:certificateComData,
+			init:certificateDefault,
+			name:'certificateCode_',
+			defaultValue:'请选择证书',
 			style:{
-				"foldHeadWidth":"165px",
-				"msCbComponent":"130px",
-				"msOkWidth":"200px"
+				"foldHeadWidth":"150px",
+				"msCbComponent":"260px",
+				"msOkWidth":"270px"
 			}
 		});
 
-	})
-	
+		var skillComData = [],skillDefault = [];
+		skillComData = ["Word","Excel","PowerPoint","Visio"];
+		skillDefault = ["Word","Excel"];
+		
+		$("#p-data-wrap3").msSkillCerPlugin({
+			
+			type:'skill',	
+			check:'checkbox',	
+			maxCount:5,		
+			column:4,		
+			allDataMap:skillDataMap,	
+			comData:skillComData,
+			init:skillDefault,
+			name:'skillCode_',
+			style:{
+				"foldHeadWidth":"120px",
+				"msCbComponent":"165px",
+				"msOkWidth":"250px"
+			}
+		});
 
 
+	});
 	</script>
-
-
-
-
-
 
 	<script type="text/javascript">
 
@@ -293,17 +216,17 @@ publicFn.min=image.tianji.com/tjs/msPickMap/js/&skillDataMap.min=image.tianji.co
 
 		var certificateComData = [],certificateDefault = [];
 		//certificateComData = ["101","102","103","104"];
-		certificateDefault = ["1001"];
+		certificateDefault = ["托福"];
 		
-		$("#p-data-wrap5_").msDefaultPlugin({
+		$("#p-data-wrap5_").msSkillCerPlugin({
 			
 			type:'certificate',	
-			check:'radio',	//单选/多选
-			column:3,		//列数
-			allDataMap:certificateDataMap,	//配置不同的数据map
+			check:'radio',	
+			column:3,		
+			allDataMap:certificateDataMap,	
 			comData:certificateComData,
 			init:certificateDefault,
-			name:'certificateCode_',//设置隐藏input的name属性值。
+			name:'certificateCode_',
 			style:{
 				"foldHeadWidth":"150px",
 				"msCbComponent":"260px",
@@ -312,78 +235,25 @@ publicFn.min=image.tianji.com/tjs/msPickMap/js/&skillDataMap.min=image.tianji.co
 		});
 
 
-
-		var industryComData = [],industryDefault = [];
-		//industryComData = ["101","102","103","104"];
-		industryDefault = ["101"];
-		
-		$("#p-data-wrap1_").msDefaultPlugin({
-			
-			type:'industry',	
-			check:'radio',	
-			column:4,		
-			allDataMap:industryDataMap,	
-			comData:industryComData,
-			init:industryDefault,
-			name:'industryCode_',
-			style:{
-				"foldHeadWidth":"120px",
-				"msCbComponent":"165px",
-				"msOkWidth":"250px"
-			}
-		});
-
-
 		var skillComData = [],skillDefault = [];
 		//skillComData = ["101","102","103","104"];
-		skillDefault = ["101"];
+		skillDefault = ["Excel"];
 		
-		$("#p-data-wrap3_").msDefaultPlugin({
+		$("#p-data-wrap3_").msSkillCerPlugin({
 			
 			type:'skill',	
-			check:'radio',	//单选/多选
-			column:4,		//列数
-			allDataMap:skillDataMap,	//配置不同的数据map
+			check:'radio',	
+			column:4,		
+			allDataMap:skillDataMap,	
 			comData:skillComData,
 			init:skillDefault,
-			name:'skillCode_',//设置隐藏input的name属性值。
+			name:'skillCode_',
 			style:{
 				"foldHeadWidth":"120px",
 				"msCbComponent":"165px",
 				"msOkWidth":"250px"
 			}
 		});
-
-
-		var cityComData=[],cityDefault=[];
-		//cityComData = ["北京","天津","上海","重庆","石家庄","唐山"];
-		cityDefault = ["石家庄"];
-
-		$("#p-data-wrap_").msCityPlugin({
-				check:'radio',	
-				allDataMap:cityDataMap,	
-				comData:cityComData,
-				init:cityDefault,
-				name:'cityCode_'
-		});
-
-
-
-		var jobDefault = [];
-		jobDefault = ["1"];
-		
-		$("#p-data-wrap2_").msJobPlugin({
-				check:'radio',	
-				column:3,
-				allDataMap:jobDataMap,	
-				init:jobDefault,
-				name:'jobCode_',
-				style:{
-					"foldHeadWidth":"165px",
-					"msCbComponent":"130px",
-					"msOkWidth":"200px"
-				}
-			});
 
 
 	})

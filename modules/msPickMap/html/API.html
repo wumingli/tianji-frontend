@@ -91,7 +91,7 @@ industryDefault = ["101","102"];	//设置默认值
 
 $("#p-data-wrap1").msDefaultPlugin({
 		
-	type:'industry',	//类型可为 industry,skill,certificate ，必填
+	type:'industry',	//类型可为 industry必填
 	check:'checkbox',	//可设置为 radio/checkbox 默认为checkbox可省略
 	maxCount:5,		//多选下的最多选择条数,如为单选可删除
 	column:4,		//默认为6列,列数根据字数多少来设置
@@ -99,6 +99,7 @@ $("#p-data-wrap1").msDefaultPlugin({
 	comData:industryComData,	//配置常用数据可删除
 	init:industryDefault,	//配置默认值，无默认值可删除
 	name:'industryCode_',//设置隐藏input的name属性值。
+	defaultValue:'自定义',	//默认是 请选择行业。 可自定义,大于5个字时需要调input宽度。
 	style:{	//设置部分元素样式
 		"foldHeadWidth":"120px",
 		"msCbComponent":"165px",
@@ -128,6 +129,7 @@ $("#p-data-wrap").msCityPlugin({
 		comData:cityComData,	//配置常用数据可删除
 		init:cityDefault,	//配置默认值，无默认值可删除
 		name:'cityCode_', //设置隐藏input的name属性值。默认为cityCode,见意按需要自已设置。
+		defaultValue:'自定义',	//默认是 请选择城市。 可自定义,大于5个字时需要调input宽度。
 		style:{		//设置部分元素样式
 			"foldHeadWidth":"165px",
 			"msCbComponent":"130px",
@@ -156,6 +158,7 @@ $("#p-data-wrap2").msJobPlugin({
 	comData:jobComData, //配置常用数据可删除
 	init:jobDefault,	//配置默认值，无默认值可删除
 	name:'jobCode_',//设置隐藏input的name属性值。默认为cityCode,见意按需要自已设置。
+	defaultValue:'自定义',	//默认是 请选择职能。 可自定义,大于5个字时需要调input宽度。
 	style:{		//设置部分元素样式
 		"foldHeadWidth":"165px",
 		"msCbComponent":"130px",
@@ -249,7 +252,7 @@ $("#p-data-wrap2").msJobPlugin({
 
 	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/underscore-min.js"></script>
-<!-- 
+ <!-- 
 	<script type="text/javascript" src="../js/cityDataMap.js"></script>
 	<script type="text/javascript" src="../js/industryDataMap.js"></script>
 	<script type="text/javascript" src="../js/jobDataMap.js"></script>
@@ -339,7 +342,7 @@ stry.min=image.tianji.com/tjs/msPickMap/js/&clearCache=1.0.8-dev" id="pageScript
 	var cityComData=[],cityDefault=[];
 	
 	cityComData = ["北京","天津","上海","重庆","石家庄","唐山"];
-	cityDefault = ["石家庄","北京"];
+	//cityDefault = ["石家庄","北京"];
 
 
 	$("#p-data-wrap").msCityPlugin({
@@ -353,7 +356,7 @@ stry.min=image.tianji.com/tjs/msPickMap/js/&clearCache=1.0.8-dev" id="pageScript
 
 	var jobDefault = [],jobComData=[];
 	jobDefault = ["1","2"];
-	//jobComData = ["1","2"];
+	jobComData = ["1","2"];
 	$("#p-data-wrap2").msJobPlugin({
 			column:3,
 			allDataMap:jobDataMap,	
