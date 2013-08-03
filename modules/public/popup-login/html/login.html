@@ -17,30 +17,35 @@
         <option>测试IE6遮挡.........</option>
     </select>
 </div>
+<!--
 <div id="tianji-popup-login">
     <div class="pop-left">
         <div class="pop-left-con">
             <div class="pop-reg">
                 <h3>立即登录</h3>
-                <ul>
-                    <li>
-                        <input type="text" placeholder="邮箱/手机" name="userName" class="txt" regtype="email_telphone,notnull" />
-                    </li>
-                    <li>
-                        <input type="password" placeholder="密码" name="userPwd" class="txt" regtype="notnull" />
-                    </li>
-                    <li><input type="hidden" id="keepLogin" /><label for="keepLogin">保持登录状态</label> <a href="http://www.tianji.com/account/account_password_backs/new" class="get-back-password" target="_blank" title="找回密码">找回密码</a></li>
-                    <li><input type="button" id="tianji-popup-login-btn" value="" />　　　　<a href="http://www.tianji.com/join" class="fblue reg-now" target="_blank">没有帐号，立即注册</a></li>
-                </ul>
+                <form method="post" action="http://www.tianji.com/index/login" id="tianji-pop-login-form">
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="邮箱/手机号" name="account[email_or_mobile]" class="txt" regtype="email_mobile,notnull" />
+                        </li>
+                        <li>
+                            <input type="password" placeholder="密码" name="account[password]" class="txt" regtype="notnull" />
+                        </li>
+                        <li><input type="hidden" name="remember" /><input type="hidden" name="return_to" value="" /><label>保持登录状态</label> <a href="http://www.tianji.com/account/account_password_backs/new" class="get-back-password" target="_blank" title="找回密码">找回密码</a></li>
+                        <li><input type="button" id="tianji-popup-login-btn" class="tianji-submit-btn" value="" />　　　　<a href="http://www.tianji.com/join" class="fblue reg-now" target="_blank">没有帐号，立即注册</a></li>
+                    </ul>
+                </form>
             </div>
             <div class="pop-login">
                 <h3>快速注册天际网</h3>
-                <ul>
-                    <li><input type="text" placeholder="真实姓名" name="userName" class="txt" regType="chinese,notnull" /></li>
-                    <li><input type="text" placeholder="邮箱/手机" name="userEmail" class="txt" regtype="email_telphone,notnull" /></li>
-                    <li><input type="password" placeholder="密码" name="userPwd" class="txt" regtype="notnull" /></li>
-                    <li><input type="button" id="tianji-popup-reg-btn" value="" />　　　　<a href="http://www.tianji.com/join" class="fblue login-now" target="_blank">已有帐号，直接登录</a></li>
-                </ul>
+                <form method="post" action="http://www.tianji.com/account/accounts" id="tianji-pop-reg-form">
+                    <ul>
+                        <li><input type="text" placeholder="真实姓名" name="account[name_native_display]" class="txt" regType="chinese,notnull" /></li>
+                        <li><input type="text" placeholder="邮箱/手机号" name="account[email_or_mobile]" class="txt" regtype="email_mobile,notnull" /></li>
+                        <li><input type="password" placeholder="密码" name="account[password]" class="txt" regtype="notnull" /></li>
+                        <li><input type="button" id="tianji-popup-reg-btn" class="tianji-submit-btn" value="" />　　　　<a href="http://www.tianji.com/join" class="fblue login-now" target="_blank">已有帐号，直接登录</a></li>
+                    </ul>
+                </form>
             </div>
         </div>
     </div>
@@ -53,8 +58,7 @@
     <b class="close" title="关闭"></b>
 </div>
 <div id="tianji-popup-login-outer-shade"></div>
-<div id="tianji-popup-login-shade">
-    
-</div>
+<div id="tianji-popup-login-shade"></div>
+-->
 </body>
 </html>

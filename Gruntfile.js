@@ -65,57 +65,21 @@ module.exports = function(grunt) {
     grunt.config.init({
         //拷贝
         copy :{
-            msPick:{
+            modules:{
                 files :[{
                     expand: true,
-                    cwd: 'modules/msPick/',
+                    cwd: 'modules/',
                     src: ['**/*.*'],
-                    dest: 'dist/msPick/',
+                    dest: 'dist/',
                     filter: 'isFile'
                 }]
             },
-            msPickMap:{
+            public:{
                 files :[{
                     expand: true,
-                    cwd: 'modules/msPickMap/',
+                    cwd: 'modules/public/',
                     src: ['**/*.*'],
-                    dest: 'dist/msPickMap/',
-                    filter: 'isFile'
-                }]
-            },
-            timeYM:{
-                files :[{
-                    expand: true,
-                    cwd: 'modules/timeYMPlugin/',
-                    src: ['**/*.*'],
-                    dest: 'dist/timeYMPlugin/',
-                    filter: 'isFile'
-                }]
-            },
-            dropBox:{
-                files :[{
-                    expand: true,
-                    cwd: 'modules/dropBox/',
-                    src: ['**/*.*'],
-                    dest: 'dist/dropBox/',
-                    filter: 'isFile'
-                }]
-            },
-            header:{
-                files :[{
-                    expand: true,
-                    cwd: 'modules/public/header/',
-                    src: ['**/*.*'],
-                    dest: 'dist/header/',
-                    filter: 'isFile'
-                }]
-            },
-            header_new:{
-                files :[{
-                    expand: true,
-                    cwd: 'modules/public/header2013/',
-                    src: ['**/*.*'],
-                    dest: 'dist/header2013/',
+                    dest: 'dist/',
                     filter: 'isFile'
                 }]
             },
@@ -267,6 +231,7 @@ module.exports = function(grunt) {
             ]
           }
         },
+        /*
         //文件部署
         scp: {
             release: {
@@ -317,10 +282,12 @@ module.exports = function(grunt) {
               tagMessage: 'Version <%= version%>' //default: 'Version <%= version %>'
             }
         },
+        */
         //删除生成的目录
         clean : {
             build: ['dist','compress'],
-            tempDir:['.build']
+            tempDir:['.build'],
+            publicRep: ['dist/public', 'dist/js']
         }
     });
     //加载任务
@@ -334,7 +301,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     //执行任务
     grunt.registerTask('clear', ['clean']);
-    grunt.registerTask('build',['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'clean:tempDir']);
+    grunt.registerTask('build',['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'clean:publicRep', 'compress', 'clean:tempDir']);
     grunt.registerTask('deploy',['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:deploy', 'clean:tempDir']);
     grunt.registerTask('rel',['clean', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'release', 'scp:release', 'clean:tempDir']);
 }
