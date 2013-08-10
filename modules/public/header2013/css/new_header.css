@@ -9,35 +9,33 @@
 .find_btn_bg{background: url(http://image.tianji.com/tjs/header2013/images/top_search_hover.jpg) no-repeat!important;}
 .user_bg{background: #E6E7EA;border-bottom: 1px solid #D7DBE1;}
 .arrow-ud_hover{background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -142px -67px!important;}
-#header { width: 100%; z-index:1100;top:0;}
-.hd_scroll_box{ width:100%;  float: left; position: relative; z-index: 97;display:none;overflow:hidden;}
-.scroll_panel{position: absolute;z-index: 98; width: 20px; right: 0px; top: 0px; height: 100%;}
-.hd_scroll_box .hd_scroll_bg{ height: 100%; width:5px; position: absolute;right:0px; top:0px; background:#DFE0E2; z-index:99;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius:5px;height: 100%}
-.hd_scroll_box .hd_scroll_bar{ width: 5px; height: 100px; position: absolute; right: -1px; top: 24px;background:#BEC3C7;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius:5px;z-index: 100;}
+#header { width: 100%;z-index:2100;top:0;position:relative;}
+.hd_scroll_box{ width:100%;  float: left; position: relative; z-index: 2100;display:none;overflow:hidden;_width:418px;}
 #header a{color:#2A7FB8;}
 
-#contacts_one_list .hd_scroll_box {height:145px;}
+#contacts_one_list .hd_scroll_box {height:218px;}
+
 
 #header .header_menu_bg {background: #2A2A2A; height:100px; position: relative; z-index:90; }
 #header .header_menu_two{ background-color: #4A4A4A; height: 40px;}
 #header .header_menu_two .header_menus {width:980px;margin: 0px auto;height: 40px;}
-#header .header_menu {width:980px;margin: 0px auto; position:relative; height: 60px; z-index: 996;}
-#header .header_menu .logo{ width: 134px; height: 37px; background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -63px -116px; text-indent: -277px; float: left; margin: 12px 0px 0px 0px;}
+#header .header_menu {width:980px;margin: 0px auto; position:relative; height: 60px; z-index: 2100;}
+#header .header_menu .logo{ width: 134px; height: 37px; background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -63px -116px; text-indent: -999px; float: left; margin: 12px 0px 0px 0px;overflow:hidden;}
 #header .header_menu .logo a{width: 134px; height: 37px; float: left;}
-#header .header_menu_two ul.left_menu li a{ height: 38px; float: left; padding: 0px 20px; color: #EAEAEA; border-top: 2px solid #4A4A4A;}
-#header .header_menu_two ul.left_menu li a:hover{color: #C1392B;background:#E6E7EA; border-top: 2px solid #E84C3D; text-decoration: none;}
-#header .header_menu_two ul li a.current{color: #C1392B;background:#E6E7EA; border-top: 2px solid #E84C3D;}
+#header .header_menu_two ul.left_menu li a{ height: 38px; float: left; padding: 0px 20px; color: #EAEAEA; border-top: 2px solid #4A4A4A; font-family: 'Microsoft Yahei';}
+#header .header_menu_two ul.left_menu li a.hover{background:#676767; border-top-color:#676767; text-decoration: none;}
+#header .header_menu_two ul.left_menu li a.current{color: #C1392B;background:#E6E7EA; border-top: 2px solid #E84C3D;}
 #header .header_menu_two ul.left_menu {float: left;display: inline;}
-#header .header_menu_two ul.left_menu li{float: left;text-align: center;  height: 40px; line-height: 35px; font-size: 16px; position: relative; z-index: 98; font-family: 'Microsoft Yahei';}
-#header .header_menu_two .new_mba{width: 27px; height: 16px; position: absolute; left: 560px; top: 1px;padding: 0px; z-index: 1110;}
-#header .header_menu_two .beta{width: 27px; height: 16px; position: absolute; left: 493px; top: 1px; padding: 0px; z-index: 1000;}
-#header .header_menu .user_info{width:130px; float: right;margin: 13px 0px 0px 0px; display: none;}
+#header .header_menu_two ul.left_menu li{float: left;text-align: center;  height: 40px; line-height: 35px; font-size: 16px; position: relative; z-index: 98;}
+#header .header_menu_two .new_mba{width: 27px; height: 16px; position: absolute; left: 560px; top: 1px;padding: 0px; z-index: 2110;}
+#header .header_menu_two .beta{width: 27px; height: 16px; position: absolute; left: 493px; top: 1px; padding: 0px; z-index: 2000;}
+#header .header_menu .user_info{width:130px; float: right;margin: 13px 0px 0px 0px; /*display: inline;*/ display:none;}
 #header .header_menu .user_info .user_poster{width: 34px; height: 35px; float: left; position: relative;}
 #header .header_menu .user_info .user_poster img{ width: 28px; height: 28px; float: left; margin:2px 0px 0px 3px;}
 #header .header_menu .user_info .user_poster .user_img_bg{width: 34px;height: 36px;position: absolute;left: 0px;top: 0px;background:url(http://image.tianji.com/tjs/header2013/images/ceng.png) no-repeat;}
 #header .header_menu .user_info .user_poster .user_img_bg a{width: 34px;height: 36px;float: left;}
 #header .header_menu .user_info .user_name{ height: 26px; line-height: 26px; float: left; font-size: 12px; color: #CCCCCC;  margin:0px 0px 0px 8px;  padding: 0px 5px;  cursor: pointer; position: relative;}
-#header .header_menu .user_info .user_name .user_item{width: 135px; height: 105px; position: absolute; left: 0px; top: 27px;  z-index: 100; background: #E6E7EA;}
+#header .header_menu .user_info .user_name .user_item{width: 135px; height: 105px; position: absolute; left: 0px; top: 27px;  z-index: 2100; background: #E6E7EA;}
 #header .header_menu .user_info .user_name .user_item li{width: 135px; height: 34px; float: left; line-height: 34px; color: #666666; font-size: 12px; font-family: '宋体'; border-bottom: 1px solid #D7DBE1;}
 #header .header_menu .user_info .user_name .user_item li a{color: #666666; width: 127px; height: 34px; float: left; padding-left: 8px;}
 #header .header_menu .user_info .user_name .user_item li a:hover{ background: #666666; color: #fff; text-decoration: none;}
@@ -45,8 +43,8 @@
 #header .header_menu .user_info .user_name .zi{max-width: 100px; overflow: hidden;height: 20px; float: left;}
 #header .header_menu .user_info .user_name .arrow-ud{background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -116px -67px; float: left;width: 10px; height: 10px; margin: 11px 0px 0px 5px; display: inline;}
 /*未登录*/
-#header .header_menu .user_unlogin_info {width:80px;padding-top:10px;}
-#header .header_menu .user_unlogin_info a {color:#fff;}
+#header .header_menu .user_unlogin_info {width:100px;padding-top:10px;}
+#header .header_menu .user_unlogin_info a {color:#fff;font-family:'Microsoft Yahei','Arial'}
 #header .header_menu .user_unlogin_info span {color:#ccc;}
 
 
@@ -65,8 +63,8 @@
 #header .header_menu .top_search .use_hign_search{float:left; background:#eee; border:1px solid #999; border-top:1px solid #ccc; padding:6px 35px 8px 47px;_padding:6px 34px 8px 47px;}
 #header .header_menu .top_search .use_hign_search a{width:72px; color:#1651a0;}
 #header .header_menu .top_search{float: left; margin: 14px 0px 0px 75px; display: inline; position: relative;}
-#header .header_menu .top_search .find_people{width: 245px; height:32px; float: left;background: #ECEDEF; font-size: 14px; color: #AAAAAA; line-height: 32px; text-indent: 10px; border: 0px none; outline:none;} 
-#header .header_menu .top_search .find_people_button{width:35px; height:32px; float: left;background: url(http://image.tianji.com/tjs/header2013/images/top_search.jpg) no-repeat; cursor: pointer;} 
+#header .header_menu .top_search .find_people{width: 245px; height:32px; float: left;background: #ECEDEF; font-size: 14px; color: #AAAAAA; line-height: 32px; text-indent: 10px; border: 0px none; outline:none;font-family:'Microsoft Yahei';} 
+#header .header_menu .top_search .find_people_button{width:35px; height:32px; float: left;background: url(http://image.tianji.com/tjs/header2013/images/top_search.jpg) no-repeat; cursor: pointer;border:none;} 
 #header .header_menu .top_search .search_home{width: 44px; height: 32px; float: left;background: url(http://image.tianji.com/tjs/header2013/images/input_li.jpg) no-repeat;}
 #header .header_menu .top_search .search_home .search_icon{width: 20px; height: 20px; float: left;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -81px -60px; margin: 6px 5px 0px 7px; display: inline; cursor: pointer;}
 /*#header .header_menu .top_search .search_home .search_up{width: 10px; height: 10px; float: left;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -116px -67px; margin: 14px 0px 0px 0px; display: inline; cursor: pointer;}*/
@@ -77,19 +75,19 @@
 #header .header_menu_two ul.right_menu li a{ text-decoration: none;}
 
 #header .header_menu_two ul.right_menu li .messages_list {display:none;}
-#header .header_menu_two ul.right_menu li .messages_list .no_notice{height: 40px; float: left; padding-left: 50px; font-size: 14px; color: #777777; font-family: 'Microsoft Yahei'; line-height: 40px;background:url(http://image.tianji.com/tjs/header2013/images/no.jpg) no-repeat; margin: 15px 0px 15px 130px; display: inline;}
-#header .header_menu_two ul.right_menu li .messages_list .loding_notice{height:28px; float: left; padding-left: 50px; font-size: 14px; color: #777777; font-family: 'Microsoft Yahei'; line-height:28px;background:url(http://image.tianji.com/tjs/header2013/images/loding.gif) no-repeat; margin: 15px 0px 15px 85px; display: inline;}
+#header .header_menu_two ul.right_menu li .messages_list .no_notice{height: 40px; float: left; padding-left: 50px; font-size: 14px; color: #777777; font-family: 'Microsoft Yahei'; line-height: 40px;background:url(http://image.tianji.com/tjs/header2013/images/no.jpg) no-repeat; margin: 15px 0px 15px 130px; display: inline;_padding-bottom:15px;}
+#header .header_menu_two ul.right_menu li .messages_list .loding_notice{height:28px; float: left; padding-left: 50px; font-size: 14px; color: #777777; font-family: 'Microsoft Yahei'; line-height:28px;background:url(http://image.tianji.com/tjs/header2013/images/loding.gif) no-repeat; margin: 15px 0px 15px 85px; display: inline;_padding-bottom:15px;}
 #people_kone{/*height:145px;*/}
 #new_header_message{/*height:438px;*/}
 #new_header_message li a{float: left; width: 100%;}
 #header .header_menu_two ul.right_menu li .messages_list{position: absolute;right:-35px; top:39px; border: 1px solid #D7DBE1; background-color: #ffffff; z-index: 0; _top:39px;}
-#header .header_menu_two ul.right_menu li .messages_list .title_renmai{width: 418px; height: 30px; float: left; background: #ECF0F1; line-height: 30px; font-size: 15px; font-family: 'Microsoft Yahei';color:#545454; text-indent: 15px;border-bottom: 1px solid #D7DBE1; position: relative;display:none;}
-#header .header_menu_two ul.right_menu li .messages_list .title_renmai a.all_kone {float:right;margin-right:10px;font-size:12px;font-weight:normal;}
-#header .header_menu_two ul.right_menu li .messages_list .title_renmai .wirte_info{width: 50px; height: 30px; line-height: 30px; position: absolute; right: 0px; top: 0px; color: #2A7FB8; font-size: 12px; font-family: '宋体';}
+#header .header_menu_two ul.right_menu li .messages_list .title_renmai{width: 418px; height: 30px; float: left; background: #ECF0F1; line-height: 30px; font-size: 15px; font-family: 'Microsoft Yahei';color:#545454; text-indent: 15px;border-bottom: 1px solid #D7DBE1; position: relative;/*display:none;*/}
+#header .header_menu_two ul.right_menu li .messages_list .title_renmai a.all_kone {width: 50px; height: 30px; line-height: 30px; position: absolute; right: 0px; top: 0px; font-size: 12px;text-align:right;padding-right:10px;}
+#header .header_menu_two ul.right_menu li .messages_list .title_renmai .wirte_info{height: 30px; line-height: 30px; position: absolute; right: 0px; top: 0px; font-size: 12px;text-align:right;padding-right:10px;}
 #header .header_menu_two ul.right_menu li .messages_list .promit_no{width: 418px; line-height: 30px; text-align: center; color: #777777; font-size: 14px;font-family: 'Microsoft Yahei'; float: left; margin: 20px 0px; display: none;}
 #header .header_menu_two ul.right_menu li .messages_list .promit_zcjy_no{width: 388px; line-height: 30px; text-align: center; color: #777777; font-size: 14px;font-family: 'Microsoft Yahei'; float: left; margin: 20px 0px; display: inline;}
 
-#header .header_menu_two ul.right_menu li .messages_list .emails_panel{width: 318px; overflow: hidden; float: left;}
+#header .header_menu_two ul.right_menu li .messages_list .emails_panel{width: 318px; overflow: hidden;display:none; margin:0 auto;text-align:center;}
 #header .header_menu_two ul.right_menu li .messages_list .emails_panel h6{ float: left; height: 20px; line-height: 20px; font-size: 12px; color: #999999; font-weight: normal; text-indent: 15px; margin: 10px 0px 0px 0px; width: 300px;}
 #header .header_menu_two ul.right_menu li .messages_list .emails_panel .list_itme{width: 65px; float: left; text-align: center; font-size: 12px; color: #999999; line-height: 20px; margin: 15px 0px 10px 11px; display: inline;}
 
@@ -99,9 +97,9 @@
 #header .header_menu_two ul.right_menu li .bg_red{ background-color: #CCCCCC; }
 
 #header .header_menu_two ul.right_menu li .messages_list .list_c{ width: 25px; height: 10px; position: absolute;right:40px; top:-10px;
-background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -78px -93px;}
+background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -78px -93px;_display:none;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main{width: 388px; overflow: hidden; float: left; background-color: #ffffff;}
-#header .header_menu_two ul.right_menu li .messages_list .contacts2_main li{width: 388px; overflow: hidden; float: left; border-bottom: 1px solid #D7DBE1;position: relative;}
+#header .header_menu_two ul.right_menu li .messages_list .contacts2_main li{width: 388px; overflow: hidden; float: left; border-bottom: 1px solid #D7DBE1;position: relative;height:72px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .logo1{ width: 45px; height: 50px; float: left; border: 1px solid #D7DBE1; padding: 1px; margin-left: 15px; display: inline;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .times{height: 20px; line-height: 20px; overflow: hidden; color: #999999; display: inline; margin-top: 5px;position:absolute;right:10px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .logo1 img{width: 45px; height: 50px;}
@@ -131,7 +129,7 @@ background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) 
 #header .header_menu_two ul.right_menu li .messages_list .contacts3_main li .notice_con .postion_03{background-position: -167px -322px;}
 #header .strong{font-weight: bold;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main{width: 418px; overflow: hidden; float: left; background-color: #ffffff;}
-#header .header_menu_two ul.right_menu li .messages_list .contacts_main li{width: 418px; overflow: hidden; float: left; border-bottom: 1px solid #D7DBE1;  position: relative; padding: 9px 0px;max-height:73px;}
+#header .header_menu_two ul.right_menu li .messages_list .contacts_main li{width: 418px; overflow: hidden; float: left; border-bottom: 1px solid #D7DBE1;  position: relative; padding: 9px 0px;height:54px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li a{width: 388px; overflow: hidden;  float: left;padding: 9px 0px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .bi_x{width: 13px; height: 15px; position: absolute; top: 6px; right: 15px;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -124px -90px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts3_main li .bi_x{width: 13px; height: 15px; position: absolute; top: 4px; right: 15px;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -124px -90px;}
@@ -144,7 +142,7 @@ background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) 
 
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .ignore_btn{width: 60px; height: 24px; float: left; line-height: 24px; text-align: center;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -134px -173px; margin: 7px 0px 0px 0px;color: #fff; text-decoration: none;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .ignore_btn:hover{background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -134px -213px;}
-#header .header_menu_two ul.right_menu li .messages_list .contacts_main li .adds_btn{width:57px; height: 24px; line-height: 24px; text-align: left;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -63px -366px; color: #fff; text-decoration: none; padding-left: 20px; position: absolute; right: 52px; top: 25px;display:none;}
+#header .header_menu_two ul.right_menu li .messages_list .contacts_main li .adds_btn{width:57px; height: 24px; line-height: 24px; text-align: left;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -63px -366px; color: #fff; text-decoration: none; padding-left: 20px; position: absolute; right: 52px; top: 25px;display:none; overflow:hidden;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .adds_btn:hover{background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -64px -403px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .adds_btn_yi{width: 77px; height: 24px;line-height: 24px;color: #fff; text-decoration: none; text-align: center; color: #fff; background: #BEC3C7; cursor:default; position: absolute; right: 52px; top: 25px; display:none;}
 
@@ -156,7 +154,7 @@ background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) 
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .times{height: 20px; line-height: 20px; overflow: hidden; float:right; color: #999999; margin-right: 32px; display: inline;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .logo1 img{width: 45px; height: 50px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_title{width: 130px; float: left; height: 20px; overflow: hidden; color: #2A7FB8; line-height: 20px; margin-left: 10px; display: inline; text-align: left; margin-top: 5px; }
-#header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_companies{width:225px; float: left; overflow: hidden; color: #545454; line-height: 20px; margin-left: 10px; display: inline; text-align: left;}
+#header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_companies{width:320px; float: left; overflow: hidden; color: #545454; line-height: 32px; margin-left: 10px; display: inline; text-align: left; }
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .new_msg {font-weight:bold;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_companies .yi_icon{width: 20px; height: 20px; float: left;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -137px -17px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_title .name_titles{ max-width: 80px; height: 20px; overflow: hidden; float: left;}
@@ -208,12 +206,13 @@ background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) 
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_title img.none{display: none;}
 #header .header_menu_two ul.left_menu li .yellow{ color: #FFFF73;}
 
-#look_list1 {width:418px;}
-#look_list2 {width:388px;}
+#look_list1,#contacts_one_list {width:418px;}
+#look_list2 {width:388px;_overflow:hidden;}
+
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name2_title{max-width: 130px; float: left; height: 20px; overflow: hidden;color: #555555; line-height: 20px; margin-left: 10px; display: inline; text-align: left; margin-top: 5px; }
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name2_companies{max-width:130px; float: left; height: 20px; overflow: hidden; color: #999999; line-height: 20px; margin-left: 10px; display: inline; text-align: left; margin-top: 5px;}
 
-#new_header_message li span.icon {display:inline-block; background:url(http://www.tianji.com/images/poke.gif) no-repeat 0px 0px; width:20px; height:20px; margin:0 4px 0 10px; position:relative; z-index:2; top:4px; left:0;}
+#new_header_message li span.icon {display:inline-block; background:url(http://www.tianji.com/images/poke.gif) no-repeat 0px 0px; width:20px; height:20px; margin:0 4px 0 10px; position:relative; z-index:2; top:4px; left:0;vertical-align:top;}
 
 #new_header_message li span.p01 {background-position:0px 0px;}
 #new_header_message li span.p08 {background-position:-420px 0px;}

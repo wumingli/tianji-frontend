@@ -13,9 +13,6 @@
         var config = {
             name: 'sex',
             dataBase: '../js/boxData.json',
-            css: {
-                width: 100
-            },
             clearCache: false,
             version: '1.0.1-dev',
             method: 'click',
@@ -25,6 +22,9 @@
         var $this = $(this),
             rqUrl = '',
             isLinkage = sel.linkage && sel.linkageType;
+        if (sel['css']){
+            $this.css(sel['css']);
+        }
 
         //读取数据字典中的Title，若初始化时有默认值，则默认选择
         $.getJSON(sel.dataBase,function (json){
@@ -89,8 +89,8 @@
             var html = '',rd = '';
             curBox = $this.attr('id');
             //箭头改变
-            $this.find('em.dropArr').addClass('dropArrUp').end()
-                 .siblings().find('em.dropArr').removeClass('dropArrUp');
+            //$this.find('em.dropArr').addClass('dropArrUp').end()
+            //     .siblings().find('em.dropArr').removeClass('dropArrUp');
             //读取数据
             $.getJSON(sel.dataBase,function (json){
                 var data = null,
@@ -133,8 +133,8 @@
                     //添加样式，动态控制下拉列表位置
                     conNode.css({
                         left: thisOffset.left,
-                        top: thisOffset.top + $this.height(),
-                        width: $this.width() + 20
+                        top: thisOffset.top + $this.outerHeight(),
+                        width: $this.width()
                     });
                     //添加节点
                     conNode.html(html);
@@ -230,7 +230,7 @@
     //失去焦点关闭下拉列表
     $(document).click(function (){
         $('.dropList').hide();
-        $('.wml-p-data-wrap em.dropArr').removeClass('dropArrUp');
+        //$('.wml-p-data-wrap em.dropArr').removeClass('dropArrUp');
         var reqInput = $('#' + curBox).find($('[data-required="true"]'));
         if('' != curBox && reqInput.length > 0 && reqInput.val().indexOf('请选择') > -1){
             $('#' + curBox).addClass('data-sub-error');

@@ -50,12 +50,15 @@
 	"zh_CN":"北京盈科时代信息技术有限公司",
 	"en_US":"Beijing Yingkeshidai Information Technology Co. Ltd."
 }/>
-<div class="footer-nav">
-	<ul class="ft-nav-list">
-		<#list ftnav[globalData.locale] as item>
-		<li class="ft-nav-item"><a href="${item.url}" target="_blank" class="ft-nav-link" title="${item.text}">${item.text}</a>|</li>
-		</#list>
-	</ul>
+
+<div id="footer">
+	<div class="footer-nav">
+		<ul class="ft-nav-list">
+			<#list ftnav[globalData.locale] as item>
+			<li class="ft-nav-item"><a href="${item.url}" target="_blank" class="ft-nav-link" title="${item.text}">${item.text}</a>|</li>
+			</#list>
+		</ul>
+	</div>
+	<p class="copyright">Copyright&nbsp;©&nbsp;2004-2012&nbsp;${copyRight[globalData.locale]}&nbsp;<a href="http://www.viadeo.com/">Viadeo.com</a><a class="redShield" href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202005102400013" target="_blank"><img src="http://image.tianji.com/common/img/redShield.png" alt=""/></a></p>
+	<p class="icpNumber"><a href="http://www.miibeian.gov.cn" target="_blank">京ICP证050525号</a><span>京公网安备110105002161号</span> </p>
 </div>
-<p class="copyright">Copyright&nbsp;©&nbsp;2004-2012&nbsp;${copyRight[globalData.locale]}&nbsp;<a href="http://www.viadeo.com/">Viadeo.com</a><a class="redShield" href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202005102400013" target="_blank"><img src="http://image.tianji.com/common/img/redShield.png" alt=""/></a></p>
-<p class="icpNumber"><a href="http://www.miibeian.gov.cn" target="_blank">京ICP证050525号</a><span>京公网安备110105002161号</span> </p>

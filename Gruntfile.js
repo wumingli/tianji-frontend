@@ -231,7 +231,6 @@ module.exports = function(grunt) {
             ]
           }
         },
-        /*
         //文件部署
         scp: {
             release: {
@@ -242,8 +241,8 @@ module.exports = function(grunt) {
                     passphrase: ''
                 },
                 files: [{
-                    cwd: 'compress/dist/',
-                    src: '*.war',
+                    cwd: 'compress/',
+                    src: '**/*.*',
                     filter: 'isFile',
                     // path on the server
                     dest: '/home/jsrepository/js/tianji-frontend/' + pkg.version
@@ -282,7 +281,6 @@ module.exports = function(grunt) {
               tagMessage: 'Version <%= version%>' //default: 'Version <%= version %>'
             }
         },
-        */
         //删除生成的目录
         clean : {
             build: ['dist','compress'],
@@ -303,5 +301,5 @@ module.exports = function(grunt) {
     grunt.registerTask('clear', ['clean']);
     grunt.registerTask('build',['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'clean:publicRep', 'compress', 'clean:tempDir']);
     grunt.registerTask('deploy',['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:deploy', 'clean:tempDir']);
-    grunt.registerTask('rel',['clean', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'release', 'scp:release', 'clean:tempDir']);
+    grunt.registerTask('rel',['clean:build', 'copy', 'concat', 'uglify', 'cssmin','clean:publicRep','compress','release', 'scp:release', 'clean:tempDir']);
 }

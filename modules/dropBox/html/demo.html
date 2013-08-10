@@ -5,6 +5,9 @@
 <title>测试文档</title>
 <link rel="stylesheet" href="http://image.tianji.com/tjs/dropBox/css/selector.css" type="text/css" >
 <link rel="stylesheet" href="http://image.tianji.com/tjs/styles/base.css" type="text/css" >
+<style type="text/css">
+.wml-p-data-wrap {margin-top:10px;float:left;margin-left:10px;}
+</style>
 </head>
 <body>
 <div class="wrap" id="wrap">
@@ -22,8 +25,8 @@
         <div id="wml-p-data-wrap8" class="wml-p-data-wrap"></div>
         <div id="wml-p-data-wrap9" class="wml-p-data-wrap"></div>
         <div class="clearfix" style="clear:both;height:0px;line-height:0;overflow:hidden;"></div>
-        <span style="float:left;font-size:12px;vertical-align:middle;line-height:30px;">职位薪资：</span>
-        <div id="wml-p-data-wrap10" class="wml-p-data-wrap"></div><span style="float:left;font-size:12px;vertical-align:middle;line-height:30px;">至：</span>
+        <span style="float:left;font-size:12px;vertical-align:middle;line-height:60px;padding-left:10px;">职位薪资：</span>
+        <div id="wml-p-data-wrap10" class="wml-p-data-wrap"></div><span style="float:left;font-size:12px;vertical-align:middle;line-height:60px;padding-left:10px;">至：</span>
         <div id="wml-p-data-wrap11" class="wml-p-data-wrap"></div>
         <div class="subCon" id="subCon">
             <input type="submit" id="subBtn" value="提交" />
@@ -34,79 +37,87 @@
 <script type="text/javascript" src="http://image.tianji.com/tjs/dropBox/js/dropBox.js"></script>
 <script type="text/javascript">
 $(function (){
-$('#wml-p-data-wrap').dropBox({
-    name: 'sex'
-});
-$('#wml-p-data-wrap1').dropBox({
-    name: 'salary',
-    init: {
-        code: '5000及以上'
-    }
-});
-$('#wml-p-data-wrap2').dropBox({
-    name: 'companyProperty',
-    required: true
-});
-$('#wml-p-data-wrap3').dropBox({
-    name: 'workExperience',
-    required: true
-});
-$('#wml-p-data-wrap4').dropBox({
-    name: 'companyLevel'
-});
-$('#wml-p-data-wrap5').dropBox({
-    name: 'eduBackground',
-    required: true,
-    init: {
-        code: '60'
-    }
-});
-$('#wml-p-data-wrap6').dropBox({
-    name: 'language'
-});
-$('#wml-p-data-wrap7').dropBox({
-    name: 'lanLS'
-});
-$('#wml-p-data-wrap8').dropBox({
-    name: 'lanRW'
-});
-$('#wml-p-data-wrap9').dropBox({
-    name: 'custom',
-    customData: {
-        'custom': {
-            'data': [{
-                'code': '901',
-                'name': '自定义数据1'
-            },{
-                'code': '902',
-                'name': '自定义数据2222'
-            },{
-                'code': '903',
-                'name': '自定义数据自定义数据自定义数据'
-            }],
-            'title': '自定义数据'
+    $('#wml-p-data-wrap').dropBox({
+        name: 'sex',
+        css: {
+            width: '130',
+            color: '#f60'
         }
-    },
-    init: {
-        code: '901'
-    },
-    required: true
-});
-$('#wml-p-data-wrap10').dropBox({
-    name: 'salarySingle',
-    linkage: '#wml-p-data-wrap11',
-    linkageType: 'from',
-    required: true
-});
-$('#wml-p-data-wrap11').dropBox({
-    name: 'salarySingle',
-    linkage: '#wml-p-data-wrap10',
-    linkageType: 'to',
-    required: true
-});
-$('#testForm').submit(function (){
-    return $(this).subDropList();
-});
+    });
+    $('#wml-p-data-wrap1').dropBox({
+        name: 'salary',
+        init: {
+            code: '5000及以上'
+        }
+    });
+    $('#wml-p-data-wrap2').dropBox({
+        name: 'companyProperty',
+        required: true
+    });
+    $('#wml-p-data-wrap3').dropBox({
+        name: 'workExperience',
+        required: true
+    });
+    $('#wml-p-data-wrap4').dropBox({
+        name: 'companyLevel'
+    });
+    $('#wml-p-data-wrap5').dropBox({
+        name: 'eduBackground',
+        required: true,
+        init: {
+            code: '60'
+        },
+        css: {
+            width: '200',
+            color: '#f60'
+        }
+    });
+    $('#wml-p-data-wrap6').dropBox({
+        name: 'language'
+    });
+    $('#wml-p-data-wrap7').dropBox({
+        name: 'lanLS'
+    });
+    $('#wml-p-data-wrap8').dropBox({
+        name: 'lanRW'
+    });
+    $('#wml-p-data-wrap9').dropBox({
+        name: 'custom',
+        customData: {
+            'custom': {
+                'data': [{
+                    'code': '901',
+                    'name': '自定义数据1'
+                },{
+                    'code': '902',
+                    'name': '自定义数据2222'
+                },{
+                    'code': '903',
+                    'name': '自定义数据自定义数据自定义数据'
+                }],
+                'title': '自定义数据'
+            }
+        },
+        init: {
+            code: '901'
+        },
+        required: true
+    });
+    $('#wml-p-data-wrap10').dropBox({
+        name: 'salarySingle',
+        linkage: '#wml-p-data-wrap11',
+        linkageType: 'from',
+        required: true
+    });
+    $('#wml-p-data-wrap11').dropBox({
+        name: 'salarySingle',
+        linkage: '#wml-p-data-wrap10',
+        linkageType: 'to',
+        required: true
+    });
+    $('#testForm').submit(function (){
+        return $(this).subDropList();
+    });
 });
 </script>
 </body>
