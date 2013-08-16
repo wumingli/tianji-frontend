@@ -13,6 +13,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>${defaultTitle[globalData.locale]}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="http://image.tianji.com/tjs/recruiting/images/tianji.ico" />
 	<meta name="keywords" content="精英招聘,网络招聘, 社交网络招聘" />
 	<meta name="description" content="精英招聘依托于中国最大的职业社交网站天际网,利用社交网络招聘,不仅可以将职位通过人际网络传递至数百万目标人群,还可以通过动态多维度考量候选人,为聘用提供依据." />
 	<link rel="stylesheet" type="text/css" href="http://image.tianji.com/tjs/styles/base.css" />

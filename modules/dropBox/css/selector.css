@@ -46,6 +46,3 @@ div label {vertical-align:middle;position:relative;top:-4px;color:#666;}
 25%,50%,100%{opacity: 1;}
 25%,75%{opacity: 0;}
 }
-/*提交按钮样式，临时*/
-.subCon {clear:both;}
-.subCon input {width:80px;height:30px;}

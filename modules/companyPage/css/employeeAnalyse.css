@@ -1,0 +1,51 @@
+/*
+ * author : wumingli
+ * for : epmplyee analyse
+ * developed at : 2013/6/28 14:14
+ * Copyright 2013. All rights reserved.
+ */
+ /*背景定义*/
+.avatarCon span,.emItem dl dd strong em ,.analyseCon h3.hideText,.analyseCon .em_a .avatarCon .grayBg{ background:url(../images/employeeBg.png) no-repeat;}
+
+.analyseCon {margin: 0 auto; width:978px; height: 248px; border:1px solid #d8d8d8; border-radius: 3px; background-color:#fafafa;box-shadow:0 1px 2px #eee; text-align:center;position:relative;}
+.analyseCon h3 {font: 16px/20px 'Sim sun'; color: #447e85; margin:30px auto 20px;position:relative;z-index:88;width:250px;height:20px;overflow:hidden;}
+.analyseCon h3.hideText {text-indent:-999px; background-position:45px 0;}
+.avatarCon {margin:0 auto; position:relative;width:82px;height:82px;z-index:89;}
+.yourAvatar {top:15px;}
+.avatarCon img {width: 60px; height: 68px;display:block;position:absolute;left:50%;top:50%;margin-left:-30px;margin-top:-34px;}
+.avatarCon span {display:block;width:82px;height:82px;position:absolute;background-position:-418px 0;left:0;top:0;}
+.loadingGif {width:250px;height:45px; background:url(../images/loading.gif) center bottom no-repeat; margin:25px auto; font-family: 'Arial'; position:relative;z-index:88;}
+
+.emItem {position:absolute;z-index:88;left:450px;top:85px;}
+.emItem .avatarCon {width:60px;height:60px;overflow:hidden;}
+.emItem .avatarCon img {width:50px;height:50px;margin-left:-25px;margin-top:-25px;}
+.emItem .avatarCon span {width:60px;height:60px;background-position:-440px -101px;}
+.emItem .avatarCon, .emItem dl dd {float:left; text-align:left;}
+.emItem dl dt a {display:block;width:60px;height:60px;}
+.emItem dl dd {line-height:25px; padding-left:10px;display:none;}
+.emItem dl dd strong { height:25px; line-height:25px;display:block;}
+.emItem dl dd strong span {float:left;}
+.emItem dl dd strong em { background-position:0 -244px;width:22px;height:20px;float:left;margin-left:5px;}
+.emItem dl dd strong em.renmai2 {background-position:0 -281px;}
+.emItem dl dd p {color:#999;width:5em;height:20px;overflow:hidden;cursor:default;}
+
+/*箭头定义*/
+.analyseCon .em_a {position:absolute;display:none;}
+.analyseCon .em_a1 {background:url(../images/alt.png);right:535px;bottom: 135px;width:148px;height:63px;display:none;}
+.analyseCon .em_a2 {background:url(../images/alc.png);right:530px;bottom: 100px;width:281px;height:32px;}
+.analyseCon .em_a3 {background:url(../images/alb.png);right:495px;bottom: 30px;width:156px;height:54px;}
+.analyseCon .em_a4 {background:url(../images/art.png);right:175px;bottom: 130px;width:285px;height:74px;}
+.analyseCon .em_a5 {background:url(../images/arc.png);right:280px;bottom: 95px;width:167px;height:30px;}
+.analyseCon .em_a6 {background:url(../images/arb.png);right:200px;bottom: 25px;width:283px;height:50px;}
+
+.analyseCon .em_a .avatarCon {width:43px;height:43px;position:absolute;}
+.analyseCon .em_a .avatarCon img {width:36px;height:36px;margin-left:-18px;margin-top:-18px;}
+.analyseCon .em_a .avatarCon span,.analyseCon .em_a .avatarCon .grayBg {width:43px;height:43px;background-position:-457px -190px;}
+.analyseCon .em_a .avatarCon .grayBg {background-position:-463px -263px;}
+
+.analyseCon .em_a1 .avatarCon {left:55px;}
+.analyseCon .em_a2 .avatarCon {left: 100px;top:-18px;}
+.analyseCon .em_a3 .avatarCon {left: 60px;top:25px;}
+.analyseCon .em_a4 .avatarCon {left: 130px;top:-5px;}
+.analyseCon .em_a5 .avatarCon {left: 70px;top:-12px;}
+.analyseCon .em_a6 .avatarCon {left: 80px;top:12px;}

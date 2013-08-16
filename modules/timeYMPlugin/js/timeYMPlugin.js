@@ -6,6 +6,9 @@
  * Copyright 2011. All rights reserved.
  */
 (function ($){
+    //加载样式
+    var style = '<style type="text/css">.date_input{border:1px solid #f0f0f0;border-radius:2px;height:28px;line-height:28px;color:#999;padding-left:5px;width:50px;box-shadow:#e9e9e9 0 0 3px;outline:none;}.timeYM_box{position:absolute;top:-100px;left:-100px;z-index:99;overflow:hidden;padding:1px;width:220px;height:160px;border:#09c 1px solid;background:#fcfcfc;color:#000; box-shadow:#ccc 0 0 3px;}.timeYM_box .tit{position:relative;height:30px;background:#09c;color:#fff;text-align:center;font-weight:bold;font-size:12px;line-height:30px}.timeYM_box .tit em{position:absolute;top:0;left:10px;font-weight:bold;font-family:\'Sim Hei\';cursor:pointer}.timeYM_box .tit em.next{right:10px;left:auto}.timeYM_box .tit em.disable{color:#bcd;text-shadow:1px 0 0 #fff;cursor:not-allowed}.timeYM_box .timeCon{position:absolute;left:0;width:2000px;height:150px}.timeYM_box .timeCon .oneBlock{float:left;margin-top:10px;padding-left:10px;width:212px;line-height:25px}.timeYM_box .timeCon .oneBlock span{float:left;display:block;margin:0 5px 5px 0;width:45px;height:25px;text-align:center;font-size:12px;cursor:pointer}.timeYM_box .timeCon .oneBlock span:hover,.timeYM_box .timeCon .oneBlock span.cur{background-color:#eee;color:#08c}.timeYM_box .btns{position:absolute;bottom:15px;width:100%;text-align:center}.timeYM_box .btns a{color:#09c;text-decoration:none;font-size:12px}span.modifyEndYM{padding-right:15px;background:url(http://image.tianji.com/tjs/timeYMPlugin/images/note.gif) right center no-repeat;color:#09c;cursor:pointer}</style>';
+    $('head').append(style);
     //插件扩展
     $.fn.timeYM = function (options){
         $this = $(this);
@@ -30,6 +33,9 @@
             'date-type': timePlugin.type,
             'se-type': timePlugin.seType
         });
+        if (timePlugin['css']){
+            $this.css(timePlugin['css']);
+        }
         /* 返回时间数据
          * st:开始年份/月份
          * et:结束年份/月份,
@@ -70,7 +76,7 @@
         }
         //生成控件
         function createTimeBox($target, type){
-            $('.' + timePlugin.boxCssClass).remove();
+            $('.' + timePlugin.boxCssClass).hide();
             var $timeBox = $('<div />'),
                 boxHtml = '',
                 sinceNowStr = '',

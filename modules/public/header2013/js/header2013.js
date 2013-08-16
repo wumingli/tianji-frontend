@@ -14,29 +14,13 @@ $(function (){
     var isEn = ($('#header .header_menu_two ul.left_menu li:eq(0)').find('a').text() == 'Home');
     var searchValue = '';
     var DD_belatedPNG = DD_belatedPNG || false;
-    //GA检测
-    //ga_category、ga_action 参数值由bi部门指定
-    //ga_area 事件发生区域
-    //no_prefix 有些事件，只要传递一个标识，不需要知道是哪个页面的，不用加上 CURRENT_LOCATION
-    function addGaTrackEventNewHeader(ga_category, ga_action, ga_area, no_prefix) {
-        var ga_location = window.CURRENT_LOCATION;
-        if (typeof ga_area != 'undefined') {
-            if (no_prefix) {
-                ga_location = ga_area;
-            } else {
-                ga_location = window.CURRENT_LOCATION + "_" + ga_area;
-            }
-        }
-        if (typeof _gaq != 'undefined') {
-            _gaq.push(['_trackEvent', ga_category, ga_action, ga_location]);
-        } else {
-            //开发模式下调试用
-            //console.log("trigger GA Event: ['_trackEvent', '" + ga_category + "', '" + ga_action + "', '" + ga_location + "']");
-        }
+    if(typeof _gaq == 'undefined'){
+        _gaq = [];
     }
-    var _gaq = _gaq || [];
-    document.domain = 'tianji.com';
-
+    //GA检测
+    function addGaTrackEventNewHeader(ga_category, ga_action, ga_area) {
+        _gaq.push(['_trackEvent', ga_category, ga_action, ga_area]);
+    }
     //用户名滑过
     $('.user_name').hover(function(){
         $(this).addClass('font_hui user_bg');
@@ -271,6 +255,7 @@ $(function (){
                           if (notice_msg['unread_friend_requests_count'] == 0){
                             $('#contacts_one .span_promit').hide();
                           } else {
+                            $('#contacts_one .span_promit').attr('data-num', notice_msg['unread_friend_requests_count']);
                             $('#contacts_one .span_promit').show().text(notice_msg['unread_friend_requests_count'] > 99 ? '99+' : notice_msg['unread_friend_requests_count']);
                             $('#contacts_one .promit_no').hide();
                           }
@@ -295,6 +280,7 @@ $(function (){
                 }
             }
             if (thisDomain != ridDomain){
+                document.domain = 'tianji.com';
                 var frame = document.createElement('iframe'),
                     frameQuery;
                 frame.src = config.crossDomainFrameUrl;
@@ -346,7 +332,8 @@ $(function (){
                             for (var i=0; i < pLen; i++){
                                 var addTxt = isEn ? 'Add' : '加为好友';
                                 var sendTxt = isEn ? 'Sent' : '已发送';
-                                pHtml += '<li data-id="' + pDatas[i]['id'] + '"> <span class="logo1"><a href="http://www.tianji.com/p/'+pDatas[i]['id']+'" target="_blank"><img src="' + pDatas[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/'+pDatas[i]['id']+'" target="_blank">' + pDatas[i]['name'] + '</a> </span> <span class="name1_companies">' + pDatas[i]['headline'].substring(0,17) + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="adds_btn">'+addTxt+'</a> <a href="javascript:void(0);" class="adds_btn_yi">'+sendTxt+'</a> </li>';
+                                var headlineTxt =  pDatas[i]['headline'] == null ? '' : pDatas[i]['headline'].substring(0,17);
+                                pHtml += '<li data-id="' + pDatas[i]['id'] + '"> <span class="logo1"><a href="http://www.tianji.com/p/'+pDatas[i]['id']+'" target="_blank" class="goToProfile"><img src="' + pDatas[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/'+pDatas[i]['id']+'" target="_blank" class="goToProfile">' + pDatas[i]['name'] + '</a> </span> <span class="name1_companies">' + headlineTxt + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="adds_btn">'+addTxt+'</a> <a href="javascript:void(0);" class="adds_btn_yi">'+sendTxt+'</a> </li>';
                             }
                         } else {
                             $('#contacts_one_list .emails_panel').show();
@@ -389,7 +376,8 @@ $(function (){
                             retData = data['data'];
                             for (var i=0; i<retData.length; i++){
                                 var acpTxt = isEn ? 'Accept' : '同意';
-                                returnHtml += '<li data-id="'+retData[i]['id']+'" data-userID="'+retData[i]['userId']+'"> <span class="logo1"><a href="http://www.tianji.com/p/'+retData[i]['userId']+'" target="_blank"><img src="' + retData[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/'+retData[i]['userId']+'" target="_blank">' + retData[i]['name'] + '</a> </span> <span class="name1_companies">' + retData[i]['headline'] + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="agree_btn">'+acpTxt+'</a> </li>\n';
+                                var headlineTxt =  pDatas[i]['headline'] == null ? '' : pDatas[i]['headline'].substring(0,17);
+                                returnHtml += '<li data-id="'+retData[i]['id']+'" data-userID="'+retData[i]['userId']+'"> <span class="logo1"><a href="http://www.tianji.com/p/'+retData[i]['userId']+'" target="_blank" class="goToProfile"><img src="' + retData[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/'+retData[i]['userId']+'" target="_blank" class="goToProfile">' + retData[i]['name'] + '</a> </span> <span class="name1_companies">' + headlineTxt + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="agree_btn">'+acpTxt+'</a> </li>\n';
                             }
                         }
                         //同意需要延时删除，不同意直接删除
@@ -465,16 +453,6 @@ $(function (){
                     $('#contacts_one_list').hide();
                 }, 500);
             });
-            //添加GA
-            $('#new_header ul').on('click', 'li a.goToProfile', function (){
-                addGaTrackEventNewHeader('notification_bar','GoToProfile','CR');
-            });
-            $('#new_header_message ul').on('click', 'li a', function (){
-                addGaTrackEventNewHeader('notification_bar','ReplyMessage','Message');
-            });
-            $('#header .header_menu_two ul.right_menu li .messages_list .title_renmai .wirte_info').on('click', function (){
-                addGaTrackEventNewHeader('notification_bar','WriteMessage','Message');
-            });
             //人脉邀请、可能认识的人【列表】滑过
             $('#new_header,#people_kone').on('mouseover','li', function (){
                 $(this).addClass('current');
@@ -486,7 +464,8 @@ $(function (){
             $('#new_header').on('click','span.bi_x1, a.agree_btn', function (event){
                 var $this = $(this),
                     $thisList = $(this).parent('li');
-                var $concatNum = $('#contacts_one .span_promit');
+                var $concatNum = $('#contacts_one .span_promit'),
+                    $concatNumOut = $concatNum.attr('data-num');
                 event = event || window.event;
                 //同意
                 if ((event.srcElement || event.target).className == 'agree_btn'){
@@ -494,7 +473,7 @@ $(function (){
                     var nameTitleHtml = $thisList.find('.name1_title').html();
                     var dataID = $thisList.attr('data-userID');
                     $thisList.find('.name1_title, .bi_x1, .agree_btn').hide();
-                    $thisList.find('.name1_companies').html('<a href="http://www.tianji.com/p/contacts/'+dataID+'" target="_blank">查看TA的联系人</a> | <a href="http://www.tianji.com/p/'+dataID+'" class="goToProfile" target="_blank">给TA写信</a>');
+                    $thisList.find('.name1_companies').html('<a href="http://www.tianji.com/p/contacts/'+dataID+'" class="goToProfile" target="_blank">查看TA的联系人</a> | <a href="http://www.tianji.com/p/'+dataID+'" class="sendMessage" target="_blank">给TA写信</a>');
                     $thisList.find('.name1_companies').before('<span class="name2_title">'+nameTitleHtml+'</span><span class="name2_companies">已成为你的人脉</span>');
                     concat($thisList, 'http://www.tianji.com/front/nav/accept_cr', 'put', 'agree');
                 }
@@ -508,7 +487,9 @@ $(function (){
                     $concatNum.text('0');
                     $concatNum.fadeOut(2000);
                 } else {
-                    $concatNum.text($concatNum.text() - 1);
+                    $concatNum.attr('data-num', $concatNum.attr('data-num') - 1);
+                    $concatNumOut = $concatNum.attr('data-num') > 99 ? '99+': $concatNum.attr('data-num');
+                    $concatNum.text($concatNumOut);
                 }
             });
             //可能认识的人加为好友、删除
@@ -517,7 +498,7 @@ $(function (){
                 event = event || window.event;
                 //发送
                 if ((event.srcElement || event.target).className == 'adds_btn'){
-                     addGaTrackEventNewHeader('notification_bar','SendContactRequest','CR');
+                    addGaTrackEventNewHeader('notification_bar','SendContactRequest','CR');
                     $this.parent('li').find('.bi_x1,.adds_btn').hide()
                                       .end().find('.adds_btn_yi').fadeIn(1000);
                     personMayKnow('http://www.tianji.com/front/nav/apply_pymk', 'post', {id:$(this).parent('li').attr('data-id'), count:$('#people_kone').find('li').length}, 'append');
@@ -527,7 +508,7 @@ $(function (){
                 }
                 //删除
                 else if((event.srcElement || event.target).className == 'bi_x1') {
-                     addGaTrackEventNewHeader('notification_bar','HiddePYMK','CR');
+                    addGaTrackEventNewHeader('notification_bar','HiddePYMK','CR');
                     personMayKnow('http://www.tianji.com/front/nav/ignore_pymk', 'delete', {id:$(this).parent('li').attr('data-id'), count:$('#people_kone').find('li').length}, 'append');
                     updatePersonListHeight($this.parent('li'));
                 }
@@ -578,6 +559,7 @@ $(function (){
             });
             //通知GA映射
             var noticeMap = {
+                visitor: ['notification_bar','GoToRecentVisit', 'Recentvisit'],
                 visitors: ['notification_bar','GoToGroup3', 'Groups'],
                 notice_0: ['notification_bar','GoToProfile', 'Contacts'],
                 notice_1: ['notification_bar','GoToGroup1', 'Groups'],
@@ -600,10 +582,12 @@ $(function (){
                 notice_18: ['notification_bar','GoToMyProfile', 'Profile'],
                 notice_19: ['notification_bar','GoToVerificationConditions', 'InvitePeople'],
                 notice_21: ['notification_bar','GoToProfile', 'RecentVisit'],
-                visitors: ['notification_bar','GoToRecentVisit', 'Recentvisit']
+                notice_22: ['notification_bar','GoToProfile', 'Verification'],
+                notice_23: ['notification_bar','GoToProfile', 'InvitePeople']
             };
             $('#header .header_menu_two ul.right_menu li .messages_list .contacts2_main').on('click', 'li a', function (){
-                addGaTrackEventNewHeader(noticeMap[$(this).attr('data-ga')].toString());
+                var notice_type = noticeMap[$(this).attr('data-ga')];
+                addGaTrackEventNewHeader(notice_type[0], notice_type[1], notice_type[2]);
             });
             //查看通知
             var countNotice = 0;
@@ -637,7 +621,7 @@ $(function (){
                                                 aTempNames.push(aNames[j].substring(0, 4));
                                             }
                                         }
-                                        nameStr = aTempNames.join('，') + '等' +nDatas.length + '人';
+                                        nameStr = aTempNames.join('，') + '等' +aNames.length + '人';
                                     } else {
                                         nameStr = nDatas[i]['name'];
                                     }
@@ -691,6 +675,25 @@ $(function (){
                 info_timer = setTimeout(function (){
                     $('#look_list2').hide();
                 }, 500);
+            });
+            //添加GA
+            $('#new_header, #people_kone').on('click', 'li a.goToProfile', function (){
+                addGaTrackEventNewHeader('notification_bar','GoToProfile','CR');
+            });
+            $('#new_header_message').on('click', 'li a', function (){
+                addGaTrackEventNewHeader('notification_bar','ReplyMessage','Message');
+            });
+            $('#header .header_menu_two ul.right_menu li .messages_list .title_renmai .wirte_info').on('click', function (){
+                addGaTrackEventNewHeader('notification_bar','WriteMessage','Message');
+            });
+            $('#contacts_one_list .title_renmai:eq(0) a').click(function (){
+                addGaTrackEventNewHeader('notification_bar','Import','CR');
+            });
+            $('#contacts_one .emails_panel a').click(function (){
+                addGaTrackEventNewHeader('notification_bar','GoToInvite','CR');
+            });
+            $('#contacts_one_list .border_t a.all_kone').click(function (){
+                addGaTrackEventNewHeader('notification_bar','GoToPYMK','CR');
             });
         }, 800);
     }

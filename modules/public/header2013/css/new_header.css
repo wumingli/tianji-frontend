@@ -103,7 +103,7 @@ background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) 
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .logo1{ width: 45px; height: 50px; float: left; border: 1px solid #D7DBE1; padding: 1px; margin-left: 15px; display: inline;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .times{height: 20px; line-height: 20px; overflow: hidden; color: #999999; display: inline; margin-top: 5px;position:absolute;right:10px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .logo1 img{width: 45px; height: 50px;}
-#header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .name1_title{width: 230px; float: left;overflow: hidden;color: #555555; line-height: 20px; margin-left: 10px; display: inline; text-align: left; margin-top: 5px; }
+#header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .name1_title{width: 230px; float: left;overflow: hidden;color: #555555; line-height: 26px; margin-left: 10px; display: inline; text-align: left; margin-top: 5px; }
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .name1_companies{max-width:130px; float: left; height: 20px; overflow: hidden; color: #999999; line-height: 20px; margin-left: 10px; display: inline; text-align: left; margin-top: 5px;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li:hover{ background-color: #F5F8F8; cursor: pointer;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts2_main li .notice_con{width:280px; float: left; overflow: hidden; color: #545454; line-height: 20px; margin-left: 10px; display: inline; text-align: left;}
@@ -153,7 +153,7 @@ background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) 
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .logo1{ width: 45px; height: 50px; float: left; border: 1px solid #D7DBE1; padding: 1px; margin-left: 15px; display: inline;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .times{height: 20px; line-height: 20px; overflow: hidden; float:right; color: #999999; margin-right: 32px; display: inline;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .logo1 img{width: 45px; height: 50px;}
-#header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_title{width: 130px; float: left; height: 20px; overflow: hidden; color: #2A7FB8; line-height: 20px; margin-left: 10px; display: inline; text-align: left; margin-top: 5px; }
+#header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_title{width: 130px; float: left; height: 20px; overflow: hidden; color: #000; line-height: 20px; margin-left: 10px; display: inline; text-align: left; margin-top: 5px; }
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_companies{width:320px; float: left; overflow: hidden; color: #545454; line-height: 32px; margin-left: 10px; display: inline; text-align: left; }
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .new_msg {font-weight:bold;}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .name1_companies .yi_icon{width: 20px; height: 20px; float: left;background:url(http://image.tianji.com/tjs/header2013/images/new_header_bg.png) no-repeat -137px -17px;}
