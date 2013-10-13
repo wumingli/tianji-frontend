@@ -231,56 +231,6 @@ module.exports = function(grunt) {
             ]
           }
         },
-        //文件部署
-        scp: {
-            release: {
-                options: {
-                    host: 'repository.tianji.com',
-                    username: 'root',
-                    privateKey: grunt.file.read(global.process.env.HOME + '/.ssh/id_rsa'),
-                    passphrase: ''
-                },
-                files: [{
-                    cwd: 'compress/',
-                    src: '**/*.*',
-                    filter: 'isFile',
-                    // path on the server
-                    dest: '/home/jsrepository/js/tianji-frontend/' + pkg.version
-                }]
-            },            
-            deploy: {
-                options: {
-                    //host: 'web1.env-40-6.dev.tianji.com',
-                    host: 'web1.env-40-7.dev.tianji.com',
-                    username: 'root',
-                    privateKey: grunt.file.read(global.process.env.HOME + '/.ssh/id_rsa'),
-                    passphrase: ''
-                },
-                files: [{
-                    cwd: 'compress/dist/',
-                    src: '*.war',
-                    filter: 'isFile',
-                    // path on the server
-                    dest: '/opt/tianji/apps/'
-                }]
-            }
-        },
-        //发布
-        release: {
-            options: {
-              bump: false, //default: true
-              file: 'package.json', //default: package.json
-              add: true, //default: true
-              commit: true, //default: true
-              tag: true, //default: true
-              push: true, //default: true
-              pushTags: true, //default: true
-              npm: false, //default: true
-              tagName: 'tianji-frontend-<%= version%>', //default: '<%= version %>'
-              commitMessage: 'release <%= version%>', //default: 'release <%= version %>'
-              tagMessage: 'Version <%= version%>' //default: 'Version <%= version %>'
-            }
-        },
         //删除生成的目录
         clean : {
             build: ['dist','compress'],
