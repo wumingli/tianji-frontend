@@ -1,5 +1,7 @@
-<link href="http://image.tianji.com/tjs/header2013/css/new_header.min.css?v=1.0.17" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/header2013.min.js?v=1.0.17"></script>
+<link href="http://image.tianji.com/tjs/header2013/css/new_header.min.css?v=1.1.2" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/header2013.min.js?v=1.1.2"></script>
+<script type="text/javascript" src="http://image.tianji.com/tjs/popup-login/js/tj-popup-login.min.js?v=1.1.2"></script>
+
 <div id="header">
   <div class="header_menu_bg">
     <div class="header_menu"> <span class="logo png_ie6"><a href="http://www.tianji.com/home">Tianji</a></span>
@@ -20,19 +22,35 @@
         </form>
       </div>
       <div class="user_info user_unlogin_info" style="display:block;">
-        <a href="https://login.tianji.com/cas/login?service=" target="_self">login</a> <span>|</span> <a href="http://www.tianji.com/join" class="popup-login" data-init="register" target="_self">register</a>
+        <a href="https://login.tianji.com/cas/login?service=" target="_self" class="popup-login">login</a> <span>|</span> <a href="http://www.tianji.com/join" class="popup-login" data-init="register" target="_self" class="popup-login">register</a>
       </div>
     </div>
     <div class="header_menu_two">
       <div class="header_menus">
         <ul class="left_menu" >
           <li> <a href="http://www.tianji.com/home">Home</a> </li>
-          <li> <a href="http://www.tianji.com/p">Profile</a> </li>
-          <li> <a href="http://www.tianji.com/contacts">Contacts</a> </li>
-          <li> <a href="http://job.tianji.com/sr/home?from=tianji">Jobs</a> </li>
+          <li> <a href="http://www.tianji.com/p" class="popup-login">Profile</a> </li>
+          <li> <a href="http://www.tianji.com/contacts" class="popup-login">Contacts</a> </li>
+          <li> <a href="http://job.tianji.com/career/index/nologin">Jobs</a>
+                <div class="more_panel" style="display:none;">
+                    <dl class="list_item"><a href="http://job.tianji.com/career/index/nologin">Find</a></dl>
+                    <dl class="list_item"><a href="http://job.tianji.com/career/candidate/resume/index" class="popup-login">我的简历</a></dl>
+                    <dl class="list_item"><a href="http://job.tianji.com/career/recruiter/position/publish" class="popup-login">发职位</a></dl>
+                    <dl class="list_item"><a href="http://job.tianji.com/career/recruiter/positions" class="popup-login">我的招聘</a></dl>
+                </div>
+          </li>
           <li> <a href="http://www.tianji.com/corps">Companies</a> </li>
           <li> <a href="http://www.tianji.com/mba">Training</a> </li>
-          <!--<li> <a href="http://www.tianji.com/news">互动</a> </li>-->
+          <li> <a href="javascript:void(0);">App</a>
+                <div class="more_panel" style="display:none;">
+                    <dl class="list_item"><a href="http://www.tianji.com/events">Events</a></dl>
+                    <dl class="list_item"><a href="http://www.tianji.com/news">News</a></dl>
+                    <dl class="list_item"><a href="http://www.tianji.com/pub">Community</a></dl>
+                    <dl class="list_item"><a href="http://bbs.tianji.com/bbs/index">Forum</a></dl>
+                    <dl class="list_item"><a href="http://www.tianji.com/companies">Company</a></dl>
+                    <dl class="list_item"><a href="http://www.tianji.com/quiz">Quiz</a></dl>
+                </div>
+           </li>
         </ul>
       </div>
     </div>

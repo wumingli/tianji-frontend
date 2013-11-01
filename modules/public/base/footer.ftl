@@ -11,9 +11,13 @@
 		"text":"联系方式",
 		"url":"http://s.tianji.com/html/contact.html"
 	},	{
+		"text":"对外合作",
+		"url":"http://s.tianji.com/html/link_out.html" 
+	},	{
 		"text":"合作伙伴",
 		"url":"http://s.tianji.com/html/link.html" 
-	},	{
+	}
+	,	{
 		"text":"手机客户端",
 		"url":"http://m.tianji.com?ga_from=footer" 
 	},	{
@@ -52,13 +56,14 @@
 }/>
 
 <div id="footer">
-	<div class="footer-nav">
-		<ul class="ft-nav-list">
-			<#list ftnav[globalData.locale] as item>
-			<li class="ft-nav-item"><a href="${item.url}" target="_blank" class="ft-nav-link" title="${item.text}">${item.text}</a>|</li>
-			</#list>
-		</ul>
-	</div>
-	<p class="copyright">Copyright&nbsp;©&nbsp;2004-2012&nbsp;${copyRight[globalData.locale]}&nbsp;<a href="http://www.viadeo.com/">Viadeo.com</a><a class="redShield" href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202005102400013" target="_blank"><img src="http://image.tianji.com/common/img/redShield.png" alt=""/></a></p>
-	<p class="icpNumber"><a href="http://www.miibeian.gov.cn" target="_blank">京ICP证050525号</a><span>京公网安备110105002161号</span> </p>
+
+    <#list ftnav[globalData.locale] as item>
+        <a href="${item.url}" target="_blank" title="${item.text}">${item.text}</a>
+    </#list>
+    <br>
+    Copyright © 2004-2013　${copyRight[globalData.locale]}
+    <a target="_blank" href="http://www.viadeo.com" class="font_cl">Viadeo.com</a>
+    <br><a target="_blank" href="http://www.miibeian.gov.cn" class="font_cl">京ICP证050525号</a> 京公网安备110105002161号
+    <a class="footer_icon" target="_blank" href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202005102400013"><img src="http://www.tianji.com/images/login_imgs_36.gif?1373857427"></a>
+
 </div>

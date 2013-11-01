@@ -17,8 +17,11 @@ $(function (){
     if(typeof _gaq == 'undefined'){
         _gaq = [];
     }
+    if($('#header .header_menu .user_info .user_name .zi').width() > 60){
+        $('#header .header_menu .user_info .user_name .zi').width(60);
+    }
     //GA检测
-    function addGaTrackEventNewHeader(ga_category, ga_action, ga_area) {
+    window.addGaTrach = function(ga_category, ga_action, ga_area) {
         _gaq.push(['_trackEvent', ga_category, ga_action, ga_area]);
     }
     //用户名滑过
@@ -84,6 +87,7 @@ $(function (){
         },
         _bind: function(){
           this.selectors.input.bind("blur", this._hide).bind("keyup", this._keyup);
+          this.selectors.input.bind("input", this._keyup);
           this.selectors.box.bind("click", this._hide);
           this.selectors.box.hover(function(){
             SearchBox.selectors.input.unbind("blur");
@@ -195,14 +199,25 @@ $(function (){
         $('.header_menus .left_menu li a').removeClass('current');
     }
     else{
-        $('.header_menus .left_menu li').eq(urlIndex).find('a').addClass('current').end().siblings().find('a').removeClass('current');
+        $('.header_menus .left_menu li').eq(urlIndex).children('a').addClass('current').end().siblings().children('a').removeClass('current');
     }
     //导航滑过
-    $('#header .header_menu_two ul li a.current').parent('li').siblings().find('a').hover(function (){
-        $(this).addClass('hover');
+    /*$('#header .header_menu_two ul.left_menu li a[class!="current"]').hover(function (){
+        if (!$(this).parent('li').is(':last')){
+            $(this).addClass('hover');
+        }
     },function (){
-        $(this).removeClass('hover');
-    });
+        if (!$(this).parent('li').is(':last')){
+            $(this).removeClass('hover');
+        }
+    });*/
+    $('.left_menu li').hover(function() {
+        $(this).children('a').addClass('mover');
+        $(this).children('.more_panel').stop().slideDown(300);
+    }, function() {
+        $(this).children('a').removeClass('mover');
+        $(this).children('.more_panel').stop().slideUp(300);
+    }); 
     //登录链接
     $('.user_unlogin_info a:eq(0)').attr('href', $('.user_unlogin_info a:eq(0)').attr('href') + locLink);
     //设置Domain
@@ -211,9 +226,14 @@ $(function (){
         crossDomainFrameUrl: 'http://www.tianji.com/crossdomain.html',
         crossDomainFrameId: 'crossdomain-iframe'
     };
-    var thisDomain = hostname.match(/[a-z]+/)[0];
-    var ridDomain = config.crossDomainFrameUrl.match(/[a-z]+/g)[1];
+    var thisDomain = hostname.match(/[a-z]+/);
+    thisDomain = thisDomain != null ? thisDomain[0]: '';
+    var ridDomain = config.crossDomainFrameUrl.match(/[a-z]+/g);
+    ridDomain = ridDomain != null ? ridDomain[1]: '';
     var crossDom;
+    if (!/tianji.com/.test(hostname)){
+        $('#header .header_menu_two ul.right_menu').hide();
+    }
     //登录状态调用
     if ($('.user_unlogin_info').length == 0){
         //语言切换
@@ -224,62 +244,64 @@ $(function (){
         setTimeout(function (){
             //封装测试
             function getUserInfo($$){
-                if (!!$$){
-                    //用户信息
-                    $$.get('http://www.tianji.com/front/nav/user?' + Math.random(),function(data){
-                        if (data){
-                            var uData = data['data'],
-                            name = '';
-                            if (!uData){
-                                return false;
-                            } else {
-                                name = uData['name'];
-                                //英文，取First Name                                            
-                                if (/[a-z -_\.]+/i.test(name)){
-                                    name = name.split(' ')[0];
+                if (/tianji.com/.test(hostname)){
+                    if (!!$$){
+                        //用户信息
+                        $$.get('http://www.tianji.com/front/nav/user?' + Math.random(),function(data){
+                            if (data){
+                                var uData = data['data'],
+                                name = '';
+                                if (!uData){
+                                    return false;
                                 } else {
-                                     name = name.substring(0, 4);
+                                    name = uData['name'];
+                                    //英文，取First Name                                            
+                                    if (/[a-z -_\.]+/i.test(name)){
+                                        name = name.split(' ')[0];
+                                    } else {
+                                         name = name.substring(0, 4);
+                                    }
+                                    $('#header .header_menu .user_info').fadeIn();
+                                    $('.user_poster img').attr('src', uData['avatar']);
+                                    $('.user_name .zi').text(name);
+                                    $('.user_poster img,.user_name .zi').attr('title',uData['name'] + ', ' + uData['headline']);
                                 }
-                                $('#header .header_menu .user_info').fadeIn();
-                                $('.user_poster img').attr('src', uData['avatar']);
-                                $('.user_name .zi').text(name);
-                                $('.user_poster img,.user_name .zi').attr('title',uData['name'] + ', ' + uData['headline']);
                             }
-                        }
-                    });
-                    //初始化数字
-                    $$.get('http://www.tianji.com/front/nav/counts?' + Math.random(),function(data) {
-                          if(data && data['notices']){
-                              var notice_msg = data['notices'];
-                          //好友请求
-                          if (notice_msg['unread_friend_requests_count'] == 0){
-                            $('#contacts_one .span_promit').hide();
-                          } else {
-                            $('#contacts_one .span_promit').attr('data-num', notice_msg['unread_friend_requests_count']);
-                            $('#contacts_one .span_promit').show().text(notice_msg['unread_friend_requests_count'] > 99 ? '99+' : notice_msg['unread_friend_requests_count']);
-                            $('#contacts_one .promit_no').hide();
-                          }
-                          //通知
-                          if (notice_msg['unread_notices_count'] == 0){
-                            $('look_see2 .span_promit').hide();
-                          } else {
-                            $('#look_see2 .span_promit').show().text(notice_msg['unread_notices_count'] > 99 ? '99+' : notice_msg['unread_notices_count']);
-                          }
-                          //私信
-                          if (notice_msg['unread_message_topics_count'] == 0){
-                            $('#look_see1 .span_promit').hide();
-                          } else {
-                            $('#look_see1 .span_promit').show().text(notice_msg['unread_message_topics_count'] > 99 ? '99+' : notice_msg['unread_message_topics_count']);
-                          }
-                        } else {
-                            return false;
-                        }
-                    });
-                } else {
-                    window.__$ = document.getElementById(config.crossDomainFrameId).contentWindow.$ || $;
+                        });
+                        //初始化数字
+                        $$.get('http://www.tianji.com/front/nav/counts?' + Math.random(),function(data) {
+                              if(data && data['notices']){
+                                  var notice_msg = data['notices'];
+                              //好友请求
+                              if (notice_msg['unread_friend_requests_count'] == 0){
+                                $('#contacts_one .span_promit').hide();
+                              } else {
+                                $('#contacts_one .span_promit').attr('data-num', notice_msg['unread_friend_requests_count']);
+                                $('#contacts_one .span_promit').show().text(notice_msg['unread_friend_requests_count'] > 99 ? '99+' : notice_msg['unread_friend_requests_count']);
+                                $('#contacts_one .promit_no').hide();
+                              }
+                              //通知
+                              if (notice_msg['unread_notices_count'] == 0){
+                                $('look_see2 .span_promit').hide();
+                              } else {
+                                $('#look_see2 .span_promit').show().text(notice_msg['unread_notices_count'] > 99 ? '99+' : notice_msg['unread_notices_count']);
+                              }
+                              //私信
+                              if (notice_msg['unread_message_topics_count'] == 0){
+                                $('#look_see1 .span_promit').hide();
+                              } else {
+                                $('#look_see1 .span_promit').show().text(notice_msg['unread_message_topics_count'] > 99 ? '99+' : notice_msg['unread_message_topics_count']);
+                              }
+                            } else {
+                                return false;
+                            }
+                        });
+                    } else {
+                        window.__$ = document.getElementById(config.crossDomainFrameId).contentWindow.$ || $;
+                    }
                 }
             }
-            if (thisDomain != ridDomain){
+            if (thisDomain != ridDomain && /tianji.com/.test(hostname)){
                 document.domain = 'tianji.com';
                 var frame = document.createElement('iframe'),
                     frameQuery;
@@ -376,7 +398,7 @@ $(function (){
                             retData = data['data'];
                             for (var i=0; i<retData.length; i++){
                                 var acpTxt = isEn ? 'Accept' : '同意';
-                                var headlineTxt =  pDatas[i]['headline'] == null ? '' : pDatas[i]['headline'].substring(0,17);
+                                var headlineTxt =  retData[i]['headline'] == null ? '' : retData[i]['headline'].substring(0,17);
                                 returnHtml += '<li data-id="'+retData[i]['id']+'" data-userID="'+retData[i]['userId']+'"> <span class="logo1"><a href="http://www.tianji.com/p/'+retData[i]['userId']+'" target="_blank" class="goToProfile"><img src="' + retData[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/'+retData[i]['userId']+'" target="_blank" class="goToProfile">' + retData[i]['name'] + '</a> </span> <span class="name1_companies">' + headlineTxt + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="agree_btn">'+acpTxt+'</a> </li>\n';
                             }
                         }
@@ -469,7 +491,7 @@ $(function (){
                 event = event || window.event;
                 //同意
                 if ((event.srcElement || event.target).className == 'agree_btn'){
-                    addGaTrackEventNewHeader('notification_bar','AcceptContactrequest','CR');
+                    addGaTrach('notification_bar','AcceptContactrequest','CR');
                     var nameTitleHtml = $thisList.find('.name1_title').html();
                     var dataID = $thisList.attr('data-userID');
                     $thisList.find('.name1_title, .bi_x1, .agree_btn').hide();
@@ -479,7 +501,7 @@ $(function (){
                 }
                 //删除
                 else if((event.srcElement || event.target).className == 'bi_x1') {
-                    addGaTrackEventNewHeader('notification_bar','DeleteContactRequest','CR');
+                    addGaTrach('notification_bar','DeleteContactRequest','CR');
                     concat($thisList, 'http://www.tianji.com/front/nav/ignore_cr', 'put', 'delete');
                 }
                 //数字变化
@@ -498,7 +520,7 @@ $(function (){
                 event = event || window.event;
                 //发送
                 if ((event.srcElement || event.target).className == 'adds_btn'){
-                    addGaTrackEventNewHeader('notification_bar','SendContactRequest','CR');
+                    addGaTrach('notification_bar','SendContactRequest','CR');
                     $this.parent('li').find('.bi_x1,.adds_btn').hide()
                                       .end().find('.adds_btn_yi').fadeIn(1000);
                     personMayKnow('http://www.tianji.com/front/nav/apply_pymk', 'post', {id:$(this).parent('li').attr('data-id'), count:$('#people_kone').find('li').length}, 'append');
@@ -508,7 +530,7 @@ $(function (){
                 }
                 //删除
                 else if((event.srcElement || event.target).className == 'bi_x1') {
-                    addGaTrackEventNewHeader('notification_bar','HiddePYMK','CR');
+                    addGaTrach('notification_bar','HiddePYMK','CR');
                     personMayKnow('http://www.tianji.com/front/nav/ignore_pymk', 'delete', {id:$(this).parent('li').attr('data-id'), count:$('#people_kone').find('li').length}, 'append');
                     updatePersonListHeight($this.parent('li'));
                 }
@@ -561,7 +583,7 @@ $(function (){
             var noticeMap = {
                 visitor: ['notification_bar','GoToRecentVisit', 'Recentvisit'],
                 visitors: ['notification_bar','GoToGroup3', 'Groups'],
-                notice_0: ['notification_bar','GoToProfile', 'Contacts'],
+                notice_0: ['notification_bar','GoToProfile', 'Notice'],
                 notice_1: ['notification_bar','GoToGroup1', 'Groups'],
                 notice_2: ['notification_bar','GoToGroup2', 'Groups'],
                 notice_3: ['notification_bar','GoToEvent', 'Event'],
@@ -587,7 +609,7 @@ $(function (){
             };
             $('#header .header_menu_two ul.right_menu li .messages_list .contacts2_main').on('click', 'li a', function (){
                 var notice_type = noticeMap[$(this).attr('data-ga')];
-                addGaTrackEventNewHeader(notice_type[0], notice_type[1], notice_type[2]);
+                addGaTrach(notice_type[0], notice_type[1], notice_type[2]);
             });
             //查看通知
             var countNotice = 0;
@@ -678,23 +700,31 @@ $(function (){
             });
             //添加GA
             $('#new_header, #people_kone').on('click', 'li a.goToProfile', function (){
-                addGaTrackEventNewHeader('notification_bar','GoToProfile','CR');
+                addGaTrach('notification_bar','GoToProfile','CR');
             });
             $('#new_header_message').on('click', 'li a', function (){
-                addGaTrackEventNewHeader('notification_bar','ReplyMessage','Message');
+                addGaTrach('notification_bar','ReplyMessage','Message');
             });
-            $('#header .header_menu_two ul.right_menu li .messages_list .title_renmai .wirte_info').on('click', function (){
-                addGaTrackEventNewHeader('notification_bar','WriteMessage','Message');
+            $('#header .header_menu_two ul.right_menu li .wirte_info').on('click', function (){
+                addGaTrach('notification_bar','WriteMessage','Message');
             });
-            $('#contacts_one_list .title_renmai:eq(0) a').click(function (){
-                addGaTrackEventNewHeader('notification_bar','Import','CR');
+            $('#contacts_one_list .title_renmai:eq(0) a,#contacts_one a:eq(0)').click(function (){
+                addGaTrach('notification_bar','GoToInvite','CR');
             });
             $('#contacts_one .emails_panel a').click(function (){
-                addGaTrackEventNewHeader('notification_bar','GoToInvite','CR');
+                addGaTrach('notification_bar','Import','CR');
             });
             $('#contacts_one_list .border_t a.all_kone').click(function (){
-                addGaTrackEventNewHeader('notification_bar','GoToPYMK','CR');
+                addGaTrach('notification_bar','GoToPYMK','CR');
             });
+            $('#look_see1 a:eq(0)').on('click', function (){
+                addGaTrach('notification_bar','GoToMessage','Message');
+            });
+            $('#look_see2 a:eq(0)').on('click', function (){
+                addGaTrach('notification_bar','GoToNotice','Notice');
+            });
+
+            //人脉邀请链接： addGaTrach('notification_bar','GoToInvite','CR');
         }, 800);
     }
     var timerShowSearch = null,

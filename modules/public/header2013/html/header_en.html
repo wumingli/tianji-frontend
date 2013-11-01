@@ -1,12 +1,13 @@
-<link href="http://image.tianji.com/tjs/header2013/css/new_header.min.css?v=1.0.17" rel="stylesheet" type="text/css" />
-<link href="http://image.tianji.com/tjs/styles/jquery_mCustomScrollbar.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/DD_belatedPNG.min.js"></script>
+<link href="http://image.tianji.com/tjs/header2013/css/new_header.min.css?v=1.1.2" rel="stylesheet" type="text/css" />
+<link href="http://image.tianji.com/tjs/styles/jquery_mCustomScrollbar.min.css" rel="stylesheet" type="text/css" />
+<!--[if IE 6]><script type="text/javascript" src="http://image.tianji.com/tjs/gallery/DD_belatedPNG.min.js"></script><![endif]-->
 <script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-mCustomScrollbar-concat.min.js"></script>
-<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/jquery-tipsy.js"></script>
-<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/header2013.min.js?v=1.0.17"></script>
+<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-tipsy.min.js"></script>
+<script type="text/javascript" src="http://image.tianji.com/tjs/header2013/js/header2013.min.js?v=1.1.2"></script>
+
 <script type="text/javascript">
 $(function (){
-    DD_belatedPNG.fix('.png_ie6');
+    ($.browser.msie && $.browser.version == 6.0) && DD_belatedPNG.fix('.png_ie6');
     $('.auther_icon').tipsy({gravity: 's'});
 });
 </script>
@@ -47,18 +48,35 @@ $(function (){
       <div class="header_menus">
         <ul class="left_menu" >
           <li> <a href="http://www.tianji.com/home">Home</a> </li>
-          <li> <a href="http://www.tianji.com/p">Profile</a> </li>
-          <li> <a href="http://www.tianji.com/contacts">Contacts</a> </li>
-          <li> <a href="http://job.tianji.com/sr/home?from=tianji">Jobs</a> </li>
+          <li> <a href="http://www.tianji.com/p" class="popup-login">Profile</a> </li>
+          <li> <a href="http://www.tianji.com/contacts" class="popup-login">Contacts</a> </li>
+          <li> <a href="http://job.tianji.com/career/index" class="popup-login">Jobs</a>
+                <div class="more_panel" style="display:none;">
+                    <dl class="list_item"><a href="http://job.tianji.com/career/index" class="popup-login">Find</a></dl>
+                    <dl class="list_item"><a href="http://job.tianji.com/career/candidate/resume/index" class="popup-login">我的简历</a></dl>
+                    <dl class="list_item"><a href="http://job.tianji.com/career/recruiter/position/publish" class="popup-login">发职位</a></dl>
+                    <dl class="list_item"><a href="http://job.tianji.com/career/recruiter/positions" class="popup-login">我的招聘</a></dl>
+                </div>
+          </li>
           <li> <a href="http://www.tianji.com/corps">Companies</a> </li>
           <li> <a href="http://www.tianji.com/mba">Training</a> </li>
-          <!--<li> <a href="http://www.tianji.com/news">互动</a> </li>-->
+          <li> <a href="javascript:void(0);">App</a>
+                <div class="more_panel" style="display:none;">
+                    <dl class="list_item"><a href="http://www.tianji.com/events">Events</a></dl>
+                    <dl class="list_item"><a href="http://www.tianji.com/news">News</a></dl>
+                    <dl class="list_item"><a href="http://www.tianji.com/pub">Community</a></dl>
+                    <dl class="list_item"><a href="http://bbs.tianji.com/bbs/index">Forum</a></dl>
+                    <dl class="list_item"><a href="http://www.tianji.com/companies">Company</a></dl>
+                    <dl class="list_item"><a href="http://www.tianji.com/quiz">Quiz</a></dl>
+                </div>
+           </li>
         </ul>
         <ul class="right_menu">
           <li id="contacts_one" class="contacts">
-            <a href="http://www.tianji.com/contacts/invitation" class="icon_01" target="_self"></a>
-            <div class="clear"></div>
-            <div class="span_promit">0</div>
+            <a href="http://www.tianji.com/contacts/invitation" class="icon_01" target="_self">
+                <div class="clear"></div>
+                <div class="span_promit">0</div>
+            </a>
             <div class="messages_list" id="contacts_one_list" >
               <span class="list_c"></span>
               <span class="title_renmai">Contact Requests <a href="http://www.tianji.com/contacts/invitation" class="all_kone" title="查看更多人脉邀请">More</a></span>
@@ -79,9 +97,10 @@ $(function (){
             </div>
           </li>
           <li id="look_see1" class="message">
-            <a href="http://www.tianji.com/messages" class="icon_01" target="_self"></a>
-            <div class="clear"></div>
-            <div class="span_promit">0</div>
+            <a href="http://www.tianji.com/messages" class="icon_01" target="_self">
+                <div class="clear"></div>
+                <div class="span_promit">0</div>
+            </a>
             <div class="messages_list" style="display: none;" id="look_list1" >
               <span class="list_c"></span>
               <span class="title_renmai">Message <a href="http://www.tianji.com/messages/new" class="wirte_info">Write Message</a> </span>
@@ -95,9 +114,10 @@ $(function (){
             </div>
           </li>
           <li id="look_see2" class="tool">
-            <a href="http://www.tianji.com/notices" class="icon_01" target="_self"></a>
-            <div class="clear"></div>
-            <div class="span_promit">0</div>
+            <a href="http://www.tianji.com/notices" class="icon_01" target="_self">
+                <div class="clear"></div>
+                <div class="span_promit">0</div>
+            </a>
             <div class="messages_list" id="look_list2" > <span class="list_c png_ie6"></span> <span class="title_renmai notices_title">Notifications</span>
               <div class="no_notice mg_r125" style="display:none;">No invitations yet，Complete <a href="http://www.tianji.com/p" target="_blank">Profile</a> will get more</div>
               <div class="loding_notice mg_r125">loading.....</div>

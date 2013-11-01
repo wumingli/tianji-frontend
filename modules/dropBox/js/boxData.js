@@ -11,236 +11,264 @@ var TJ_box_data = {
     },
     "salary":{
         "data": [{
-                "code": "s1",
+                "code": "3000",
                 "name": "3000及以上"
             },{
-                "code": "s2",
+                "code": "5000",
                 "name": "5000及以上"
             },{
-                "code": "s3",
+                "code": "8000",
                 "name": "8000及以上"
             },{
-                "code": "s4",
+                "code": "10000",
                 "name": "10000及以上"
             },{
-                "code": "s5",
+                "code": "15000",
                 "name": "15000及以上"
             },{
-                "code": "s6",
+                "code": "20000",
                 "name": "20000及以上"
             },{
-                "code": "s7",
+                "code": "30000",
                 "name": "30000及以上"
             },{
-                "code": "s8",
+                "code": "50000",
                 "name": "50000及以上"
             }],
         "title": "期望薪资"
     },
     "companyLevel":{
         "data":[{
-                "code": "cl1",
+                "code": "1",
                 "name": "1-49人"
             },{
-                "code": "cl2",
+                "code": "2",
                 "name": "50-99人"
             },{
-                "code": "cl3",
+                "code": "3",
                 "name": "100-499人"
             },{
-                "code": "cl4",
+                "code": "4",
                 "name": "500-999人"
             },{
-                "code": "cl5",
-                "name": "1000-9999人"
-            },{
-                "code": "cl6",
-                "name": "10000人以上"
+                "code": "9",
+                "name": "1000人以上"
             }],
         "title": "公司规模"        
     },
     "companyProperty":{
         "data": [{
-                "code": "cp1",
+                "code": "3",
                 "name": "国有企业"
             },{
-                "code": "cp2",
+                "code": "2",
                 "name": "私营.股份制企业"
             },{
-                "code": "cp3",
+                "code": "1",
                 "name": "外资.合资"
             },{
-                "code": "cp4",
+                "code": "4",
                 "name": "非盈利.事业单位"
             },{
-                "code": "cp0",
+                "code": "9",
                 "name": "其他"
             }],
         "title": "公司性质"        
     },
     "workExperience":{
         "data": [{
-            "code": "we1",
+            "code": "1",
             "name": "在读学生"
         },{
-            "code": "we2",
+            "code": "2",
             "name": "应届毕业生"
         },{
-            "code": "we3",
+            "code": "3",
             "name": "1年"
         },{
-            "code": "we4",
+            "code": "4",
             "name": "2年"
         },{
-            "code": "we5",
+            "code": "5",
             "name": "3年"
         },{
-            "code": "we6",
+            "code": "6",
             "name": "4年"
         },{
-            "code": "we7",
+            "code": "7",
             "name": "5年"
         },{
-            "code": "we8",
+            "code": "8",
             "name": "6年"
         },{
-            "code": "we9",
+            "code": "9",
             "name": "7年"
         },{
-            "code": "we0",
+            "code": "10",
             "name": "8年以上"
         }],
         "title": "工作经验"
     },
     "eduBackground":{
         "data": [{
-            "code": "90",
-            "name": "博士/博士后"
-        },{
-            "code": "80",
-            "name": "MBA/EMBA"
-        },{
-            "code": "70",
-            "name": "硕士"
-        },{
-            "code": "60",
+            "code": "1",
             "name": "学士"
         },{
-            "code": "50",
+            "code": "10",
+            "name": "MBA/EMBA"
+        },{
+            "code": "3",
+            "name": "博士/博士后"
+        },{
+            "code": "2",
+            "name": "硕士"
+        },{
+            "code": "4",
             "name": "大专"
         },{
-            "code": "40",
+            "code": "5",
             "name": "高中"
         },{
-            "code": "30",
+            "code": "6",
             "name": "中技"
         },{
-            "code": "20",
+            "code": "7",
             "name": "初中"
         },{
-            "code": "10",
+            "code": "8",
             "name": "小学"
         },{
-            "code": "0",
+            "code": "9",
             "name": "其他学历"
         }],
         "title": "学历"
     },
     "language":{
         "data": [{
-            "code": "lg1",
+            "code": "1",
             "name": "英语"
         },{
-            "code": "lg2",
+            "code": "2",
             "name": "日语"
         },{
-            "code": "lg3",
+            "code": "3",
             "name": "法语"
         },{
-            "code": "lg4",
+            "code": "4",
             "name": "德语"
         },{
-            "code": "lg5",
+            "code": "5",
             "name": "俄语"
         },{
-            "code": "lg6",
+            "code": "6",
             "name": "韩语"
         },{
-            "code": "lg7",
+            "code": "7",
             "name": "西班牙语"
         },{
-            "code": "lg8",
+            "code": "8",
             "name": "葡萄牙语"
         },{
-            "code": "lg9",
+            "code": "9",
             "name": "阿拉伯语"
         },{
-            "code": "lg10",
+            "code": "10",
             "name": "意大利语"
         },{
-            "code": "lg11",
+            "code": "11",
             "name": "朝鲜语"
         }],
         "title": "语言类别"
     },
     "lanLS":{
         "data": [{
-            "code": "lls1",
+            "code": "1",
             "name": "一般"
         },{
-            "code": "lls2",
+            "code": "2",
             "name": "良好"
         },{
-            "code": "lls3",
+            "code": "3",
             "name": "熟练"
         },{
-            "code": "lls4",
+            "code": "4",
             "name": "精通"
         }],
         "title": "听说"
     },
     "lanRW":{
         "data": [{
-            "code": "lrw1",
+            "code": "1",
             "name": "一般"
         },{
-            "code": "lrw2",
+            "code": "2",
             "name": "良好"
         },{
-            "code": "lrw3",
+            "code": "3",
             "name": "熟练"
         },{
-            "code": "lrw4",
+            "code": "4",
             "name": "精通"
         }],
         "title": "读写"
     },
     "salarySingle":{
         "data": [{
-                "code": "ss1",
+                "code": "3000",
                 "name": "3000"
             },{
-                "code": "ss2",
+                "code": "5000",
                 "name": "5000"
             },{
-                "code": "ss3",
+                "code": "8000",
                 "name": "8000"
             },{
-                "code": "ss4",
+                "code": "10000",
                 "name": "10000"
             },{
-                "code": "ss5",
+                "code": "15000",
                 "name": "15000"
             },{
-                "code": "ss6",
+                "code": "20000",
                 "name": "20000"
             },{
-                "code": "ss7",
+                "code": "30000",
                 "name": "30000"
             },{
-                "code": "ss8",
+                "code": "50000",
                 "name": "50000"
+            },{
+                "code": "-1",
+                "name": "面议"
+            },{
+                "code": "-2",
+                "name": "以上"
             }],
         "title": "职位薪资"
+    },
+    "others":{
+        "data": [{
+                "code": "1",
+                "name": "兴趣爱好"
+            },{
+                "code": "2",
+                "name": "宗教信仰"
+            },{
+                "code": "3",
+                "name": "社会活动"
+            },{
+                "code": "4",
+                "name": "荣誉"
+            },{
+                "code": "5",
+                "name": "职业目标"
+            },{
+                "code": "6",
+                "name": "特殊技能"
+            },{
+                "code": "7",
+                "name": "自我评价"
+            }],
+        "title": "其他"
     }
 }

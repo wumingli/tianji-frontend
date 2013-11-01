@@ -79,24 +79,14 @@ var findData = {
 $(".industryC").each(function(){
 
 	var code = $(this).attr("code");
-	var arr = code.split(",");
-	var name = [];
-	for(var i=0;i<arr.length;i++)
-	{
-		name.push(getCodeOrName.industry(arr[i]));
-	}
-	$(this).html(name.join(","));
+	var name = getCodeOrName.industry(code);
+	$(this).html(name);
 
 })
 $(".jobC").each(function(){
 
 	var code = $(this).attr("code");
-	var arr = code.split(",");
-	var name = [];
-	for(var i=0;i<arr.length;i++)
-	{
-		name.push(getCodeOrName.job(arr[i]));
-	}
-	$(this).html(name.join(","));
+	var name = getCodeOrName.job(code);
+	$(this).html(name);
 
 })

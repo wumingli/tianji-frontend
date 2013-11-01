@@ -18,6 +18,7 @@
 			comData:[],
 			init:[],
 			name:'jobCode',
+			defaultValue:'请选择职能',
 			style:{
 				"foldHeadWidth":"78px",
 				"msCbComponent":"88px",
@@ -30,7 +31,7 @@
 		var strInput = "<div class='ms-btn-component ms-btn-canhover'></div>"+
 						"<div class='txt-box-com-W'>"+
 							"<div class='txt-box-component'>"+
-							    "<div class='txt-box-tip'>请选择职能</div>"+
+							    "<div class='txt-box-tip'>"+msPick.defaultValue+"</div>"+
 							"</div>"+
 						"</div>"+
 						"<input type='hidden' class='ms_checkInput' value='' name='"+msPick.name+"' />";

@@ -69,7 +69,7 @@ id="pageCssInit"></script>
 	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/underscore-min.js"></script>
 
-<!-- 
+
 	<script type="text/javascript" src="../js/cityDataMap.js"></script>
 	<script type="text/javascript" src="../js/industryDataMap.js"></script>
 	<script type="text/javascript" src="../js/jobDataMap.js"></script>
@@ -81,13 +81,12 @@ id="pageCssInit"></script>
 	<script type="text/javascript" src="../js/newReJobFn.js"></script>
 	
 	<script type="text/javascript" src="../js/newReIndustryFn.js"></script>
- -->
 
-
+<!-- 
 	<script type="text/javascript" src="http://image.tianji.com/tjs/common/initJs.min.js?
 newRePublic.min=image.tianji.com/tjs/msPickMap/js/&newReFunction.min=image.tianji.com/tjs/msPickMap/js/&newReCity.min=image.tianji.com/tjs/msPickMap/js/&newReIndustry.min=image.tianji.com/tjs/msPickMap/js/&clearCache=1.0.8-dev" id="pageScriptInit"></script>
 
-
+ -->
 	<script type="text/javascript">
 
 	$(function(){
@@ -95,7 +94,7 @@ newRePublic.min=image.tianji.com/tjs/msPickMap/js/&newReFunction.min=image.tianj
 		var cityComData=[],cityDefault=[];
 		
 		cityComData = ["北京","天津","上海","重庆","石家庄","唐山"];
-		//cityDefault = ["石家庄","北京"];
+		cityDefault = [""];
 
 		$("#p-data-wrap").msCityPlugin({
 				maxCount:5,		
@@ -107,7 +106,7 @@ newRePublic.min=image.tianji.com/tjs/msPickMap/js/&newReFunction.min=image.tianj
 
 		var industryComData = [],industryDefault = [];
 		industryComData = ["101","102","103","104"];
-		//industryDefault = ["101","102"];
+		industryDefault = [""];
 		
 		$("#p-data-wrap1").msIndustryPlugin({
 			
@@ -126,8 +125,8 @@ newRePublic.min=image.tianji.com/tjs/msPickMap/js/&newReFunction.min=image.tianj
 
 
 		var jobDefault = [],jobComData=[];
-		//jobDefault = ["1","2"];
-		jobComData = ["1","2"];
+		jobDefault = ["0"];
+		//jobComData = ["0"];
 		$("#p-data-wrap2").msJobPlugin({
 				column:3,
 				allDataMap:jobDataMap,	
