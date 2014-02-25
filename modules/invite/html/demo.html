@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>invite demo</title>
+<link href="../../../styles/reset.css" rel="stylesheet" type="text/css" />
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<link href="../../../styles/jquery_mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../../gallery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../gallery/jquery-mCustomScrollbar-concat.min.js"></script>
+<script type="text/javascript" src="../js/invite.js"></script>
+</head>
+<body>
+<div style="margin:20px;">
+    <a href="javascript:void(0);" class="inviteBtn">+邀请好友帮我做测评</a> 
+    <input type="button" name="" value="邀请好友认证我" style="width:180px;height:30px;line-height:30px;display:block;background:orange;color:#fff;margin:10px 0;" />
+    <!-- <img alt="2919161" src="http://image.tianji.com/u/58679850/2919161.jpg"> -->
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.inviteBtn').inviteBox({
+            title: '邀请好友帮我做测评',
+            //dragable: false,
+            //position: 'absolute',
+            //multiple: false,
+            leftTabList: ['tianji','friend','quick','weibo'],
+            inviteUrl: 'http://www.baidu.com/',
+            //tianjiMax: 3,
+            /*leftTabList: {
+                weibo: '邀请我的微博好友',
+                tianji: '站内好友',
+                friend: '通过邮件邀请'
+            },*/
+            adList: [{
+                title: '描述文字111111',
+                url: 'http://www.baidu.com',
+                img: 'http://static.tianji.com/images/evaluation/lo_adchange_1.jpg'
+            },{
+                title: '描述文字222222',
+                url: 'http://www.tianji.com',
+                img: 'http://static.tianji.com/images/evaluation/lo_adchange_2.jpg'
+            },{
+                title: '描述文字333333',
+                url: 'http://www.baidu.com',
+                img: 'http://static.tianji.com/images/evaluation/lo_adchange_1.jpg'
+            },{
+                title: '描述文字222222',
+                url: 'http://www.tianji.com',
+                img: 'http://static.tianji.com/images/evaluation/lo_adchange_2.jpg'
+            }],
+            ok: function(){
+                alert(this.tianjiIDs);
+                this.close();
+                this.disabled = true;
+            },
+            wbOk: function(){
+                alert(this.weiboIDs);
+            }
+        });
+        $('input').inviteBox({
+            title: '邀请好友对我进行认证',
+            position: 'absolute',
+            leftTabList: {
+                weibo: '邀请我的微博好友',
+                friend: '通过邮件邀请',
+                quick: '快速邀请'
+            },
+            /*leftTabList: 1,*/
+            //showCloseBtn: false,
+            wbOk: function(){
+                alert(this.weiboIDs)
+            }
+        });
+    });
+</script>
+</body>
+</html>

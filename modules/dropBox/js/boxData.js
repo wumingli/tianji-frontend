@@ -78,6 +78,40 @@ var TJ_box_data = {
     "workExperience":{
         "data": [{
             "code": "1",
+            "name": "不限"
+        },{
+            "code": "2",
+            "name": "应届毕业生"
+        },{
+            "code": "3",
+            "name": "1年及以上"
+        },{
+            "code": "4",
+            "name": "2年及以上"
+        },{
+            "code": "5",
+            "name": "3年及以上"
+        },{
+            "code": "6",
+            "name": "4年及以上"
+        },{
+            "code": "7",
+            "name": "5年及以上"
+        },{
+            "code": "8",
+            "name": "6年及以上"
+        },{
+            "code": "9",
+            "name": "7年及以上"
+        },{
+            "code": "10",
+            "name": "8年及以上"
+        }],
+        "title": "工作经验"
+    },
+    "resumeExperience":{
+        "data": [{
+            "code": "1",
             "name": "在读学生"
         },{
             "code": "2",
@@ -237,9 +271,6 @@ var TJ_box_data = {
             },{
                 "code": "50000",
                 "name": "50000"
-            },{
-                "code": "-1",
-                "name": "面议"
             },{
                 "code": "-2",
                 "name": "以上"

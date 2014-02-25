@@ -17,7 +17,7 @@ div label{vertical-align:middle;position:relative;top:-4px;color:#666}
 <body>
 <div class="wrap" id="wrap">
     <h2>自定义下拉框API：</h2>
-    <pre style="margin:15px 0;font:100 12px/18px monaco, andale mono, courier new;padding:10px 12px;border:#ccc 1px solid;border-left-width:4px;background-color:#fefefe;box-shadow:0 0 4px #eee;word-break:break-all;word-wrap:break-word;color:#170;"><span style="color:#a50">&lt;!-- 引入以下JS：&lt;script type="text/javascript" src="http://image.tianji.com/tjs/dropBox/js/tjDropBox.min.js"&gt;&lt;/script&gt; --&gt;</span><br><span style="color:#a50">&lt;!-- 用JQuery选择器筛选出元素，如： --&gt;</span><br><span style="color:#06c">&lt;script</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text/javascript"</span><span style="color:#06c">&gt;</span><br>/* 配置参数说明：<br>    name:提交至后台的隐藏input的name<br>    dataName:数据对应name，对应关系如下：<br>    {<br>        gender:性别<br>        salary:期望薪资<br>        companyLevel：公司规模<br>        companyProperty：公司性质<br>        workExperience：工作经验<br>        eduBackground：学历<br>        language：语言类别<br>        lanLS：听说<br>        lanRW：读写<br>        salarySingle：职位薪资<br>    }<br>    text:用于显示的文字，如“请选择【职位薪资】”中的职位薪资，可替换为text<br>    css: 自定义样式，语法为json格式<br>    required: 是否必选项，默认false，可选值：true|false<br>    initCode: 初始化Code值<br>    customData: 自定义数据，此项数据格式为json，注：其键值必须同dataName一致<br>    linkage: 相关联项的选择器，可为ID或class，但元素必须唯一<br>    linkageType: 开始项或结束项，可选值：from|to<br>*/<br><span style="color:#000">$</span>(<span style="color:#a11">'#wml-p-data-wrap2'</span>).<span style="color:#000">dropBox</span>({<br>    <span style="color:#000">name</span>: <span style="color:#a11">'companyXXX'</span>,<br>    <span style="color:#000">dataName</span>: <span style="color:#a11">'companyProperty'</span>,<br>    <span style="color:#000">required</span>: <span style="color:#219">true</span>,<br>    <span style="color:#000">initCode</span>: <span style="color:#a11">'国有企业'</span><br>});<br><span style="color:#06c">&lt;/script</span><span style="color:#06c">&gt;</span></pre>
+    <pre style="margin:15px 0;font:100 12px/18px monaco, andale mono, courier new;padding:10px 12px;border:#ccc 1px solid;border-left-width:4px;background-color:#fefefe;box-shadow:0 0 4px #eee;word-break:break-all;word-wrap:break-word;color:#170;"><span style="color:#a50">&lt;!-- 引入以下JS：&lt;script type="text/javascript" src="http://image.tianji.com/tjs/dropBox/js/tjDropBox.min.js"&gt;&lt;/script&gt; --&gt;</span><br><span style="color:#a50">&lt;!-- 用JQuery选择器筛选出元素，如： --&gt;</span><br><span style="color:#06c">&lt;script</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text/javascript"</span><span style="color:#06c">&gt;</span><br>/* 配置参数说明：<br>    name:提交至后台的隐藏input的name<br>    dataName:数据对应name，对应关系如下：<br>    {<br>        gender:性别<br>        salary:期望薪资<br>        companyLevel：公司规模<br>        companyProperty：公司性质<br>        workExperience：工作经验<br>        resumeExperience：工作经验【简历求职端，不含“及以上”字样】<br>        eduBackground：学历<br>        language：语言类别<br>        lanLS：听说<br>        lanRW：读写<br>        salarySingle：职位薪资<br>    }<br>    text:用于显示的文字，如“请选择【职位薪资】”中的职位薪资，可替换为text<br>    css: 自定义样式，语法为json格式<br>    required: 是否必选项，默认false，可选值：true|false<br>    initCode: 初始化Code值<br>    customData: 自定义数据，此项数据格式为json，注：其键值必须同dataName一致<br>    linkage: 相关联项的选择器，可为ID或class，但元素必须唯一<br>    linkageType: 开始项或结束项，可选值：from|to<br>*/<br><span style="color:#000">$</span>(<span style="color:#a11">'#wml-p-data-wrap2'</span>).<span style="color:#000">dropBox</span>({<br>    <span style="color:#000">name</span>: <span style="color:#a11">'company'</span>,<br>    <span style="color:#000">dataName</span>: <span style="color:#a11">'companyProperty'</span>,<br>    <span style="color:#000">required</span>: <span style="color:#219">true</span>,<br>    <span style="color:#000">initCode</span>: <span style="color:#a11">'4'</span><br>});<br><span style="color:#06c">&lt;/script</span><span style="color:#06c">&gt;</span></pre>
     <form method="get" action="" name="testForm" id="testForm">
         <div class="container"><div id="wml-p-data-wrap" class="wml-p-data-wrap"></div></div>
         <div class="container"><div id="wml-p-data-wrap1" class="wml-p-data-wrap"></div></div>
@@ -38,17 +38,18 @@ div label{vertical-align:middle;position:relative;top:-4px;color:#666}
         <div class="container"><div id="wml-p-data-wrap12" class="wml-p-data-wrap"></div></div>
         <div class="container"><div id="wml-p-data-wrap13" class="wml-p-data-wrap"></div></div>
         <div class="subCon" id="subCon">
-            <input type="submit" id="subBtn" value="提交" />
+            <!-- <input type="submit" id="subBtn" value="提交" /> -->
         </div>
         <br />
         <h2>通过Code查找Name：</h2>
         <br />
         <pre style="margin: 15px 0; font: 100 12px/18px monaco, andale mono, courier new; padding: 10px 12px; border: #ccc 1px solid; border-left-width: 4px; background-color: #fefefe; box-shadow: 0 0 4px #eee; word-break: break-all; word-wrap: break-word; color: #444;"><span style="color:#a50">&lt;!-- 为要查找name的元素添加自定义属性：data-dropbox-code --&gt;</span>
+<span style="color:#a50">&lt;!-- data-dropbox-name为对应的dataName，参见上面列表 --&gt;</span>
 <span style="color:#a50">&lt;!-- code值可参照数据文件：http://image.tianji.com/tjs/dropBox/js/boxData.js --&gt;</span>
 如：<span style="color:#06c">&lt;span</span> <span style="color:#00c">data-dropbox-code</span>=<span style="color:#a11">"cp4"</span> <span style="color:#00c">data-dropbox-name</span>=<span style="color:#a11">"salary"</span><span style="color:#06c">&gt;</span><span style="color:#06c">&lt;/span</span><span style="color:#06c">&gt;</span>
 <span style="color:#a50">&lt;!-- </span>
-     <span style="color:#a50">JS中动态调用，增加全局方法：findDropBoxDataName(code, dataName)</span>
-     <span style="color:#a50">接受两个参数，第一个是Code，第二个是数据项中的Name值，如salary</span>
+     <span style="color:#a50">JS中动态调用，可通过方法：findDropBoxDataName('code', 'dataName', 'appendText')</span>
+     <span style="color:#a50">接受三个参数，第一个是Code；第二个是数据项中的Name值，如salary；第三个为拼接在后面的文本，如1年工作经验——“工作经验”为连接在后面的文本</span>
      <span style="color:#a50">例：findDropBoxDataName('2', 'salary')，返回对应的薪资：“8000及以上”</span>
 <span style="color:#a50">--&gt;</span></pre>
         <div class="findByCode">期望薪资：<span data-dropbox-code="7" data-dropbox-name="salary"></span></div>
@@ -78,17 +79,14 @@ $(function (){
         text: '男女'
     });
     $('#wml-p-data-wrap1').dropBox({
-        dataName: 'salary'//,
-        /*initCode: '5000及以上'*/
+        dataName: 'salary'
     });
     $('#wml-p-data-wrap2').dropBox({
         name: 'companyXXX',
-        dataName: 'companyProperty',
-        required: true
+        dataName: 'companyProperty'
     });
     $('#wml-p-data-wrap3').dropBox({
         dataName: 'workExperience',
-        required: true,
         name: 'workYear'
     });
     $('#wml-p-data-wrap4').dropBox({
@@ -96,12 +94,7 @@ $(function (){
     });
     $('#wml-p-data-wrap5').dropBox({
         dataName: 'eduBackground',
-        required: true,
-        initCode: '60',
-        css: {
-            width: '200',
-            color: '#f60'
-        }
+        initCode: '1'
     });
     $('#wml-p-data-wrap6').dropBox({
         dataName: 'language'
@@ -129,20 +122,17 @@ $(function (){
                 'title': '自定义数据'
             }
         },
-        initCode: '901',
-        required: true
+        initCode: '901'
     });
     $('#wml-p-data-wrap10').dropBox({
         dataName: 'salarySingle',
         linkage: '#wml-p-data-wrap11',
-        linkageType: 'from',
-        required: true
+        linkageType: 'from'
     });
     $('#wml-p-data-wrap11').dropBox({
         dataName: 'salarySingle',
         linkage: '#wml-p-data-wrap10',
-        linkageType: 'to',
-        required: true
+        linkageType: 'to'
     });
     $('#wml-p-data-wrap12').dropBox({
         dataName: 'salary2',
@@ -209,6 +199,9 @@ $(function (){
                 },{
                     "code": "500000",
                     "name": "300000"
+                },{
+                    "code": "-2",
+                    "name": "以上"
                 }],
                 'title': '自定义薪资'
             }

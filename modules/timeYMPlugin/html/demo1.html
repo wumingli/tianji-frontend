@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>年、月选择插件API&Demo</title>
+<link href="../css/base.css" rel="stylesheet" type="text/css" />
+<!--<link href="../css/timeYM.css" rel="stylesheet" type="text/css" />-->
+<style type="text/css">
+.wrap {margin:20px;font-size:12px;}
+h2 {height:50px;padding-left:15px;background:#eee;font:bold 18px/50px 'Microsoft Yahei';margin:20px 0;}
+.info {font:14px/25px 'Microsoft Yahei';color:#666;padding:15px; background-color:#f9f9f9;}
+.info ul li {list-style:square;margin-left:30px;}
+
+/*.tillNow, .tillNowChecked {cursor: pointer;font-style:normal;display: inline-block;height:16px;}
+.tillNow .checkbox,.tillNowChecked .checkbox{background: url(http://image.tianji.com/tjs/recruiting/images/zp.gif) -228px -225px no-repeat; display: inline-block;height:15px;width:13px; }
+.tillNowChecked .checkbox{background-position: -206px -225px;}
+.tillNow span {vertical-align: top;}*/
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h2>普通年、月选择：</h2>
+    <div class="">
+        <input type="text" id="start_date_y" maxlength="4" size="4" value="2012" /> <span class="txt">年</span>
+        <input type="text" id="start_date_m" maxlength="2" size="4" value="5" /> <span class="txt">月</span>
+        
+        至 
+        <input type="text" id="end_date_y" maxlength="4" size="4" value="2013" /> <span class="txt">年</span>
+        <input type="text" id="end_date_m" maxlength="2" size="4" value="10" /> <span class="txt">月</span>
+        <i class="tillNow" title="至今">
+            <span class="checkbox"></span>
+            <span class="checkboxV">至今</span>
+        </i>
+        <input id="sinceNow" name="sinceNow" type="hidden" />
+    </div>
+    <h2>年、月选择【默认是至今】：</h2>
+    <div style="margin-top:15px;">
+        <input type="text" id="start_date_y1" maxlength="4" size="4" /> <span class="txt">年</span>
+        <input type="text" id="start_date_m1" maxlength="2" size="4" /> <span class="txt">月</span>
+        
+        至 
+        <input type="text" id="end_date_y1" maxlength="4" size="4" /> <span class="txt">年</span>
+        <input type="text" id="end_date_m1" maxlength="2" size="4" /> <span class="txt">月</span>
+        <i class="tillNow tillNowChecked" title="至今">
+            <span class="checkbox"></span>
+            <span class="checkboxV">至今</span>
+        </i>
+        <input id="sinceNow" name="sinceNow" type="hidden" />
+    </div>
+    <h2>年、月选择【默认是至今，但不能修改】：</h2>
+    <div style="margin-top:15px;">
+        <input type="text" id="start_date_y2" maxlength="4" size="4" /> <span class="txt">年</span>
+        <input type="text" id="start_date_m2" maxlength="2" size="4" /> <span class="txt">月</span>
+        
+        至 
+        <input type="text" id="end_date_y2" maxlength="4" size="4" /> <span class="txt">年</span>
+        <input type="text" id="end_date_m2" maxlength="2" size="4" /> <span class="txt">月</span>
+        <i class="tillNow tillNowChecked" title="至今" disabled="disabled">
+            <span class="checkbox"></span>
+            <span class="checkboxV">至今</span>
+        </i>
+    </div>
+    <h2>功能说明：</h2>
+    <div class="info">
+        <ul>
+            <li>开始年份选择后，结束年份自动计算，值≥开始年份</li>
+            <li>若结束年份=开始年份，开始月份、结束月份自动计算（若选择了开始月份，结束月份自动从开始月份起，最大值为12月；反之亦会自动计算）</li>
+            <li>从开始年份开始选择，，若下一个择框为空，会自动跳至下个选择框</li>
+            <li>“至今”功能请参照下面的调用方法</li>
+            <li>可清空选择</li>
+        </ul>
+    </div>
+    <h2>调用方法：</h2>
+    <pre style="margin: 15px 0; font: 100 12px/18px monaco, andale mono, courier new; padding: 10px 12px; border: #ccc 1px solid; border-left-width: 4px; background-color: #fefefe; box-shadow: 0 0 4px #eee; word-break: break-all; word-wrap: break-word; color: #444;">
+<span style="color:#FF00FF">&lt;h2</span><span style="color:#FF00FF">&gt;</span>普通年、月选择：<span style="color:#FF00FF">&lt;/h2</span><span style="color:#FF00FF">&gt;</span>
+    <span style="color:#FF00FF">&lt;div</span> <span style="color:#00c">class</span>=<span style="color:#a11">""</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"start_date_y"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"4"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>年<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"start_date_m"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"2"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>月<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        
+        至 
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"end_date_y"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"4"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>年<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"end_date_m"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"2"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>月<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+    <span style="color:#FF00FF">&lt;/div</span><span style="color:#FF00FF">&gt;</span>
+    <span style="color:#FF00FF">&lt;h2</span><span style="color:#FF00FF">&gt;</span>年、月选择【默认是至今】：<span style="color:#FF00FF">&lt;/h2</span><span style="color:#FF00FF">&gt;</span>
+    <span style="color:#FF00FF">&lt;div</span> <span style="color:#00c">style</span>=<span style="color:#a11">"margin-top:15px;"</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"start_date_y1"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"4"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>年<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"start_date_m1"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"2"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>月<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        
+        至 
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"end_date_y1"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"4"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>年<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"end_date_m1"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"2"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>月<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"modifyEndYM"</span> <span style="color:#00c">title</span>=<span style="color:#a11">"修改结束年月"</span><span style="color:#FF00FF">&gt;</span>[现在]<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">id</span>=<span style="color:#a11">"sinceNow"</span> <span style="color:#00c">name</span>=<span style="color:#a11">"sinceNow"</span> <span style="color:#00c">type</span>=<span style="color:#a11">"hidden"</span> <span style="color:#FF00FF">/&gt;</span>
+    <span style="color:#FF00FF">&lt;/div</span><span style="color:#FF00FF">&gt;</span>
+    <span style="color:#FF00FF">&lt;h2</span><span style="color:#FF00FF">&gt;</span>年、月选择【默认是至今，但不能修改】：<span style="color:#FF00FF">&lt;/h2</span><span style="color:#FF00FF">&gt;</span>
+    <span style="color:#FF00FF">&lt;div</span> <span style="color:#00c">style</span>=<span style="color:#a11">"margin-top:15px;"</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"start_date_y2"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"4"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>年<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"start_date_m2"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"2"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>月<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        
+        至 
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"end_date_y2"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"4"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>年<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"end_date_m2"</span> <span style="color:#00c">maxlength</span>=<span style="color:#a11">"2"</span> <span style="color:#00c">size</span>=<span style="color:#a11">"4"</span> <span style="color:#FF00FF">/&gt;</span> <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"txt"</span><span style="color:#FF00FF">&gt;</span>月<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;span</span> <span style="color:#00c">class</span>=<span style="color:#a11">"modifyEndYM"</span> <span style="color:#00c">title</span>=<span style="color:#a11">"修改结束年月"</span> <span style="color:#00c">disabled</span>=<span style="color:#a11">"disabled"</span><span style="color:#FF00FF">&gt;</span>[现在]<span style="color:#FF00FF">&lt;/span</span><span style="color:#FF00FF">&gt;</span>
+        <span style="color:#FF00FF">&lt;input</span> <span style="color:#00c">id</span>=<span style="color:#a11">"sinceNow"</span> <span style="color:#00c">name</span>=<span style="color:#a11">"sinceNow"</span> <span style="color:#00c">type</span>=<span style="color:#a11">"hidden"</span> <span style="color:#FF00FF">/&gt;</span>
+    <span style="color:#FF00FF">&lt;/div</span><span style="color:#FF00FF">&gt;</span></pre>
+
+    <pre style="margin: 15px 0; font: 100 12px/18px monaco, andale mono, courier new; padding: 10px 12px; border: #ccc 1px solid; border-left-width: 4px; background-color: #fefefe; box-shadow: 0 0 4px #eee; word-break: break-all; word-wrap: break-word; color: #444;"><span style="color:green">//普通年、月选择</span>
+<span style="color:#000">$</span>(<span style="color:#a11">'#start_date_y'</span>).<span style="color:#000">timeYM</span>();
+<span style="color:#000">$</span>(<span style="color:#a11">'#start_date_m'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">type</span>: <span style="color:#a11">'month'</span>,
+    <span style="color:#000">title</span>: <span style="color:#a11">'开始月份'</span>,
+    <span style="color:#000">css</span>: {
+        <span style="color:#000">width</span>: <span style="color:#164">50</span>,
+        <span style="color:#000">paddingLeft</span>: <span style="color:#164">0</span>
+    }
+});
+<span style="color:#000">$</span>(<span style="color:#a11">'#end_date_y'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">title</span>: <span style="color:#a11">'结束年份'</span>,
+    <span style="color:#000">seType</span>: <span style="color:#a11">'end'</span>
+});
+<span style="color:#000">$</span>(<span style="color:#a11">'#end_date_m'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">type</span>: <span style="color:#a11">'month'</span>,
+    <span style="color:#000">title</span>: <span style="color:#a11">'结束月份'</span>,
+    <span style="color:#000">seType</span>: <span style="color:#a11">'end'</span>
+});
+<span style="color:green">//年、月选择【默认是至今】</span>
+<span style="color:#000">$</span>(<span style="color:#a11">'#start_date_y1'</span>).<span style="color:#000">timeYM</span>();
+<span style="color:#000">$</span>(<span style="color:#a11">'#start_date_m1'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">type</span>: <span style="color:#a11">'month'</span>,
+    <span style="color:#000">title</span>: <span style="color:#a11">'开始月份'</span>,
+    <span style="color:#000">css</span>: {
+        <span style="color:#000">width</span>: <span style="color:#164">50</span>,
+        <span style="color:#000">textAlign</span>: <span style="color:#a11">'center'</span>,
+        <span style="color:#000">paddingLeft</span>: <span style="color:#164">0</span>
+    }
+});
+<span style="color:#000">$</span>(<span style="color:#a11">'#end_date_y1'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">title</span>: <span style="color:#a11">'结束年份'</span>,
+    <span style="color:#000">seType</span>: <span style="color:#a11">'end'</span>
+});
+<span style="color:#000">$</span>(<span style="color:#a11">'#end_date_m1'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">type</span>: <span style="color:#a11">'month'</span>,
+    <span style="color:#000">title</span>: <span style="color:#a11">'结束月份'</span>,
+    <span style="color:#000">seType</span>: <span style="color:#a11">'end'</span>
+});
+<span style="color:green">//年、月选择【默认是至今，但不能修改】</span>
+<span style="color:#000">$</span>(<span style="color:#a11">'#start_date_y2'</span>).<span style="color:#000">timeYM</span>();
+<span style="color:#000">$</span>(<span style="color:#a11">'#start_date_m2'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">type</span>: <span style="color:#a11">'month'</span>,
+    <span style="color:#000">title</span>: <span style="color:#a11">'开始月份'</span>,
+    <span style="color:#000">css</span>: {
+        <span style="color:#000">width</span>: <span style="color:#164">50</span>,
+        <span style="color:#000">paddingLeft</span>: <span style="color:#164">0</span>
+    }
+});
+<span style="color:#000">$</span>(<span style="color:#a11">'#end_date_y2'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">title</span>: <span style="color:#a11">'结束年份'</span>,
+    <span style="color:#000">seType</span>: <span style="color:#a11">'end'</span>
+});
+<span style="color:#000">$</span>(<span style="color:#a11">'#end_date_m2'</span>).<span style="color:#000">timeYM</span>({
+    <span style="color:#000">type</span>: <span style="color:#a11">'month'</span>,
+    <span style="color:#000">title</span>: <span style="color:#a11">'结束月份'</span>,
+    <span style="color:#000">seType</span>: <span style="color:#a11">'end'</span>
+});</pre>
+</div>
+<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../js/timeYM.js"></script>
+<script type="text/javascript">
+//普通年、月选择
+$('#start_date_y').timeYM();
+$('#start_date_m').timeYM({
+    type: 'month',
+    title: '开始月份',
+    css: {
+        width: 50,
+        paddingLeft: 0,
+        textAlign: 'center'
+    }
+});
+$('#end_date_y').timeYM({
+    title: '结束年份',
+    seType: 'end'
+});
+$('#end_date_m').timeYM({
+    type: 'month',
+    title: '结束月份',
+    seType: 'end',
+    css: {
+        paddingLeft: 0,
+        textAlign: 'center'
+    }
+});
+//年、月选择【默认是至今】
+$('#start_date_y1').timeYM();
+$('#start_date_m1').timeYM({
+    type: 'month',
+    title: '开始月份',
+    css: {
+        width: 50,
+        textAlign: 'center',
+        paddingLeft: 0
+    }
+});
+$('#end_date_y1').timeYM({
+    title: '结束年份',
+    seType: 'end'
+});
+$('#end_date_m1').timeYM({
+    type: 'month',
+    title: '结束月份',
+    seType: 'end'
+});
+//年、月选择【默认是至今，但不能修改】
+$('#start_date_y2').timeYM();
+$('#start_date_m2').timeYM({
+    type: 'month',
+    title: '开始月份',
+    css: {
+        width: 50,
+        paddingLeft: 0
+    }
+});
+$('#end_date_y2').timeYM({
+    title: '结束年份',
+    seType: 'end'
+});
+$('#end_date_m2').timeYM({
+    type: 'month',
+    title: '结束月份',
+    seType: 'end'
+});
+</script>
+</body>
+</html>

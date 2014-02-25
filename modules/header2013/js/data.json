@@ -1,0 +1,41 @@
+{
+    "paging": {
+        "current_page": 1,
+        "elt_per_page": 3,
+        "total_pages": 1,
+        "total_results": 9
+    },
+    "users": [{
+        "user_id": 8438845,
+        "distance": 2,
+        "name": "李良召(java)"
+    }, {
+        "user_id": 10985941,
+        "distance": 0,
+        "name": "Java"
+    }, {
+        "user_id": 467061,
+        "distance": 0,
+        "name": "黄鹏（招java高手）"
+    }],
+    "corps": [{
+        "company_id": 882213,
+        "company_name": "java"
+    }, {
+        "company_id": 3175358,
+        "company_name": "sun java"
+    }, {
+        "company_id": 4598874,
+        "company_name": "JAVA工程师。"
+    }],
+    "jobs": [{
+        "job_id": 27061,
+        "title": "JAVA工程师"
+    }, {
+        "job_id": 27591,
+        "title": "Java工程师"
+    }, {
+        "job_id": 30389,
+        "title": "java工程师"
+    }]
+}

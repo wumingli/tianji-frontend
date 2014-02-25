@@ -1,0 +1,3 @@
+#inviteBox {border:1px solid #ccc; background: #fff; font-size:14px; border-radius: 3px; /*box-shadow:1px 1px 1px 1px #e2e2e2; */z-index:1000000;}
+#inviteBox h3 {font: bold 14px/30px "Microsoft Yahei"; text-indent: 10px; background:url(http://statics.tianji.com/images/jquery/ui/header_bg.png) repeat-x scroll;height:30px;border-bottom: 1px solid #ccc;}
+#inviteBox .box_close{display: block;position: absolute;right:10px;top:5px; background: url(http://statics.tianji.com/images/jquery/ui/dialog_x.png) no-repeat 0 0;z-index:2;width:20px;height:20px; cursor: pointer;}

@@ -12,7 +12,7 @@
 
 */
 
-(function($) {
+(function ($) {
     'use strict';
     var oResults = {};
     var pluginCfg = {};
@@ -112,7 +112,7 @@
             alertText: '请输入',
             alertText2: '不能为空',
             alertTextSelect: '请选择',
-            fnValidation: function(element, need, name, type) {
+            fnValidation: function (element, need, name, type) {
                 var len = 0,
                     text1 = this.alertText,
                     text2 = '',
@@ -125,7 +125,7 @@
                         oResult['result'] = true;
                     }
                 } else {
-                    if(element.is('[date-type]')){
+                    if (element.is('[date-type]')) {
                         oResult['msg'] = this.alertTextSelect + name;
                     } else {
                         oResult['msg'] = text1 + name;
@@ -139,7 +139,7 @@
             regex: 'none',
             alertText: '至少',
             alertText2: '个字',
-            fnValidation: function(element, mLen, name, type) {
+            fnValidation: function (element, mLen, name, type) {
                 var len = 0,
                     text1 = this.alertText,
                     text2 = this.alertText2,
@@ -173,7 +173,7 @@
             regex: 'none',
             alertText: '最多',
             alertText2: '个字',
-            fnValidation: function(element, mLen, name) {
+            fnValidation: function (element, mLen, name) {
                 var len = 0,
                     text1 = '',
                     text2 = '',
@@ -201,7 +201,7 @@
             regex: /\d+/,
             alertText: '最小值为',
             alertText2: '不是正整数',
-            fnValidation: function(element, min, name) {
+            fnValidation: function (element, min, name) {
                 var oResult = {};
                 var thisVal = $.trim(element.val());
                 if (thisVal != '') {
@@ -224,7 +224,7 @@
             regex: /\d+/,
             alertText: '最大值为',
             alertText2: '不是正整数',
-            fnValidation: function(element, max, name) {
+            fnValidation: function (element, max, name) {
                 var oResult = {};
                 var thisVal = $.trim(element.val());
                 if (thisVal != '') {
@@ -247,7 +247,7 @@
             regex: /^\s*[a-zA-Z0-9]+([\._\-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([_\-][a-zA-Z0-9]+)*(\.[a-zA-Z0-9]+([_\-][a-zA-Z0-9]+)*)+\s*$/,
             alertText: '请输入正确的',
             alertText2: '格式不正确',
-            fnValidation: function(element, text, name) {
+            fnValidation: function (element, text, name) {
                 var oResult = {};
                 if ($.trim(element.val()) != '' && !this.regex.test($.trim(element.val()))) {
                     oResult['msg'] = name + this.alertText2;
@@ -263,7 +263,7 @@
             alertText: '请输入正确的',
             alertText2: '格式不正确',
             alertText3: '，正确格式为：01058951128/0543-1234567',
-            fnValidation: function(element, text, name) {
+            fnValidation: function (element, text, name) {
                 var oResult = {};
                 if ($.trim(element.val()) != '' && !this.regex.test($.trim(element.val()))) {
                     oResult['msg'] = this.alertText + name;
@@ -275,11 +275,11 @@
             }
         },
         mobilePhone: {
-            regex: /^((\+86)|(86))?-?1\d{10}$/,
+            regex: /^\s*1[3|4|5|7|8][0-9]\d{8}\s*$/,
             alertText: '请输入正确的',
             alertText2: '格式不正确',
             alertText3: '，正确格式为：13800138000',
-            fnValidation: function(element, text, name) {
+            fnValidation: function (element, text, name) {
                 var oResult = {};
                 if ($.trim(element.val()) != '' && !this.regex.test($.trim(element.val()))) {
                     oResult['msg'] = this.alertText + name;
@@ -290,13 +290,13 @@
                 return oResult;
             }
         },
-        isNotNum: function(val) {
+        isNotNum: function (val) {
             return isNaN(val) || !/^0?\d*$/.test(val);
         },
         compare: {
             alertText: '的值与',
             alertText2: '不一致',
-            fnValidation: function(element, text, name) {
+            fnValidation: function (element, text, name) {
                 var oResult = {};
                 if (element.val() != '' && element.val() != $('#' + text + ',[name=' + text + ']').val()) {
                     oResult['msg'] = name + this.alertText + eval('(' + $('#' + text).attr(pluginCfg.btnData) + ')').name + this.alertText2;
@@ -311,7 +311,7 @@
             regex: /^\s*[\u4E00-\u9FA5]+\s*$/,
             alertText: '请输入正确的',
             alertText2: '只能为汉字',
-            fnValidation: function(element, text, name) {
+            fnValidation: function (element, text, name) {
                 var oResult = {};
                 if ($.trim(element.val()) != '' && !this.regex.test($.trim(element.val()))) {
                     oResult['msg'] = name + this.alertText2;
@@ -324,11 +324,43 @@
         },
         isID: {
             alertText: '请输入正确的',
-            fnValidation: function(element, text, name) {
+            fnValidation: function (element, text, name) {
                 var oResult = {};
                 var thisVal = $.trim(element.val());
                 if (thisVal != '' && !IdCardValidate(thisVal)) {
                     oResult['msg'] = this.alertText + name;
+                    oResult['result'] = false;
+                } else {
+                    oResult['result'] = true;
+                }
+                return oResult;
+            }
+        },
+        url: {
+            regex: /^((http|https|ftp):\/\/)(\w(\:\w)?@)?([0-9a-z_-]+\.)*?([a-z0-9-]+\.[a-z]{2,6}(\.[a-z]{2})?(\:[0-9]{2,6})?)((\/[^?#<>\/\\*":]*)+(\?[^#]*)?(#.*)?)?$/i,
+            alertText: '请输入正确的',
+            alertText2: '格式不正确',
+            fnValidation: function (element, text, name) {
+                var oResult = {};
+                var thisVal = $.trim(element.val());
+                if (thisVal != '' && !this.regex.test(thisVal)) {
+                    oResult['msg'] = name + this.alertText2;
+                    oResult['result'] = false;
+                } else {
+                    oResult['result'] = true;
+                }
+                return oResult;
+            }
+        },
+        QQ: {
+            regex: /^[1-9]\d{4,14}$/,
+            alertText: '请输入正确的',
+            alertText2: '格式不正确',
+            fnValidation: function (element, text, name) {
+                var oResult = {};
+                var thisVal = $.trim(element.val());
+                if (thisVal != '' && !this.regex.test(thisVal)) {
+                    oResult['msg'] = name + this.alertText2;
                     oResult['result'] = false;
                 } else {
                     oResult['result'] = true;
@@ -352,7 +384,7 @@
             ltData,
             cfg;
         var fstNode;
-        element.parent().find('.' + pluginCfg.errorMsgConClass).remove();
+        //element.parent().find('.' + pluginCfg.errorMsgConClass).remove();
         if (type == 'checkbox' || type == 'radio') {
             //element.parent().find('.' + pluginCfg.errorMsgConClass).remove();
             fstNode = element.parent().find('[name=' + element.attr('name') + ']:eq(0)');
@@ -392,9 +424,12 @@
                 var res = oGetRule && oGetRule['result'];
                 var text = cfg.text || oGetRule['msg'];
                 oResults[checkingArray[i] + cfg.name] = res;
-                if (oGetRule && !res) {
+                if (!res) {
                     element.parent().find('.' + pluginCfg.errorMsgConClass).length == 0 && element.parent().append('<' + pluginCfg.nodeName + ' class="' + pluginCfg.errorMsgConClass + ' ' + cssClass + '">' + text + '</' + pluginCfg.nodeName + '>');
                     break;
+                    //return false;
+                } else {
+                    element.parent().find('.' + pluginCfg.errorMsgConClass).remove();
                 }
             }
         }
@@ -402,14 +437,17 @@
     //方法触发
 
     function triggerMethod($obj, method, cfg) {
-        $obj.bind(method, function() {
+        $obj.bind(method, function () {
             checkData($obj, cfg);
+            $obj.siblings('[' + pluginCfg.btnData + ']').each(function () {
+                checkData($(this), cfg);
+            });
         });
         /*$(document).on('click', function() {
             $('[' + pluginCfg.btnData + ']').trigger(method);
         });*/
     }
-    $.fn.formValidator = function(config) {
+    $.fn.formValidator = function (config) {
         var opt = {
             btnData: 'validation-config',
             triggerMethod: 'blur',
@@ -423,16 +461,15 @@
         $this.attr({
             'class': pluginCfg.formCssClass
         });
-        $form.on(pluginCfg.triggerMethod, function() {
+        $form.on(pluginCfg.triggerMethod, function () {
             var canSub = true;
             oResults = {};
-            $this.find('[' + pluginCfg.btnData + ']').each(function() {
+            $this.find('[' + pluginCfg.btnData + ']').each(function () {
                 var $this = $(this);
                 if ($this.is(':visible')) {
-                    checkData($(this), pluginCfg);
                     if ($(this).is('input') || $(this).is('select') || $(this).is('textarea')) {
                         if ($(this).is('[type="checkbox"]') || $(this).is('[type="radio"]')) {
-                            $(this).parent().find('input:checkbox,input:radio').each(function() {
+                            $(this).parent().find('input:checkbox,input:radio').each(function () {
                                 triggerMethod($(this), 'click', pluginCfg);
                             });
                         } else if ($(this).is('select')) {
@@ -441,10 +478,11 @@
                             triggerMethod($(this), 'blur', pluginCfg);
                         }
                     } else if ($(this).is('div')) {
-                        $(document).on('click', function() {
+                        $(document).on('click', function () {
                             checkData($this, pluginCfg);
                         });
                     }
+                    checkData($(this), pluginCfg);
                 }
             });
             for (var k in oResults) {
@@ -453,11 +491,12 @@
                 }
             }
             if (canSub && pluginCfg.callback) {
-                return pluginCfg.callback();
+                return pluginCfg.callback.call($this, pluginCfg);
             } else {
                 $this.find('[' + pluginCfg.btnData + ']').siblings('.' + pluginCfg.errorMsgConClass).first().siblings('[' + pluginCfg.btnData + ']').focus();
                 return false;
             }
         });
+        return this;
     }
 })(jQuery);

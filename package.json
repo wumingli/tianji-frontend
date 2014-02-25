@@ -1,6 +1,6 @@
 {
   "name": "common",
-  "version": "1.1.3-dev",
+  "version": "1.3.7-dev",
   "description": "tianji common javascript project",
   "main": "Gruntfile.js",
   "author": "wumingli",

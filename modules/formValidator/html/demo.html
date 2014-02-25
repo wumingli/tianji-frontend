@@ -19,12 +19,13 @@ form.valForm label {font-size:12px;vertical-align:middle;position:relative;top:-
 <div class="wrap" id="wrap">
     <form method="get" action="" class="valForm">
         <ul>
-            <li><label>用户名：</label><input type="text" id="name" name="name" placeholder="用户名" validation-config="{'checking':['required', 'maxSize', 'minSize'],'init':[true, 20, 5],'name':'用户名','leftTop':'165,5'}" class="vFormText" /> <span>aaaa</span></li>
+            <li><label>用户名：</label><input type="text" id="name" name="name" placeholder="用户名" validation-config="{'checking':['required', 'maxSize', 'minSize'],'init':[true, 20, 5],'name':'用户名','leftTop':'165,5'}" class="vFormText" /></li>
             <li><label>密　码：</label><input type="password" id="password" name="password" placeholder="密码" validation-config="{'checking':['maxSize', 'required', 'minSize'],'init':[20,true,  6],'name':'密码'}" class="vFormText" /> <label>确　认：</label><input type="password" placeholder="确认密码" validation-config="{'checking':['required', 'minSize', 'compare'],'init':[true, '6', 'password'],'name':'确认密码'}" class="vFormText" /></li>
             <!-- <li></li> -->
-            <li><label>邮　箱：</label><input type="text" id="email" name="email" placeholder="邮箱" validation-config="{'checking':['required', 'email'],'init':[true, true],'name':'电子邮箱'}" class="vFormText" /> <label>地　址：</label><input type="text" id="address" name="address" placeholder="地址" validation-config="{'checking':['required', 'chinese', 'maxSize'],'init':[true, true, 20],'name':'地址','text': '地址必须填写哦，亲'}" class="vFormText" /></li>
+            <li><label>邮　箱：</label><input type="text" id="email" name="email" placeholder="邮箱" validation-config="{'checking':['required', 'email'],'init':[true, true],'name':'电子邮箱'}" class="vFormText" /> <label>地　址：</label><input type="text" id="address" name="address" placeholder="地址" validation-config="{'checking':['required', 'chinese', 'maxSize'],'init':[true, true, 20],'name':'地址'}" class="vFormText" /></li>
             <!-- <li></li> -->
             <li><label>年　龄：</label><input type="text" id="old" name="old" placeholder="年龄" class="vFormText" validation-config="{'checking':['max', 'min'],'init':[110, 10],'name':'年龄'}" /></li>
+            <li><label>网　址：</label><input type="text" id="url" name="url" placeholder="网址" class="vFormText" validation-config="{'checking':['required', 'url'],'init':[true,true],'name':'网址'}" /></li>
             <li><label>电　话：</label><input type="text" id="phone" name="phone" placeholder="电话" class="vFormText" validation-config="{'checking':['phone'],'init':[true],'name':'电话'}" /></li>
             <li><label>手　机：</label><input type="text" id="mobilePhone" name="mobilePhone" placeholder="13800138000" class="vFormText" validation-config="{'checking':['mobilePhone'],'init':[true],'name':'手机号'}" /></li>
             <li><label>兴趣爱好：</label><input type="checkbox" id="hobby1" name="hobby" validation-config="{'checking':['required', 'maxSize', 'minSize'],'init':[true,4,2],'name':'兴趣爱好','leftTop':'290 0'}" value="台球" /><label for="hobby1">台球</label> <input type="checkbox" id="hobby2" name="hobby" value="足球" /><label for="hobby2">足球</label> <input type="checkbox" id="hobby3" name="hobby" value="羽毛球" /><label for="hobby3">羽毛球</label> <input type="checkbox" id="hobby4" name="hobby" value="篮球" /><label for="hobby4">篮球</label> <input type="checkbox" id="hobby5" name="hobby" value="高尔夫球" /><label for="hobby5">高尔夫球</label></li>
@@ -38,15 +39,16 @@ form.valForm label {font-size:12px;vertical-align:middle;position:relative;top:-
                 <option value="00102">这是啥啊？！</option>
             </select>
             </li>
-            <li style="height:100px;">
+            <li style="height:70px;">
                 <label>地区：</label>
 	            <div class="p-data-wrap" id="p-data-wrap" style="z-index:4" validation-config="{'checking':['required'],'init':[true],'name':'地区','cssClass':'pdl0'}"></div>
             </li>
-            <li>
-                <textarea name="" rows="5" cols="30" validation-config="{'checking':['required', 'maxSize'],'init':[true, 10],'name':'描述'}"></textarea>
+            <li style="height:120px;">
+                
+                <label>描述：</label><br /><textarea name="" rows="5" cols="30" validation-config="{'checking':['required', 'maxSize'],'init':[true, 10],'name':'描述'}"></textarea>
             </li>
+            <li><label>QQ：</label><input type="text" id="old" name="old" placeholder="QQ" class="vFormText" validation-config="{'checking':['QQ'],'init':[true],'name':'QQ号码'}" /></li>
         </ul>
-        <div style="clear:both;height:50px;"></div>
         <input type="submit" id="submit" value="提交" style="padding:5px 10px;" />
     </form>
 </div>
@@ -61,13 +63,15 @@ form.valForm label {font-size:12px;vertical-align:middle;position:relative;top:-
 <script type="text/javascript" src="http://image.tianji.com/tjs/gallery/underscore-min.js"></script>
 <script src="http://image.tianji.com/tjs/msPickMap/js/publicFn.min.js" type="text/javascript"></script>
 <script src="http://image.tianji.com/tjs/msPickMap/js/city.min.js?v=1.0.19-dev" type="text/javascript"></script>
+<script src="http://image.tianji.com/tjs/timeYMPlugin/js/timeYMPlugin.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function (){
     $('form').formValidator({
         nodeName: 'div',
         triggerMethod: 'submit',
         callback: function (){
-            return true;
+            console.log($(this))
+            return false;
         }
     });
     $('#wml-p-data-wrap').dropBox({
@@ -82,6 +86,22 @@ $(function (){
 		allDataMap:cityDataMap,	//配置不同的数据源,此处为城市数据 必需有。
 		name:'cityCode_', //设置隐藏input的name属性值。默认为cityCode,见意按需要自已设置。
 		align:"left"	//设置下拉对齐方式,可设置left/right不设置,默认是left
+    });
+    $('#work_start_year').timeYM({
+        title: '工作开始年份'
+    });
+    $('#work_start_month').timeYM({
+        type: 'month',
+        title: '工作开始月份'
+    });
+    $('#work_end_year').timeYM({
+        title: '结束年份',
+        seType: 'end'
+    });
+    $('#work_end_month').timeYM({
+        type: 'month',
+        title: '结束月份',
+        seType: 'end'
     });
 });
 </script>
