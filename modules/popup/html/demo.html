@@ -10,12 +10,21 @@
 </head>
 <body>
     <div style="padding:30px;">
-       <a href="javascript:void(0);" id="popup">弹出层</a> 
+       <a href="javascript:void(0);" id="popup">弹出层链接</a> <br>
+       <input type="button" id="btn" value="弹出屋按钮" style="width:100px;height:40px;background:#06c;color:#fff;margin-top:10px;border-radius: 5px; cursor: pointer;" />
     </div>
     
     <script type="text/javascript">
         $('#popup').tianjiPopup({
             //title: '天际弹出层插件测试Demo'
+            escClosed: false,
+            boxWidth: 700,
+            boxHeight: 310,
+            showTitle: false
+        });
+        $('#btn').tianjiPopup({
+            title: '天际弹出层插件测试Demo',
+            dragable: false
         });
     </script>
 </body>
