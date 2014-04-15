@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>表单验证API</title>
+<link rel="stylesheet" href="../../../styles/base.css" type="text/css" >
+<script type="text/javascript" src="../../../gallery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="http://static.oschina.net/js/syntax-highlighter-2.1.382/scripts/brush.js"></script>
+<link type="text/css" rel="stylesheet" href="http://static.oschina.net/js/syntax-highlighter-2.1.382/styles/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="http://static.oschina.net/js/syntax-highlighter-2.1.382/styles/shThemeDefault.css"/>
+<style type="text/css" media="screen">
+    h1 {height:50px;padding-left:15px;background:#eee;font:bold 18px/50px 'Microsoft Yahei';margin:20px 10px;}
+    pre {padding-left:10px;}
+    p.info { background-color: #f7f7f7; margin: 10px; padding:10px; font-size: 14px; line-height: 25px;}
+    table {background-color: #ccc;border-collapse:inherit;border-spacing: 1px;margin:20px 0 20px 10px;}
+    td, th {background-color: #fff;height:30px;padding-left: 10px;font:normal 14px/30px "Arial";}
+    th {background-color: #e5e5e5;font-weight: bold;}
+    strong {font-weight: 700;}
+</style>
+</head>
+<body>
+<h1>表单验证控件API：(功能有待修复、完善，慎用)</h1>
+<p class="info">
+    给input或自定义下拉、城市、职能选择的div元素增加属性：validation-config。<br>
+    例：validation-config赋值为：{'checking':['required', 'maxSize', 'minSize'],'init':[true, 20, 5],'name':'用户名','leftTop':'165,5','text':'您没有输入用户名！'}<br>
+    说明：<br>   
+    1.checking数组长度、对应项应与init一致，否则可能会报错 <br>
+    2.name为提示时的名字，如“用户名”不能为空；若有text项，提示语会忽略name，显示text的赋值 <br>
+    3.leftTop可以调整出错信息显示位置，你可以自己试试。 <br>
+</p>
+
+<pre class="brush:html">
+    <script type="text/javascript" src="http://image.tianji.com/tjs/formValidator/js/formValidator.min.js"></script>
+    <form action="api_submit" method="get" accept-charset="utf-8">
+        <input type="text" validation-config="{'checking':['required', 'maxSize', 'minSize'],'init':[true, 20, 5],'name':'用户名'}" />
+        <!-- 自定义控件也可以添加validation-config属性进行验证 -->
+        <div class="p-data-wrap" id="wml-p-data-wrap-industry" validation-config="{'checking':['required'],'init':[true],'name':'所属行业'}"></div>
+    </form>
+    
+    <script type="text/javascript">
+    $(function() {
+        $('form').formValidator({
+            nodeName: 'div',
+            triggerMethod: 'submit',
+            errorMsgConClass: 'val_error',
+            callback: function() {
+                //codes here
+                return false;
+            }
+        });
+    });
+    </script>
+</div>
+</pre>
+<p class="info">
+    <strong>checking可选值如下：</strong>
+</p>
+<table cellspacing="1" cellpadding="0" border="0" width="800">
+    <thead>
+        <tr>
+            <th>字段</th>
+            <th>可选值[init对应值]</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>required</td>
+            <td>true/false</td>
+            <td>是否必填</td>
+        </tr>
+        <tr>
+            <td>minSize</td>
+            <td>任意大于0的数字</td>
+            <td>最少字符数</td>
+        </tr>
+        <tr>
+            <td>maxSize</td>
+            <td>任意大于0的数字</td>
+            <td>最多字符数</td>
+        </tr>
+        <tr>
+            <td>min</td>
+            <td>任意数字</td>
+            <td>最小值</td>
+        </tr>
+        <tr>
+            <td>max</td>
+            <td>任意数字</td>
+            <td>最大值</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>true/false</td>
+            <td>电子邮件</td>
+        </tr>
+        <tr>
+            <td>phone</td>
+            <td>-</td>
+            <td>固定电话</td>
+        </tr>
+        <tr>
+            <td>compare</td>
+            <td>-</td>
+            <td>被比较者的ID/name值</td>
+        </tr>
+        <tr>
+            <td>chinese</td>
+            <td>-</td>
+            <td>必须是中文</td>
+        </tr>
+        <tr>
+            <td>isID</td>
+            <td>-</td>
+            <td>身份证号码校验</td>
+        </tr>
+        <tr>
+            <td>url</td>
+            <td>-</td>
+            <td>网址</td>
+        </tr>
+        <tr>
+            <td>QQ</td>
+            <td>-</td>
+            <td>QQ号校验[1-9开头，5~15位数字]</td>
+        </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function(){
+        SyntaxHighlighter.config.clipboardSwf = 'http://static.oschina.net/js/syntax-highlighter-2.1.382/scripts/clipboard.swf';
+        SyntaxHighlighter.all();
+    });
+</script>
+</body>
+</html>

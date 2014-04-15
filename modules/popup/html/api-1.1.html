@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>弹窗控件1.1 API文档</title>
+    <link rel="stylesheet" href="http://image.tianji.com/tjs/styles/reset.css" type="text/css" >
+    <link href="http://image.tianji.com/tjs/popup/css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="http://static.oschina.net/js/syntax-highlighter-2.1.382/scripts/brush.js"></script>
+    <!--<script type="text/javascript" src="http://image.tianji.com/tjs/popup/js/popup.min.js"></script>-->
+    <script type="text/javascript" src="../js/popup-v101.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://static.oschina.net/js/syntax-highlighter-2.1.382/styles/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="http://static.oschina.net/js/syntax-highlighter-2.1.382/styles/shThemeDefault.css"/>
+    <style type="text/css" media="screen">
+        h1 {height:50px;padding-left:15px;background:#eee;font:bold 18px/50px 'Microsoft Yahei';margin:20px 10px;}
+        pre {padding-left:10px;}
+        p.info { background-color: #f7f7f7; margin: 10px; padding:10px; font-size: 14px; line-height: 25px;}
+        table {background-color: #ccc;border-collapse:inherit;border-spacing: 1px;margin:20px 0 20px 10px;}
+        td, th {background-color: #fff;height:30px;padding-left: 10px;font:normal 14px/30px "Arial";}
+        th {background-color: #e5e5e5;font-weight: bold;}
+        strong {font-weight: 700;}
+        #description {padding-left:15px;margin-left:20px;}
+        #description li{list-style:square;font:normal 14px/20px 'Microsoft Yahei';margin:0;padding:0;}
+    </style>
+</head>
+<body>
+<h1>弹窗控件1.1 API文档</h1>
+<p class="info">
+    <a href="demo-1.1.html">Demo地址</a><br>
+    页面需引入JS http://image.tianji.com/tjs/popup/js/popup-v101.min.js 
+</p>
+<pre class="brush:html">
+    <script type="text/javascript" src="http://image.tianji.com/tjs/popup/js/popup-v101.min.js"></script>
+</pre>
+
+<p class="info">
+    或者也可以动态引入，从而减少不必要的HTTP请求:
+</p>
+<pre class="brush:javascript">
+    $.getScript('http://image.tianji.com/tjs/popup/js/popup-v101.min.js', function(){
+        tianjiPopup({
+            //codes here
+        });
+    });
+</pre>
+<p class="info">
+    JS配置项如下：
+</p>
+<pre class="brush:javascript">
+    tianjiPopup({
+        name: 'tianjiPopupName', //弹窗标识，默认为tianjiPopupName
+        boxWidth: 700, //弹窗宽度
+        boxHeight: 320, //弹窗高度
+        title: '弹窗默认标题', //默认标题
+        noDataTip: '您已全部添加成功！', //没有数据时Tip提示文案
+        noDataNodeClass: 'no_data_tip_happy', //无数据时HTML节点的css class名称，默认为no_data_tip_sad，可选项为no_data_tip_sad(哭脸形式)|no_data_tip_happy(成功形式)
+        position: 'fixed', //定位方式，默认fixed
+        pageTabMethod: 'click', //分页切换响应事件，mouseover|click
+        titleHeight: 40, //标题栏高度,默认45px
+        enabled: true, //是否启用，默认true
+        dragable: true, //是否可拖动，默认true
+        showCloseBtn: true, //是否显示关闭按钮，默认true
+        shandowable: true, //是否显示遮罩层，默认显示
+        showTitle: true, //是否显示标题栏，默认显示
+        showLoading: true, //显示加载画面
+        showPage: true, //是否显示分页，默认true
+        showPreNext: true, //是否显示上一页、下一页按钮，默认true
+        esc: true, //ESC键关闭弹出层，默认为True
+        autoPlay: true, //是否自动播放，默认为true
+        cookie: false, //是否开启记住关闭状态，默认为false，设置为true关闭后刷新页面或点击时就不在显示popup，适用于自动弹出.
+                       //注：记住状态与name有关（name默认为tianjiPopupName），若网站有多个弹窗，最好给需要的单独取一个name，以避免影响其他弹窗。
+        content:{
+            type: 'ajaxData',   //目前接受值：ajaxData|userDefined|focus，默认值focus，用法见下方说明
+            dataUrl: '../js/career_trip.json',
+            style: '#tianjiPopupContainer .popup_list li{color:#333; font-size: 15px; font-family: "微软雅黑"; width: 477px; height:200px; float: left; margin:31px 0 0 0; line-height:30px; } #tianjiPopupContainer .popup_list li span{width: 304px; float: right; margin-top: 25px;margin-right:90px;}#tianjiPopupContainer .popup_list li.experience{background: url(../images/experience_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.zan{background: url(../images/zan_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.popular{background: url(../images/popular_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.recomment{background: url(../images/recomment_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.date{background: url(../images/date_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.friend{background: url(../images/friend_bg.jpg) no-repeat 100px 15px;}#tianjiPopupContainer .popup_list li.friend span{margin-top: 25px;}#tianjiPopupContainer .popup_list li.xueba{background: url(../images/xueba_bg.jpg) no-repeat 100px center; }#tianjiPopupContainer .popup_list li i{color:#e67e22; font-style: normal;}'
+        },
+        //是否显示标题
+        showTitle: false,
+        //当点击时的回调函数
+        whenClick: function(){
+            alert('popup will be shown')
+        },
+        //关闭事件回调函数
+        whenClose: function(){
+            //when close, the function call back here
+            //如可以设置this.enabled = false 从而禁用弹出
+            this.enabled = false;
+        },
+        //弹窗加载完的回调函数，可以在此为加载元素动态绑定事件
+        boxLoad: function(){
+            $('.add_friend').on('click', function(){
+                $.ajax('',{});
+            });
+        }
+    });
+</pre>
+<p class="info">
+    <strong>说明：</strong><br>
+    <ul id="description">
+        <li>content默认type为focus,通过list指定焦点图各项，list为JSON数据类型的数组，每项中有title/link/pic，如：
+            <pre class="brush:javascript">
+                content: {
+                    type: 'focus',
+                    list: [{
+                        title: '焦点图标题1',
+                        link: 'http://www.baidu.com',
+                        pic: '../images/f1.jpg?adf'
+                    }, {
+                        title: '焦点图标题2',
+                        link: 'http://www.tianji.com',
+                        pic: '../images/f2.jpg?ad'
+                    }, {
+                        title: '焦点图标题3',
+                        link: 'http://www.qq.com',
+                        pic: '../images/f3.jpg?aa'
+                    }, {
+                        title: '焦点图标题4',
+                        link: 'http://www.google.com',
+                        pic: '../images/f2.jpg?aa'
+                    }]
+                }
+            </pre>
+        </li>
+        <li>content支持用户自定义HTML，type设置为userDefined，只需将content的html属性设置为字符串即可。【注：目前只支持li列表，若有其他需求请单独提出。若需要在标题中显示动态元素，如“用户XXX为您推荐TA的人脉”，其中动态元素放置在li的data-name属性中即可。您可以试一下。另外，请注意HTML片段中不要有英文单引号和回车换行符，否则会报错。】例：
+            <pre class="brush:javascript">
+                content: {
+                    type: 'userDefined',
+                    html: '<li class="date" data-name="武明礼"><span><i>2013</i>年<i>12</i>月<i>16</i>日，你加入了天际网<br/>  天际已经陪你度过了84天，希望我还能陪你走的更远！</span></li><li class="friend" data-name="张亮"><span>在天际网你结交了<i>0</i>名好友，浏览过<i>12</i>的个人档案，相当于你每天参加一场社交活动。</span></li><li class="popular" data-name="王海燕"><span>【<i>一路畅销</i>】<br/>你知道你有多畅销吗？在这<i>84</i>天里你总共获得了0人的关注，真实太不可思议了！</span></li><li class="recomment" data-name="刘路"><span>【<i>职场V力</i>】<br/>你的职业生涯将会记录在职场V力里。<br/>将来，我们都一路默默地为你做好记录，让更多好的机会找到你！</span></li><li class="date" data-name="朱君"><span><i>2013</i>年<i>12</i>月<i>16</i>日，你加入了天际网<br/>天际已经陪你度过了84天，希望我还能陪你走的更远！</span></li>'
+                }
+            </pre>
+        </li>
+        <li>若要页面自动弹出，若有可以点击弹窗元素，trigger该元素的click事件；若无可点击元素，可以在页面里埋一个隐藏元素，然后trigger它的click事件。</li>
+        <li>content的style属性支持将样式表放在里面，但你也可以通过引用外部CSS的方式，style为可选项</li>
+        <li>目前弹窗类型还不全，仍在完善中</li>
+        <li>有问题及时反馈至 <a href="mailto:wumingli@tianji.com?subject=popup%E5%BC%B9%E7%AA%97%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88">wumingli@tianji.com</a></li>
+    </ul>
+</p>
+<div style="padding:30px;">
+   <a href="javascript:void(0);" id="popup">弹出层链接</a> <a href="demo-1.1.html">Demo地址</a><br>
+   <!--<input type="button" id="btn" value="弹出屋按钮" style="width:100px;height:40px;background:#06c;color:#fff;margin-top:10px;border-radius: 5px; cursor: pointer;" />-->
+</div>
+    
+<script type="text/javascript">
+    $.ajax('',{
+        success: function(data){
+            if()
+        }
+    })
+    $('#popup, #btn').on('click', function() {
+            tianjiPopup({
+                boxWidth: 680,
+                boxHeight:310,
+                name: 'tianjiMedals',
+                title: '为您推荐Ta的人脉',
+                //showPage: false,
+                pageTabMethod: 'click',
+                /*showPreNext: false,
+                showPage: false,
+                content: {
+                    type: 'userDefined',
+                    html: '<p>这里是自定义内容</p>',
+                    style: '#tianjiPopupContainer .popup_container p{text-align:center;padding:20px 0;}'
+                },
+                content: {
+                    type: 'userDefined',
+                    html: '<p>这里是自定义内容</p>',
+                    style: '#tianjiPopupContainer .popup_container p{color:red;padding:20px;text-align:center;}'
+                },*/
+                content: {
+                    type: 'ajaxData',
+                    dataUrl: '../js/career_trip.json',
+                    style: '#tianjiPopupContainer .popup_list li{color:#333; font-size: 15px; font-family: "微软雅黑"; width: 477px; height:200px; float: left; margin:31px 0 0 0; line-height:30px; } #tianjiPopupContainer .popup_list li span{width: 304px; float: right; margin-top: 25px;margin-right:90px;}#tianjiPopupContainer .popup_list li.experience{background: url(../images/experience_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.zan{background: url(../images/zan_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.popular{background: url(../images/popular_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.recomment{background: url(../images/recomment_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.date{background: url(../images/date_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.friend{background: url(../images/friend_bg.jpg) no-repeat 100px 15px;}#tianjiPopupContainer .popup_list li.friend span{margin-top: 25px;}#tianjiPopupContainer .popup_list li.xueba{background: url(../images/xueba_bg.jpg) no-repeat 100px center; }#tianjiPopupContainer .popup_list li i{color:#e67e22; font-style: normal;}#tianjiPopupContainer h3 i {font-style:normal;color:#3992cd;margin-right:5px;}'
+                },
+                beforeCreate: function() {
+                    //this.enabled = false;
+                    //alert('popup will be shown')
+                },
+                whenClose: function() {
+                    this.enabled = false
+                    //alert(this.title)
+                },
+                boxLoad: function() {
+                    $('#tianjiPopupContainer .popup_list li').on('click', function() {
+                        alert($(this).html())
+                    })
+                }
+            });
+        });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        SyntaxHighlighter.config.clipboardSwf = 'http://static.oschina.net/js/syntax-highlighter-2.1.382/scripts/clipboard.swf';
+        SyntaxHighlighter.all();
+    });
+</script>
+</body>
+</html>

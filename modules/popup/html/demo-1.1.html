@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>popup demo</title>
+    <link href="http://image.tianji.com/tjs/styles/reset.css" rel="stylesheet" type="text/css" />
+    <!--<link href="../css/style.css" rel="stylesheet" type="text/css" />-->
+    <script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../js/popup-v101.js"></script>
+</head>
+<body>
+    <div style="padding:30px;">
+       <a href="javascript:void(0);" id="popup">弹出层链接</a> | <a href="javascript:void(0);" id="popupMedal">查看我的徽章</a> | <a href="api-1.1.html">API文档</a><br>
+       <input type="button" id="btn" value="弹出屋按钮" style="width:100px;height:30px;background:#06c;color:#fff;margin-top:10px;border-radius: 5px; cursor: pointer;" />       
+    </div>
+    
+    <script type="text/javascript">
+        function pop2(){
+            tianjiPopup({
+                boxWidth: 600,
+                boxHeight:310,
+                name: 'tianjiMedals',
+                //showTitle: false,
+                title: '天际徽章',
+                showPreNext: false,
+                showPage: false,
+                //dragable:true,
+                closeWhenClickPage: true,
+                //cookie:true,
+                /*content: {
+                    type: 'userDefined',
+                    html: '<p>这里是自定义内容</p>',
+                    style: '#tianjiPopupContainer .popup_container p{text-align:center;padding:20px 0;}'
+                },*/
+                content: {
+                    type: 'userDefined',
+                    html: '<div><li><p>恭喜！<br />你已经成功点亮了 <a href="" title="">#生涯证#</a>  徽章<br /><img src="http://img.t.sinajs.cn/t4/style/images/medal/667_l.png?version=704a168784f8cbe5" /><br /><a href="" title="">前往徽章馆，获得更多徽章</a></p></li></div>',
+                    style: '#tianjiPopupContainer .popup_container p{color:red;padding:20px;text-align:center;line-height:30px;}'
+                },
+                beforeCreate: function() {
+                    //this.enabled = false;
+                    //alert('popup will be shown')
+                    $('body').css('height', '2000px');
+                },
+                whenClose: function() {
+                    this.enabled = false;
+                    $('body').css('height', 'auto');
+                    //alert(this.title)
+                },
+                boxLoad: function() {
+                    $('#tianjiPopupContainer .popup_list li').on('click', function() {
+                        alert($(this).html())
+                    })
+                }
+            });
+        }
+        $('#popup').on('click', function() {
+            tianjiPopup({
+                boxWidth: 680,
+                boxHeight:310,
+                name: 'tianjiMedals',
+                title: '为您推荐Ta的人脉',
+                //showPage: false,
+                pageTabMethod: 'click',
+                showPreNext: false,
+                autoPlay: false,
+                /*showPage: false,
+                content: {
+                    type: 'userDefined',
+                    html: '<p>这里是自定义内容</p>',
+                    style: '#tianjiPopupContainer .popup_container p{text-align:center;padding:20px 0;}'
+                },
+                content: {
+                    type: 'userDefined',
+                    html: '<p>这里是自定义内容</p>',
+                    style: '#tianjiPopupContainer .popup_container p{color:red;padding:20px;text-align:center;}'
+                },*/
+                content: {
+                    type: 'ajaxData',
+                    dataUrl: '../js/career_trip.json',
+                    style: '#tianjiPopupContainer .popup_list li{color:#333; font-size: 15px; font-family: "微软雅黑"; width: 477px; height:200px; float: left; margin:31px 0 0 0; line-height:30px; } #tianjiPopupContainer .popup_list li span{width: 304px; float: right; margin-top: 25px;margin-right:90px;}#tianjiPopupContainer .popup_list li.experience{background: url(../images/experience_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.zan{background: url(../images/zan_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.popular{background: url(../images/popular_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.recomment{background: url(../images/recomment_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.date{background: url(../images/date_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.friend{background: url(../images/friend_bg.jpg) no-repeat 100px 15px;}#tianjiPopupContainer .popup_list li.friend span{margin-top: 25px;}#tianjiPopupContainer .popup_list li.xueba{background: url(../images/xueba_bg.jpg) no-repeat 100px center; }#tianjiPopupContainer .popup_list li i{color:#e67e22; font-style: normal;}#tianjiPopupContainer h3 i {font-style:normal;color:#3992cd;margin-right:5px;}'
+                },
+                beforeCreate: function() {
+                    //this.enabled = false;
+                    //alert('popup will be shown')
+                },
+                whenClose: function() {
+                    this.enabled = false
+                    //alert(this.title)
+                },
+                boxLoad: function() {
+                    $('#tianjiPopupContainer .popup_list li').on('click', function() {
+                        alert($(this).html())
+                    })
+                }
+            });
+        });
+        $('#btn').on('click', function(){
+            tianjiPopup({
+                showTitle:false
+            });
+        });
+        pop2();
+        $('#popupMedal').on('click', function(){
+            pop2();
+        });
+    </script>
+</body>
+</html>

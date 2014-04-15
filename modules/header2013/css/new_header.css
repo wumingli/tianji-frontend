@@ -43,8 +43,8 @@
 #header .header_menu .user_info .user_poster .user_img_bg{width: 34px;height: 36px;position: absolute;left: 0px;top: 0px;background:url(http://image.tianji.com/tjs/header2013/images/ceng.png) no-repeat;}
 #header .header_menu .user_info .user_poster .user_img_bg a{width: 34px;height: 36px;float: left;}
 #header .header_menu .user_info .user_name{ height: 26px; line-height: 26px; float: left; font-size: 12px; color: #ccc;  margin:0px 0px 0px 8px;  padding: 0px 5px;  cursor: pointer; position: relative;}
-#header .header_menu .user_info .user_name .user_item{width: 135px; height: 70px; position: absolute; left: 0px; top: 27px;  z-index: 2100; background: #E6E7EA;}
-#header .header_menu .user_info .user_name .user_item li{width: 135px; height: 34px; float: left; line-height: 34px; color: #666; font-size: 12px; font-family: '宋体'; border-bottom: 1px solid #D7DBE1;}
+#header .header_menu .user_info .user_name .user_item{width: 135px; height: 70px; position: absolute; left: 0px; top: 27px;  z-index: 2100;}
+#header .header_menu .user_info .user_name .user_item li{width: 135px; height: 34px; float: left; line-height: 34px; color: #666; font-size: 12px; font-family: '宋体'; border-bottom: 1px solid #D7DBE1; background-color: #e6e7ea;}
 #header .header_menu .user_info .user_name .user_item li a{color: #666; width: 127px; height: 34px; float: left; padding-left: 8px;}
 #header .header_menu .user_info .user_name .user_item li a:hover{ background: #666; color: #fff; text-decoration: none;}
 
@@ -56,20 +56,25 @@
 #header .header_menu .user_unlogin_info span {color:#ccc;}
 
 
-#header .header_menu .top_search .search_list{position:absolute; top:32px; right: 0px;  z-index: 99;}
-#header .header_menu .top_search .bottom_bg{}
+#header .header_menu .top_search .search_list{position:absolute; top:32px; right: 0px;  z-index: 99;display: none;}
 #header .header_menu .top_search form {float:left;}
-#header .header_menu .top_search .search_main{float:left; border:1px solid #D7DBE1; border-bottom:none; background-color:#FFF; overflow:hidden; width:377px;}
-#header .header_menu .top_search .search_main li{ border-bottom:1px solid #eee; overflow: hidden; float: left; height:35px; line-height: 35px; width:377px; text-align: left;}
-#header .header_menu .top_search .search_main li a{display:inline-block; width:367px; height:35px; text-decoration:none; padding-left: 20px;}
-#header .header_menu .top_search .search_main li.current a,#header .header_menu .top_search .search_main li a:hover{background:#f6f6f6; border-bottom:1px solid #fafafa;}
+#header .header_menu .top_search .search_main{float:left; border:1px solid #D7DBE1; background-color:#FFF; overflow:hidden; width:322px;border-bottom-width:2px; }
+#header .header_menu .top_search .search_main li{ border-bottom:1px solid #eee; overflow: hidden; float: left; width:100%; text-align: left;}
+#header .header_menu .top_search .search_main li.search_result_item {background:url(http://image.tianji.com/tjs/header2013/images/searchIcon.png) no-repeat 300px center;}
+#header .header_menu .top_search .search_main li a {display:inline-block; width:100%; text-decoration:none;color:#666;}
+#header .header_menu .top_search .search_main li.current a,#header .header_menu .top_search .search_main li a:hover{background-color:#f6f6f6;}
 #header .header_menu .top_search .search_main li.search_bottom{border-bottom:none;}
+#header .header_menu .top_search .search_main li dl dt {float:left;width:32px;padding:10px;}
+#header .header_menu .top_search .search_main li dl dt img {width:30px; border:1px solid #ccc;}
+#header .header_menu .top_search .search_main li dl dd {margin-left:37px;padding:10px 0;}
+#header .header_menu .top_search .search_main li dl dd h4 {margin-bottom:5px;color:#2a7fb8;font-size: 12px;}
 
-
-#header .header_menu .top_search .search_main li a{color:#666;}
 #header .header_menu .top_search .search_main li a b{color:#b51c16; font-weight:normal;}
-#header .header_menu .top_search .search_main li.search_list_title { text-indent: 10px; background-color:#eee;font-weight:bold;font-size:13px;height:30px;line-height: 30px;color:#666;}
-#header .header_menu .top_search .search_main li.search_all_keywords a {padding-left:0; text-align: center;width: 377px;}
+#header .header_menu .top_search .search_main li.search_list_title { text-indent: 10px; background-color:#f2f2f2;font-weight:bold;font-size:13px;height:30px;line-height: 30px;color:#666;border-bottom:1px solid #d9d9d9;position: relative;}
+#header .header_menu .top_search .search_main li.search_list_title a.search_more_link {position: absolute;right:10px;top:0;width:auto;font-weight: normal;color:#2a7fb8;}
+#header .header_menu .top_search .search_main li.search_all_keywords {background-color: #fafafa;height:35px;line-height: 35px;}
+#header .header_menu .top_search .search_main li.search_all_keywords a {padding-left:0; text-align: center;width: 100%;color:#005eac}
+#header .header_menu .top_search .search_main li.search_all_keywords a span {font-size:10px;font-family:'Arial'}
 #header .header_menu .top_search .use_hign_search{float:left; background:#eee; border:1px solid #999; border-top:1px solid #ccc; padding:6px 35px 8px 47px;_padding:6px 34px 8px 47px;}
 #header .header_menu .top_search .use_hign_search a{width:72px; color:#1651a0;}
 #header .header_menu .top_search{float: left; margin: 14px 0px 0px 75px; display: inline; position: relative;}

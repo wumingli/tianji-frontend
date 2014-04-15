@@ -7,15 +7,12 @@
     <div class="header_menu"> <span class="logo png_ie6"><a href="http://www.tianji.com/home">天际网</a></span>
       <div class="top_search">
         <div class="search_home"> <span class="search_icon"></span> <span class="search_up"></span> </div>
-        <form action="http://search.tianji.com/psearch">
-            <input type="text" value="搜索" id="new_search_input" class="find_people" name="header_keyword" autocomplete="off" />
-            <input name="header_destination" type="hidden" value="name">
-            <input type="submit" class="find_people_button" value="" />
-            <div class="search_list bottom_bg" style="display: none;" >
-              <ul class="search_main">
-              </ul>
-            </div>
-        </form>
+        <input type="text" value="搜索" id="new_search_input" class="find_people" autocomplete="off" />
+        <input type="button" class="find_people_button" value="" />
+        <div class="search_list">
+          <ul class="search_main">
+          </ul>
+        </div>
       </div>
       <div class="user_info">
         <div class="user_poster">
@@ -35,7 +32,11 @@
       <div class="header_menus">
         <ul class="left_menu" >
           <li> <a href="http://www.tianji.com/home">首页</a> </li>
-          <li> <a href="http://www.tianji.com/p" class="popup-login">我的档案</a> </li>
+          <li> <a href="http://www.tianji.com/p" class="popup-login">我的档案</a>
+            <div class="more_panel" style="display:none;">
+              <dl class="list_item"><a href="http://www.tianji.com/hr?from=tianji" class="popup-login">职场V力</a></dl>
+            </div>
+          </li>
           <li> <a href="http://www.tianji.com/contacts" class="popup-login">人脉</a> </li>
           <li> <a href="http://job.tianji.com/career/index?from=tianji" class="popup-login">职位</a>
                 <div class="more_panel" style="display:none;">

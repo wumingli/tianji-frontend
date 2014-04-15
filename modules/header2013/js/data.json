@@ -1,41 +1,63 @@
 {
-    "paging": {
-        "current_page": 1,
-        "elt_per_page": 3,
-        "total_pages": 1,
-        "total_results": 9
+    "userList": {
+        "url": "",
+        "datas": [{
+            "imageUrl": "http://image.tianji.com/u/47495090/1051853-s.jpg",
+            "nickName": "jeffrey65",
+            "userId": 47495090,
+            "headline": "23F拥有者",
+            "userName": "Jeffrey"
+        }, {
+            "imageUrl": "http://static.tianji.com/images/logos/user/medium_logo.png",
+            "userId": 47731463,
+            "headline": "Studying in EMBA ISUGA",
+            "userName": "Jerome Guillou"
+        }, {
+            "imageUrl": "http://static.tianji.com/images/logos/user/medium_logo.png",
+            "userId": 47733279,
+            "headline": "北京朝阳实业任销售经理北京朝阳实业任销售经理北京朝阳实业任销售经理",
+            "userName": "John"
+        }]
     },
-    "users": [{
-        "user_id": 8438845,
-        "distance": 2,
-        "name": "李良召(java)"
+    "corpList": [{
+        "square_logo_url": {
+            "feed": "http://static.tianji.com/images/new_companies/image/photo_2.jpg"
+        },
+        "corp_region": "",
+        "name": "JDU集团",
+        "id": 118317,
+        "size": "9"
     }, {
-        "user_id": 10985941,
-        "distance": 0,
-        "name": "Java"
+        "square_logo_url": {
+            "feed": "http://static.tianji.com/images/new_companies/image/photo_2.jpg"
+        },
+        "corp_region": "",
+        "name": "JC舞蹈训练营",
+        "id": 99133,
+        "size": "2"
     }, {
-        "user_id": 467061,
-        "distance": 0,
-        "name": "黄鹏（招java高手）"
+        "square_logo_url": {
+            "feed": "http://static.tianji.com/images/new_companies/image/photo_2.jpg"
+        },
+        "corp_region": "",
+        "name": "Jupiter",
+        "id": 20785,
+        "size": "3"
     }],
-    "corps": [{
-        "company_id": 882213,
-        "company_name": "java"
+    "jobList": [{
+        "imageUrl": "http://static.tianji.com/upload/corps/cp_logo/000/756/222/feed_36893a537300dd97bab92ca496aaea8a.png",
+        "companyName": "北京华源格林科技有限公司",
+        "title": "JAVA工程师",
+        "jobId": 36765
     }, {
-        "company_id": 3175358,
-        "company_name": "sun java"
+        "imageUrl": "http://static.tianji.com/upload/corps/cp_logo/000/038/823/feed_41a149da750d7c65657d3df025bbf134.png",
+        "companyName": "深圳市中润四方信息技术有限公司",
+        "title": "JAVA开发工程师",
+        "jobId": 33499
     }, {
-        "company_id": 4598874,
-        "company_name": "JAVA工程师。"
-    }],
-    "jobs": [{
-        "job_id": 27061,
-        "title": "JAVA工程师"
-    }, {
-        "job_id": 27591,
-        "title": "Java工程师"
-    }, {
-        "job_id": 30389,
-        "title": "java工程师"
+        "imageUrl": "http://static.tianji.com/images/new_companies/image/photo_2.jpg",
+        "companyName": "秦皇岛尚鳞食品有限公司北京分公司",
+        "title": "JAVA系统架构师",
+        "jobId": 36611
     }]
 }

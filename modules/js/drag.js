@@ -25,10 +25,10 @@
             var maxT = document.documentElement.clientHeight - $box.height();
 
             iLeft = iLeft < 0 ? 0 : iLeft;
-            iTop = iTop < 0 ? 0 : iTop;
+            //iTop = iTop < 0 ? 0 : iTop;
 
             iLeft = iLeft > maxL ? maxL : iLeft;
-            iTop = iTop > maxT ? maxT : iTop;
+            //iTop = iTop > maxT ? maxT : iTop;
 
             $box.css({
                 left: iLeft,

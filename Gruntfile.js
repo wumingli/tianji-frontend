@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
     var pkg = grunt.file.readJSON('package.json');
+    console.log(grunt.cli.tasks[0]);
     //industry json file create
     var jsonIndustry = grunt.file.read('modules/msPickMap/js/industryDataMap.js');
     eval(jsonIndustry);
@@ -356,6 +357,20 @@ module.exports = function(grunt) {
             build: ['dist', 'compress'],
             tempDir: ['.build'],
             publicRep: ['dist/public', 'dist/js']
+        },
+        //压缩图片
+        imagemin: {
+            static: {
+                options: {
+                    optimizationLevel: 3
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'images/',
+                    src: ['*.png'],
+                    dest: 'dist/imagesTest'
+                }]
+            }
         }
     });
     //加载任务
@@ -367,10 +382,21 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-scp');
     grunt.loadNpmTasks('grunt-release');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
     //执行任务
+    grunt.registerTask('test', [], function() {
+        var pkg1 = grunt.file.read('package.json')
+        grunt.file.write('package1.json', pkg1.replace('version', pkg.version));
+        console.log('test end.');
+    });
+    grunt.registerTask('version', function() {
+        console.log(pkg.version);
+    });
     grunt.registerTask('clear', ['clean']);
     grunt.registerTask('build', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'clean:publicRep', 'compress', 'clean:tempDir']);
     grunt.registerTask('deploy', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:qa', 'scp:406', 'scp:407', 'scp:409', 'scp:4013', 'scp:4014', 'clean:tempDir']);
-    grunt.registerTask('deploy405', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:405', 'clean:tempDir']);
+    grunt.registerTask('deploy-7-13', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:407', 'scp:4013', 'clean:tempDir']);
+    grunt.registerTask('deploy4010', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:4010', 'clean:tempDir']);
     grunt.registerTask('rel', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'clean:publicRep', 'compress', 'release', 'scp:release', 'clean:tempDir']);
+    grunt.registerTask('image', ['imagemin:static']);
 }

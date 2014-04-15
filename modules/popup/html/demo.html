@@ -3,28 +3,62 @@
 <head>
     <meta charset="utf-8" />
     <title>popup demo</title>
-    <link href="../../../styles/reset.css" rel="stylesheet" type="text/css" />
-    <link href="../css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../../../gallery/jquery-1.7.2.min.js"></script>
+    <link href="http://image.tianji.com/tjs/styles/reset.css" rel="stylesheet" type="text/css" />
+    <!--<link href="../css/style.css" rel="stylesheet" type="text/css" />-->
+    <script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="../js/popup.js"></script>
 </head>
 <body>
     <div style="padding:30px;">
-       <a href="javascript:void(0);" id="popup">弹出层链接</a> <br>
-       <input type="button" id="btn" value="弹出屋按钮" style="width:100px;height:40px;background:#06c;color:#fff;margin-top:10px;border-radius: 5px; cursor: pointer;" />
+       <a href="javascript:void(0);" id="popup">弹出层链接</a> | <a href="api.html">API文档</a><br>
+       <input type="button" id="btn" value="弹出屋按钮" style="width:100px;height:30px;background:#06c;color:#fff;margin-top:10px;border-radius: 5px; cursor: pointer;" />
+       <a href="javascript:void(0)" id="testLink" style="display:none;">test</a><br>
+       
     </div>
     
     <script type="text/javascript">
-        $('#popup').tianjiPopup({
-            //title: '天际弹出层插件测试Demo'
-            escClosed: false,
+        $('#popup,#testLink').tianjiPopup({
+            title: '为您推荐Ta的人脉',
+            noDataTip: '您已全部添加成功！',
+            noDataNodeClass: 'no_data_tip_happy',
+            //esc: false,
             boxWidth: 700,
             boxHeight: 310,
-            showTitle: false
+            //enabled: false,
+            //autoPlay: false,
+            pageTabMethod: 'click',
+            showPage: false,
+            content: {
+                type: 'ajaxData',
+                dataUrl: '../js/career_trip.json',
+                style: '#tianjiPopupContainer .popup_list li{color:#333; font-size: 15px; font-family: "微软雅黑"; width: 477px; height:200px; float: left; margin:31px 0 0 0; line-height:30px; } #tianjiPopupContainer .popup_list li span{width: 304px; float: right; margin-top: 25px;margin-right:90px;}#tianjiPopupContainer .popup_list li.experience{background: url(../images/experience_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.zan{background: url(../images/zan_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.popular{background: url(../images/popular_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.recomment{background: url(../images/recomment_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.date{background: url(../images/date_bg.jpg) no-repeat 100px center;}#tianjiPopupContainer .popup_list li.friend{background: url(../images/friend_bg.jpg) no-repeat 100px 15px;}#tianjiPopupContainer .popup_list li.friend span{margin-top: 25px;}#tianjiPopupContainer .popup_list li.xueba{background: url(../images/xueba_bg.jpg) no-repeat 100px center; }#tianjiPopupContainer .popup_list li i{color:#e67e22; font-style: normal;}#tianjiPopupContainer h3 i {font-style:normal;color:#3992cd;margin-right:5px;}'
+            },
+            whenClick: function() {
+                //this.enabled = false;
+                //alert('popup will be shown')
+            },
+            whenClose: function(){
+                this.enabled = false
+                //alert(this.title)
+            },
+            boxLoad: function(){
+                $('#tianjiPopupContainer .popup_list li').on('click', function(){
+                    alert($(this).html())
+                })
+            }
         });
+        //$('#testLink').trigger('click');
         $('#btn').tianjiPopup({
             title: '天际弹出层插件测试Demo',
-            dragable: false
+            //showTitle: false,
+            //autoPlay: false,
+            //esc: false,
+            boxWidth: 700,
+            boxHeight: 310,
+            whenClick: function() {
+                //this.enabled = false;
+                //alert('popup will be shown')
+            }
         });
     </script>
 </body>

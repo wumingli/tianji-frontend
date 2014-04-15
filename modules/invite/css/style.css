@@ -1,6 +1,9 @@
-#inviteBox { background: #fff; font-size:14px; /*border-radius: 3px; box-shadow:1px 1px 1px 1px #e2e2e2; */z-index:99999;height:625px; width:860px;position: absolute; left:50%;margin-left:-430px;/*top:50%;margin-top:-310px;*/ top:20px;}
+#inviteBox { background: #fff; font-size:14px; /*border-radius: 3px; box-shadow:1px 1px 1px 1px #e2e2e2; */z-index:999999;height:625px; width:860px;position: absolute; left:50%;margin-left:-430px;/*top:50%;margin-top:-310px;*/ top:20px;}
 #inviteBox h3 {font: bold 14px/50px "Microsoft Yahei";height:50px; text-indent: 10px; background:#eee; color:#797979;position: relative;z-index: 2;}
-#inviteBox_shandow {min-height:800px; width:100%; background: #000; opacity: 0.6; filter:alpha(opacity=50);position: absolute;z-index: 99998;left:0; top:0;}
+#inviteBox h3 strong, #inviteBox h3 span {display:block;float:left;}
+#inviteBox h3 span {font:normal 12px/22px 'Simsun';border:1px solid #ccc;background-color:#fff4cc;height:22px;padding-right:10px;margin:14px 0 0 8px;position: relative;color:#666;}
+#inviteBox h3 span i {display:block;float:left;width:6px;height:24px; background: url(../images/titleTipArr.png) no-repeat;position: absolute;left:-6px;}
+#inviteBox_shandow {min-height:800px; width:100%; background: #000; opacity: 0.6; filter:alpha(opacity=50);position: absolute;z-index: 999998;left:0; top:0;}
 #inviteBoxLeftCon {background: #999;width:210px;float:left;height: 100%; position: relative; z-index: 1; top:-50px;}
 #inviteTab {margin-top:60px;}
 #inviteTab li {padding-left:35px;border-left: 6px solid #999; cursor: pointer;}
@@ -22,13 +25,13 @@
 #inviteBoxRightNav li:hover, #inviteBoxRightNav li.currentTab {border-bottom:2px solid #f8725a; color:#222;}
 #otherGroupList {display: none;}
 #inviteBoxRightTopCon .otherGroupCon {position: absolute; right: 20px; bottom:10px;border:1px solid #ccc; padding:5px 10px; border-radius: 2px; font-size: 12px; color:#5f5f5f;}
-#inviteBoxRightInnerCon .letterNav { margin: 15px 0 20px 20px; font-family: "Arial";}
+#inviteBoxRightInnerCon .letterNav { margin: 15px 0 20px 20px; font-family: "Arial";display:none;}
 #inviteBoxRightInnerCon .letterNav li {float:left;}
 #inviteBoxRightInnerCon .letterNav li span {font-weight: bold; cursor: not-allowed; padding:0 5px;  color:#999;}
 #inviteBoxRightInnerCon .letterNav li.hasContent span {color:#f8725a;cursor: pointer;}
 #inviteBoxRightInnerCon .letterNav li.currentTab span {text-decoration: underline;cursor: default;}
 #inviteBoxRightInnerCon {float:left;width:640px;height:360px;overflow: hidden;margin-top:10px;}
-#inviteBoxRightInnerCon dl {float:left; background: #fff; width: 180px; height:60px;margin: 20px 0 0 25px;cursor: pointer;}
+#inviteBoxRightInnerCon dl {float:left; background: #fff; width: 180px; height:60px;margin: 12px 0 0 25px;cursor: pointer;}
 #inviteBoxRightInnerCon dl dt {float:left;width:64px;text-align: center;}
 #inviteBoxRightInnerCon dl dt img {margin-top: 10px;border-radius: 3px;}
 #inviteBoxRightInnerCon dl dd {margin-left:64px;font: 12px/12px "Microsoft Yahei";position: relative;}
@@ -43,13 +46,13 @@
 #inviteBoxPageCon span {background: #fff; border-radius:2px;color:#8c9499;padding:6px 8px; cursor: pointer; font-family: "Arial"; margin-left:5px;}
 #inviteBoxPageCon span:hover, #inviteBoxPageCon span.currentTab {background: #5dade2; color:#fff;}
 
-#inviteBoxRightBottomCon {background: #fff;width:650px;height:75px; position: absolute;bottom:0;right:0;}
+#inviteBoxRightBottomCon {background: #fff;width:650px;height:75px; position: absolute;bottom:0;right:0;display:none;}
 #inviteBoxRightBottomCon label, #inviteBoxRightBottomCon p, #inviteBoxRightBottomCon a {float:left;margin: 30px 0 0 45px; font: 14px/14px "Microsoft Yahei"; color:#999; }
 #inviteBoxRightBottomCon label {cursor: pointer;}
 #inviteBoxRightBottomCon label span {display: block;width:18px;height:18px; background: #dadada url(../images/btns.png) -50px 0 no-repeat;float:left;margin-right:5px;}
 #inviteBoxRightBottomCon p span {color:#f8725a;padding:0 3px;}
 #inviteBoxRightBottomCon label span.currentTab {background-position:-32px 0;}
-#inviteBox .rightConBox .subBtn {display:block;width:130px;height:36px;color:#fff;border:none;cursor: pointer; background: #f8725a;border-radius: 3px; font-size:16px;position: absolute;top:20px; left:260px;float:none;margin:0;text-align: center;line-height: 36px;}
+#inviteBox .rightConBox .subBtn {display:inline-block;width:130px;height:36px;color:#fff;border:none;cursor: pointer; background: #f8725a;border-radius: 3px; font-size:16px;position: absolute;top:20px; left:260px;float:none;margin:0;text-align: center;line-height: 36px;}
 #inviteBox .rightConBox .subBtn:hover {text-decoration: none;}
 
 /*邀请*/
@@ -57,7 +60,8 @@
 #inviteBox .rightConBox .quickCon .subBtn {position: inherit;height:30px;line-height: 30px;font-size: 12px;}
 #inviteBox .rightConBox .quickCon p {padding-bottom:15px;}
 #inviteBox .rightConBox .quickCon ul li {height:40px;}
-#inviteBox .rightConBox input {border: 1px solid #c2c2c3;color: #999; font-size: 12px;height: 28px;line-height: 28px;outline: medium none;text-indent: 8px;width: 75%;}
+#inviteBox .rightConBox input {border: 1px solid #c2c2c3;color: #999; font-size: 12px;height: 28px;line-height: 28px;outline: medium none;text-indent: 8px;width: 70%;}
+#inviteBox .rightConBox .quickCon .email_error {color:#f30;font-size:12px;margin-left:5px;}
 #inviteBox .rightConBox .quickCon hr {height:0px;border-top:1px solid #ccc;width:90%;display: block;margin:15px 0;}
 #inviteBox .rightConBox .quickCon p.grayText {font-size:12px;padding-top: 10px;color:#888;}
 /*--弹窗  邀请我的站外好友   ————邮箱....pop_invite   start--*/

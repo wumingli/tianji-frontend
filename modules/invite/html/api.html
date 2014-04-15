@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>好友邀请控件API文档</title>
+<link href="http://image.tianji.com/tjs/styles/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://image.tianji.com/tjs/invite/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="http://static.oschina.net/js/syntax-highlighter-2.1.382/scripts/brush.js"></script>
+<!--<script type="text/javascript" src="http://image.tianji.com/tjs/popup/js/popup.min.js"></script>-->
+<link type="text/css" rel="stylesheet" href="http://static.oschina.net/js/syntax-highlighter-2.1.382/styles/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="http://static.oschina.net/js/syntax-highlighter-2.1.382/styles/shThemeDefault.css"/>
+<style type="text/css" media="screen">
+    h1 {height:50px;padding-left:15px;background:#eee;font:bold 18px/50px 'Microsoft Yahei';margin:20px 10px;}
+    pre {padding-left:10px;}
+    p.info { background-color: #f7f7f7; margin: 10px; padding:10px; font-size: 14px; line-height: 25px;}
+    table {background-color: #ccc;border-collapse:inherit;border-spacing: 1px;margin:20px 0 20px 10px;}
+    td, th {background-color: #fff;height:30px;padding-left: 10px;font:normal 14px/30px "Arial";}
+    th {background-color: #e5e5e5;font-weight: bold;}
+    strong {font-weight: 700;}
+</style>
+
+<script type="text/javascript" src="http://image.tianji.com/tjs/invite/js/invite.js"></script>
+</head>
+<body>
+<h1>好友邀请控件API</h1>
+<p class="info">
+    <a href="demo.html" title="进入Demo">Demo地址</a><br />
+    <strong>页面需引入</strong><br />
+    CSS: http://image.tianji.com/tjs/invite/css/style.min.css<br>
+    JS: http://image.tianji.com/tjs/invite/js/invite.min.js 
+</p>
+<pre class="brush:html">
+    &lt;link href="http://image.tianji.com/tjs/invite/css/style.min.css" rel="stylesheet" type="text/css" /&gt;
+    &lt;script type="text/javascript" src="http://image.tianji.com/tjs/invite/js/invite.min.js"&gt;&lt;/script&gt;
+</pre>
+<p class="info">
+  插件配置参数如下：
+</p>
+<pre class="brush:javascript">
+  $(function(){
+        $('.inviteBtn').inviteBox({
+            title: '这里是自定义邀请标题，你可以把它写的很长很长', //自定义标题，默认值【邀请我的好友】
+            titleTip: '邀请好友有机会获得中国政法大学MBA教育中心邀约奖励', //titleTip会出现在标题右侧，以Tip形式展示，详见Demo
+            shandowable: false, //是否显示遮罩层，可选值：true/false，默认值：true
+            dragable: false,  //是否可拖动，可选值：true/false，默认值：false
+            position: 'absolute', //定位方式，可选值：'absolute,fixed'，默认：fixed
+            multiple: false, //单选、复选
+            leftTabList: ['tianji','friend'], //左侧文字列表，若为数组，支持选项：tianji,friend,weibo,quick，分别代表“站内好友”、“站外好友”、“微博好友”、“快速邀请”（发邮件）；
+            //若为对象，可自定义文字，如下【注：对象只支持tianji,friend,weibo,quick四个选项】：
+            /*leftTabList: {
+                weibo: '邀请我的微博好友',
+                tianji: '站内好友',
+                friend: '通过邮件邀请'
+            },*/
+            enabled: true, //是否启用，默认true
+            escToClose: true, //ESC键关闭弹出层，默认true
+            showTitle: true, //默认显示标题栏，false不显示标题栏
+            //站内好友数据源
+            tianjiDataSource: 'http://www.tianji.com/ajax/friends/friendjson', 
+            //微博好友数据源
+            weiboDataSource: 'http://www.tianji.com/ajax/friends/friendjson', 
+            //邀请链接，可自定义。默认为当前页面URL
+            inviteUrl: 'http://www.baidu.com/', 
+            tianjiMax: 3, //站内好友最多可选择数目，当为复选时可用；默认不限制
+            weiboMax: 5, //微博好友最多可选择数目，当为复选时可用；默认不限制
+            //广告数据，图片大小为150*190，若要调整可能需要修改样式
+            //adList默认为空，即不显示广告。支持以如下JSON数组格式传入，title/url/img；自动分页
+            adList: [{
+                title: '描述文字111111',
+                url: 'http://www.baidu.com',
+                img: 'http://static.tianji.com/images/evaluation/lo_adchange_1.jpg'
+            },{
+                title: '描述文字222222',
+                url: 'http://www.tianji.com',
+                img: 'http://static.tianji.com/images/evaluation/lo_adchange_2.jpg'
+            },{
+                title: '描述文字333333',
+                url: 'http://www.baidu.com',
+                img: 'http://static.tianji.com/images/evaluation/lo_adchange_1.jpg'
+            },{
+                title: '描述文字222222',
+                url: 'http://www.tianji.com',
+                img: 'http://static.tianji.com/images/evaluation/lo_adchange_2.jpg'
+            }],
+            inviteTitle: '测试邀请发送标题',  //邮件标题，默认值【来自天际网的邀请】
+            inviteContent: '测试邀请发送内容',  //邮件内容，默认值【您好，这里是来自天际网的邀请】
+            //站内好友确认按钮回调函数
+            ok: function(){
+                //所选微博好友ID串存储在tianjiIDs数组中
+                alert(this.inviteTitle + '\n' + this.inviteContent + '\n' + '选中的好友ID串：' + this.tianjiIDs);
+                this.enabled = false;
+                this.closeBox();  //关闭弹窗请回调this.closeBox函数
+            },
+            //微博好友确认按钮回调函数
+            wbOk: function(){
+                alert(this.weiboIDs); //所选微博好友ID串存储在weiboIDs数组中
+            },
+            //弹出邀请框前执行函数
+            whenClick: function(){
+                alert('before show invite box');
+            },
+            //关闭时执行的函数
+            whenClose: function(){
+                alert('when invite box is closed');
+            },
+            //快速邀请的邀请铵钮响应事件
+            emailOk: function(){
+              alert(this.emailList);
+              this.closeBox();
+            }
+        });
+        $('#btn').inviteBox({
+            title: '邀请好友对我进行认证',
+            position: 'absolute',
+            dragable: true,
+            inviteUrl: 'http://www.baidu.com',
+            leftTabList: {
+                tianji: '站内好友',
+                weibo: '邀请我的微博好友',
+                friend: '通过邮件邀请',
+                quick: '快速邀请'
+            },
+            /*leftTabList: 1,*/
+            //showCloseBtn: false,
+            wbOk: function(){
+                alert(this.weiboIDs)
+            },
+            ok: function(){
+                //alert(this.tianjiIDs);
+                alert(this.inviteTitle + '\n' + this.inviteContent + '\n' + '选中的好友ID串：' + this.tianjiIDs);
+                this.enabled = true;
+                this.closeBox();
+            }
+        });
+    });
+</pre>
+<h1>Demo地址：</h1>
+<p class="info">
+  <a href="http://image.tianji.com/tjs/invite/html/demo.html" title="进入Demo"><img src="../images/pic.png" ></a> <br />
+</p>
+<script type="text/javascript">
+    $(document).ready(function(){
+        SyntaxHighlighter.config.clipboardSwf = 'http://static.oschina.net/js/syntax-highlighter-2.1.382/scripts/clipboard.swf';
+        SyntaxHighlighter.all();
+    });
+</script>
+</body>
+</html>

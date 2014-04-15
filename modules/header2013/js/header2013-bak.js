@@ -20,7 +20,6 @@ $(function() {
     var isIE6 = ($.browser.msie && $.browser.version == 6.0);
     var isEn = ($('#header .header_menu_two ul.left_menu li:eq(0)').find('a').text() == 'Home');
     var searchValue = '';
-    var isLogin = false;
     //var DD_belatedPNG = DD_belatedPNG || false;
     //页面代码迁移——IE6透明&tipsy
     if (isIE6) {
@@ -43,6 +42,149 @@ $(function() {
         $(this).find('.arrow-ud').removeClass('arrow-ud_hover');
         $(this).find('.user_item').css('display', 'none');
     });
+    //获取string长度
+    String.prototype.length2 = function() {
+        var cArr = this.match(/[^\x00-\xff]/ig);
+        return this.length + (cArr == null ? 0 : cArr.length);
+    }
+    /*原搜索
+    $(".find_people").focus(function() {
+        $(this).addClass('find_bg');
+        $(this).parents('.top_search').find('.find_people_button').addClass('find_btn_bg');
+        if ($(this)[0].defaultValue == $(this).val()) {
+            $(this).val('');
+        }
+    });
+    $(".find_people").keyup(function() {
+        searchValue = $(this).val();
+    });
+    $(".find_people").blur(function() {
+        $(this).removeClass('find_bg');
+        $(this).parents('.top_search').find('.find_people_button').removeClass('find_btn_bg');
+        if ($.trim($(this).val()) == '') {
+            if (isEn) {
+                $(this).val('Search');
+            } else {
+                $(this).val('搜索');
+            }
+        }
+    });
+    $('.top_search form').submit(function() {
+        $(this).find('.find_people_button').val('');
+        if (searchValue === '') {
+            $(".find_people").val('');
+        }
+    });
+    window.SearchBox = {
+        selectors: {
+            root: $(".top_search"),
+            input: $(".top_search form :text:first"),
+            box: $(".search_list"),
+            highlight: $(".search_main li a b")
+        },
+        keyCode: {
+            UP: 38,
+            DOWN: 40
+        },
+        defalutText: "",
+        host: "http://search.tianji.com/psearch",
+        init: function() {
+            this._bind();
+            return this;
+        },
+        _bind: function() {
+            this.selectors.input.bind("blur", this._hide).bind("keyup", this._keyup);
+            this.selectors.input.bind("input", this._keyup);
+            this.selectors.box.bind("click", this._hide);
+            this.selectors.box.hover(function() {
+                SearchBox.selectors.input.unbind("blur");
+            }, function() {
+                SearchBox.selectors.input.bind("blur", SearchBox._hide);
+            });
+        },
+        _keyup: function(e) {
+            switch (e.which) {
+                case 38:
+                    SearchBox._up();
+                    break;
+                case 40:
+                    SearchBox._down();
+                    break;
+                case 13:
+                    SearchBox._input();
+                    this._hide;
+                    break;
+                default:
+                    SearchBox._input();
+                    break;
+            }
+            SearchBox._select();
+        },
+        _show: function() {
+            SearchBox.selectors.box.show();
+        },
+        _hide: function() {
+            SearchBox.selectors.box.hide();
+        },
+        _up: function() {
+            if ($(".search_list li.current:last").index(".search_list li") > 0) {
+                $(".search_list li.current").removeClass("current").prev("li").addClass("current");
+            }
+        },
+        _down: function() {
+            if ($(".search_list li.current:last").index(".search_list li") < 3) {
+                $(".search_list li.current").removeClass("current").next("li").addClass("current");
+            }
+        },
+        _input: function() {
+            var str = SearchBox.selectors.input.val();
+            SearchBox._resetUrl(encodeURIComponent(str));
+            if (str.length == 0) {
+                SearchBox._hide();
+                SearchBox._resetHighlight();
+            } else {
+                SearchBox._show();
+                str = SearchBox._truncate(str, 13);
+                SearchBox.selectors.highlight.text(str);
+            }
+        },
+        _select: function() {
+            $(".top_search form :hidden[name=header_destination]").val($(".search_list li.current a").attr("data-range"));
+        },
+        // 截断字符
+        _truncate: function(str, len) {
+            var _omission = "…";
+            var _maxLength = len * 2;
+            var len2 = str.length2();
+            //如果用户输入的内容 字节数小于等于10， 则return 原字符串
+            if (len2 <= _maxLength) return str;
+
+            // 否则截断字符
+            // 截取前5个字符，判断字节数是否等于10，如果小于10则补进下一个字符，直到字节数为10,并添加omission
+            var _str = str.substring(0, len);
+            var _len2 = _str.length2();
+
+            while (_len2 < _maxLength) {
+                var _tmpStr = str.substring(0, len++);
+                _len2 = _tmpStr.length2();
+                //判断最后一个字符是中文的情况
+                if (_len2 > _maxLength) break;
+                _str = _tmpStr;
+            }
+            return _str + _omission;
+        },
+        _resetHighlight: function() {
+            SearchBox.selectors.highlight.text(SearchBox.defalutText);
+        },
+        _resetUrl: function(_str) {
+            $(".search_list ul li a[data-range]").each(function() {
+                $(this).attr("href", SearchBox.host + "?header_destination=" + $(this).attr("data-range") + "&header_keyword=" + _str);
+            });
+            $(".search_list .use_hign_search a").attr("href", "http://search.tianji.com/psearch?keyword=" + _str);
+        }
+    }
+    //初始化搜索
+    SearchBox.init();*/
     //标识当前频道
     var urlPath = window.location.pathname;
     var aUrlSplit = urlPath.split('/');
@@ -73,8 +215,8 @@ $(function() {
         $(this).children('a').removeClass('mover');
         $(this).children('.more_panel').stop().slideUp(100);
     });
-    //注册、登录链接
-    $('.user_unlogin_info a').attr('href', locLink);
+    //登录链接
+    $('.user_unlogin_info a:eq(0)').attr('href', $('.user_unlogin_info a:eq(0)').attr('href') + locLink);
     //设置Domain
     var hostname = window.location.hostname;
     var config = {
@@ -123,7 +265,6 @@ $(function() {
                                     $('.user_poster img').attr('src', uData['avatar']);
                                     $('.user_name .zi').text(name);
                                     $('.user_poster img,.user_name .zi').attr('title', uData['name'] + ', ' + uData['headline']);
-                                    isLogin = true;
                                 }
                             }
                         });
@@ -226,7 +367,7 @@ $(function() {
                                     }
                                     starHtml += '</ul>';
                                 }
-                                pHtml += '<li data-id="' + pDatas[i]['id'] + '"> <span class="logo1"><a href="http://www.tianji.com/p/' + pDatas[i]['id'] + '?origin=navigation_bar_pymk" target="_blank" class="goToProfile"><img src="' + pDatas[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/' + pDatas[i]['id'] + '?origin=navigation_bar_pymk" target="_blank" class="goToProfile">' + pDatas[i]['name'] + '</a> </span> ' + starHtml + ' <span class="name1_companies">' + headlineTxt + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="adds_btn">' + addTxt + '</a> <a href="javascript:void(0);" class="adds_btn_yi">' + sendTxt + '</a> </li>';
+                                pHtml += '<li data-id="' + pDatas[i]['id'] + '"> <span class="logo1"><a href="http://www.tianji.com/p/' + pDatas[i]['id'] + '" target="_blank" class="goToProfile"><img src="' + pDatas[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/' + pDatas[i]['id'] + '" target="_blank" class="goToProfile">' + pDatas[i]['name'] + '</a> </span> ' + starHtml + ' <span class="name1_companies">' + headlineTxt + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="adds_btn">' + addTxt + '</a> <a href="javascript:void(0);" class="adds_btn_yi">' + sendTxt + '</a> </li>';
                             }
                         } else {
                             $('#contacts_one_list .emails_panel').show();
@@ -278,7 +419,7 @@ $(function() {
                                     starHtml += '</ul>';
                                 }
                                 var headlineTxt = retData[i]['headline'] == null ? '' : retData[i]['headline'].substring(0, 17);
-                                returnHtml += '<li data-id="' + retData[i]['id'] + '" data-userID="' + retData[i]['userId'] + '"> <span class="logo1"><a href="http://www.tianji.com/p/' + retData[i]['userId'] + '?origin=navigation_bar_invitation" target="_blank" class="goToProfile"><img src="' + retData[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/' + retData[i]['userId'] + '?origin=navigation_bar_invitation" target="_blank" class="goToProfile">' + retData[i]['name'] + '</a> </span>' + starHtml + ' <span class="name1_companies">' + headlineTxt + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="agree_btn">' + acpTxt + '</a> </li>\n';
+                                returnHtml += '<li data-id="' + retData[i]['id'] + '" data-userID="' + retData[i]['userId'] + '"> <span class="logo1"><a href="http://www.tianji.com/p/' + retData[i]['userId'] + '" target="_blank" class="goToProfile"><img src="' + retData[i]['avatar'] + '" /></a></span> <span class="name1_title"> <a href="http://www.tianji.com/p/' + retData[i]['userId'] + '" target="_blank" class="goToProfile">' + retData[i]['name'] + '</a> </span>' + starHtml + ' <span class="name1_companies">' + headlineTxt + '</span> <span class="bi_x1"></span> <a href="javascript:void(0);" class="agree_btn">' + acpTxt + '</a> </li>\n';
                             }
                         }
                         //同意需要延时删除，不同意直接删除
@@ -388,7 +529,7 @@ $(function() {
                     var nameTitleHtml = $thisList.find('.name1_title').html();
                     var dataID = $thisList.attr('data-userID');
                     $thisList.find('.name1_title, .bi_x1, .agree_btn').hide();
-                    $thisList.find('.name1_companies').html('<a href="http://www.tianji.com/p/contacts/' + dataID + '" class="goToProfile" target="_blank">查看TA的联系人</a> | <a href="http://www.tianji.com/p/' + dataID + '?origin=navigation_bar_invitation" class="sendMessage" target="_blank">给TA写信</a>');
+                    $thisList.find('.name1_companies').html('<a href="http://www.tianji.com/p/contacts/' + dataID + '" class="goToProfile" target="_blank">查看TA的联系人</a> | <a href="http://www.tianji.com/p/' + dataID + '" class="sendMessage" target="_blank">给TA写信</a>');
                     $thisList.find('.name1_companies').before('<span class="name2_title">' + nameTitleHtml + '</span><span class="name2_companies">已成为你的人脉</span>');
                     concat($thisList, 'http://www.tianji.com/front/nav/accept_cr', 'put', 'agree');
                 }
@@ -561,11 +702,10 @@ $(function() {
                                     } else {
                                         nameStr = nDatas[i]['name'];
                                     }
-                                    var url = nDatas[i]['url'];
-                                    url = url.indexOf('/p/') === -1 ? url : url + '?origin=navigation_bar_notification';
+
                                     nameStr += nDatas[i]['content'] ? ' ' + nDatas[i]['content'] : ' 最近访问了你的档案';
                                     classStr = nDatas[i]['status'] == 0 ? ' class="bg_new"' : '';
-                                    retHtml += '<li> <a href="' + url + '" ' + classStr + ' data-ga="' + nDatas[i]['type'] + '" data-notice-id="' + nDatas[i]['id'] + '" target="_blank"> <span class="logo1"><img src="' + nDatas[i]['avatar'] + '" /></span> <span class="name1_title">' + nameStr + '</span> <span class="times">' + nDatas[i]['time'] + '</span> </a> </li>';
+                                    retHtml += '<li> <a href="' + nDatas[i]['url'] + '" ' + classStr + ' data-ga="' + nDatas[i]['type'] + '" data-notice-id="' + nDatas[i]['id'] + '" target="_blank"> <span class="logo1"><img src="' + nDatas[i]['avatar'] + '" /></span> <span class="name1_title">' + nameStr + '</span> <span class="times">' + nDatas[i]['time'] + '</span> </a> </li>';
                                 }
                                 $('#look_see2 .loding_notice').hide();
                                 $('#look_list2 .hd_scroll_box').show();
@@ -667,211 +807,10 @@ $(function() {
             //人脉邀请链接： addGaTrach('notification_bar','GoToInvite','CR');
         }, 800);
     }
-    //新搜索
-    var $searchInput = $('#new_search_input');
-    var searchTimer = null;
-    var arrFnKeyCode = [9, 17, 18, 19, 20, 27, 35, 36, 37, 38, 39, 40, 42, 43, 45, 46, 47];
-    var searchSelectedIndex = -1;
-    var timerSearchList = null;
-    var timerGetDropbox = null;
-    var inputChanged = false;
-    //跳到搜索
-    function gotoSearch() {
-        if (inputChanged) {
-            if (isLogin) {
-                window.location.href = 'http://search.tianji.com/psearch?name=' + $.trim($searchInput.val()) + '&requestFrom=headerSearch';
-            } else {
-                window.location.href = 'http://search.tianji.com/search/n/' + $.trim($searchInput.val());
-            }
-        } else {
-            $searchInput.focus();
-        }
-    }
-    //清除计时器
-    function clearTimers() {
-        searchTimer && clearTimeout(searchTimer);
-        timerSearchList && clearTimeout(timerSearchList);
-    }
-    $('.find_people_button').on('click', function() {
-        gotoSearch();
-    });
-    $searchInput.on({
-        focus: function() {
-            clearTimers();
-            $(this).addClass('find_bg');
-            $(this).siblings('.find_people_button').addClass('find_btn_bg');
-
-            if ($(this)[0].defaultValue == $(this).val()) {
-                $(this).val('');
-            }
-            if ($.trim($(this).val()) === '') {
-                $('.search_list').hide();
-            } else if ($('.search_list').find('.search_result_item').length > 1) {
-                $('.search_list').slideDown();
-            }
-            timerGetDropbox = setTimeout(function() {
-                if (!window.findDropBoxDataName) {
-                    $.getScript('http://image.tianji.com/tjs/dropBox/js/tjDropBox.min.js');
-                }
-            }, 100);
-        },
-        blur: function() {
-            clearTimers();
-            $(this).removeClass('find_bg');
-            $(this).parents('.top_search').find('.find_people_button').removeClass('find_btn_bg');
-            if ($.trim($(this).val()) == '') {
-                if (isEn) {
-                    $(this).val('Search');
-                } else {
-                    $(this).val('搜索');
-                }
-            }
-            timerSearchList = setTimeout(function() {
-                $('.search_list').slideUp();
-            }, 500);
-        },
-        keydown: function() {
-            clearTimers();
-            inputChanged = true;
-        },
-        keyup: function(e) {
-            clearTimers();
-            //如果为空，直接返回
-            if ($.trim($searchInput.val()) === '') {
-                $('.search_list').hide().find('.search_main li').remove();
-                inputChanged = false;
-                return false;
-            }
-            e = e || window.event;
-            var code = e.keyCode;
-            var $searchResultItem = $('.search_main').find('.search_result_item');
-            //ESC TAB键关闭联想
-            if (code === 27 || code == 9) {
-                if ($('.search_list').is(':visible')) {
-                    $('.search_list').hide();
-                    searchSelectedIndex = -1;
-                    $searchResultItem.removeClass('current');
-                }
-            }
-            searchValue = $searchInput.val();
-            //上下键选择
-            if ($('.search_list').is(':visible')) {
-                if (code === 38 || code === 40) {
-                    code === 38 ? (searchSelectedIndex--) : (searchSelectedIndex++);
-                    if (searchSelectedIndex === -1) {
-                        searchSelectedIndex = $searchResultItem.length;
-                    } else if (searchSelectedIndex === $searchResultItem.length) {
-                        searchSelectedIndex = 0;
-                    }
-                    var $currentSearchTab = $searchResultItem.eq(searchSelectedIndex);
-                    $currentSearchTab.addClass('current').siblings('.search_result_item').removeClass('current');
-                    //$searchInput.val($currentSearchTab.find('a').attr('title'));
-                }
-            }
-            if (code === 13) {
-                $('.search_list').hide();
-                if (searchSelectedIndex !== -1) {
-                    window.location.href = $('.search_main').find('.search_result_item').eq(searchSelectedIndex).find('a').eq(0).attr('href');
-                } else {
-                    gotoSearch();
-                }
-                return false;
-            }
-            if (!e.shiftKey && $.inArray(code, arrFnKeyCode) !== -1) {
-                return;
-            }
-            searchTimer = setTimeout(function() {
-                var searchVal = $.trim($searchInput.val());
-                $.ajax('http://search.tianji.com/search360', {
-                    //$.ajax('../js/data.json', {
-                    dataType: 'jsonp',
-                    //jsonpCallback: '_getResult',
-                    /**/
-                    //dataType: 'json',
-                    type: 'get',
-                    data: {
-                        keyword: searchVal //encodeURIComponent()
-                    },
-                    success: function(data) {
-                        if (data === null) {
-                            $('.search_main li').remove();
-                            $('.search_list').hide();
-                            return;
-                        }
-                        if ($.trim($searchInput.val()) === '') {
-                            $('.search_list').hide().find('.search_main li').remove();
-                            inputChanged = false;
-                            return;
-                        }
-                        var html = '';
-                        var strNameMore = '',
-                            strCompanyMore = '',
-                            strJobMore = '';
-                        var strNameLink = '';
-                        if (isLogin) {
-                            strNameMore = 'http://search.tianji.com/psearch?name=' + searchVal + '&requestFrom=headerSearch';
-                            strCompanyMore = 'http://search.tianji.com/psearch?company=' + searchVal + '&requestFrom=headerSearch';
-                            strJobMore = 'http://search.tianji.com/psearch?title=' + searchVal + '&requestFrom=headerSearch';
-                        } else {
-                            strNameMore = 'http://search.tianji.com/search/n/' + searchVal;
-                            strCompanyMore = 'http://search.tianji.com/search/c/' + searchVal;
-                            strJobMore = 'http://search.tianji.com/search/t/' + searchVal;
-                        }
-                        //重新请求数据后，searchSelectedIndex重置
-                        searchSelectedIndex = -1;
-                        if (data['userList']) {
-                            html += '<li class="search_list_title">按姓名搜索<a class="search_more_link" href="' + strNameMore + '">更多&gt;&gt;</a></li>';
-                            for (var u = 0; u < data['userList'].length; u++) {
-                                var uData = data['userList'][u];
-                                var headLine = uData['headline'];
-                                var userLink = '';
-                                if (isLogin) {
-                                    userLink = 'http://www.tianji.com/p/' + uData['userId'];
-                                } else {
-                                    userLink = 'http://www.tianji.com/profile/' + (uData['nickName'] || uData['userName']);
-                                }
-                                html += '<li class="search_result_item"><a href="' + userLink + '" title="' + uData['userName'] + ',' + headLine + '"><dl><dt><img src="' + uData['imageUrl'] + '" /></dt><dd><h4>' + uData['userName'] + '</h4><p>' + headLine.substring(0, 18) + '</p></dd></dl></a></li>';
-                            }
-                        }
-                        if (data['corpList']) {
-                            html += '<li class="search_list_title">按公司搜索<a class="search_more_link" href="' + strCompanyMore + '">更多&gt;&gt;</a></li>';
-                            for (var c = 0; c < data['corpList'].length; c++) {
-                                var cData = data['corpList'][c];
-                                var logo = cData['square_logo_url']['feed'];
-                                var cSize = '';
-                                var region = cData['corp_region'] === '' ? '未知' : cData['corp_region'];
-                                cSize = findDropBoxDataName(cData['size'], 'companyLevel');
-                                html += '<li class="search_result_item"><a href="http://www.tianji.com/corps/' + cData['name'] + '" title="' + cData['name'] + '"><dl><dt><img src="' + logo + '" /></dt><dd><h4>' + cData['name'].substring(0, 18) + '</h4><p>地区：' + region + ' &nbsp;&nbsp;规模：' + cSize + '</p></dd></dl></a></li>';
-                            }
-                        }
-                        if (data['jobList']) {
-                            html += '<li class="search_list_title">按职位搜索<a class="search_more_link" href="' + strJobMore + '">更多&gt;&gt;</a></li>';
-                            for (var j = 0; j < data['jobList'].length; j++) {
-                                var jData = data['jobList'][j];
-                                html += '<li class="search_result_item"><a href="http://job.tianji.com/career/position/' + jData['jobId'] + '" title="' + jData['companyName'] + ', ' + jData['title'] + '"><dl><dt><img src="' + jData['imageUrl'] + '" /></dt><dd><h4>' + jData['title'] + '</h4><p>公司名称：' + jData['companyName'].substring(0, 15) + '</p></dd></dl></a></li>';
-                            }
-                        }
-                        //html += '<li class="search_result_item search_all_keywords"><a href="http://search.tianji.com/psearch?header_keyword=' + $searchInput.val() + '" title="查看全部 ' + $searchInput.val() + ' 的搜索结果"><span>∨</span> 查看全部搜索结果 <span>∨</span></a></li>';
-                        $('.search_main').html(html);
-                        $('.search_list').slideDown();
-                    },
-                    cache: false
-                });
-            }, 500);
-        }
-    });
-    $('.top_search form').submit(function() {
-        if (searchValue === '') {
-            $searchInput.val('');
-        }
-        $('.search_list').hide();
-    });
-    //新搜索end
-
     var timerShowSearch = null,
         timerHideSearch = null;
     var $headerMenuBg = $('#header .header_menu_bg');
-    //显示搜索栏
+    //显示搜索
     function showSearch() {
         clearTimeout(timerShowSearch);
         clearTimeout(timerHideSearch);
@@ -880,17 +819,149 @@ $(function() {
             $headerMenuBg.height(100);
         }, 500);
     }
-    //隐藏搜索栏
+    //隐藏搜索
     function hideSearch() {
         clearTimeout(timerShowSearch);
         clearTimeout(timerHideSearch);
         timerHideSearch = setTimeout(function() {
             if ((document.body.scrollTop || document.documentElement.scrollTop) >= 60) {
-                $('#header .header_menu,.search_list').hide();
+                $('#header .header_menu').hide();
                 $headerMenuBg.height(40);
             }
         }, 500);
     }
+    //新搜索
+    var $searchInput = $('#new_search_input');
+    var searchTimer = null;
+    var arrFnKeyCode = [9, 13, 16, 17, 18, 19, 20, 27, 35, 36, 37, 38, 39, 40, 42, 43, 45, 46, 47];
+    var searchSelectedIndex = -1;
+    var timerSearchList = null;
+    $searchInput.on({
+        focus: function() {
+            clearTimeout(timerSearchList);
+            $(this).addClass('find_bg');
+            $(this).siblings('.find_people_button').addClass('find_btn_bg');
+
+            if ($(this)[0].defaultValue == $(this).val()) {
+                $(this).val('');
+                $(this).stop().animate({
+                    width: 300
+                });
+            }
+            if ($.trim($(this).val()) === '') {
+                $('.search_list').hide();
+            } else if ($('.search_list').find('.search_result_item').length > 1) {
+                $('.search_list').slideDown();
+            }
+        },
+        blur: function() {
+            clearTimeout(timerSearchList);
+            $(this).removeClass('find_bg');
+            $(this).parents('.top_search').find('.find_people_button').removeClass('find_btn_bg');
+            if ($.trim($(this).val()) == '') {
+                if (isEn) {
+                    $(this).val('Search');
+                } else {
+                    $(this).val('\u641c\u7d22');
+                }
+                $(this).stop().delay(600).animate({
+                    width: 245
+                });
+            }
+            timerSearchList = setTimeout(function() {
+                $('.search_list').slideUp();
+            }, 1000);
+        },
+        keydown: function() {
+            clearTimeout(searchTimer);
+        },
+        keyup: function(e) {
+            clearTimeout(searchTimer);
+            if ($.trim($searchInput.val()) === '') {
+                $('.search_list').hide();
+                return false;
+            }
+            e = e || window.event;
+            var code = e.keyCode;
+            //ESC TAB键关闭联想
+            if (code === 27 || code == 9) {
+                if ($('.search_list').is(':visible')) {
+                    $('.search_list').hide();
+                }
+            }
+            searchValue = $searchInput.val();
+            //上下键选择
+            if ($('.search_list').is(':visible')) {
+                if (code === 38 || code === 40) {
+                    var $searchResultItem = $('.search_main').find('.search_result_item');
+                    code === 38 ? (searchSelectedIndex--) : (searchSelectedIndex++);
+                    if (searchSelectedIndex === -1) {
+                        searchSelectedIndex = $searchResultItem.length - 1;
+                    } else if (searchSelectedIndex === $searchResultItem.length) {
+                        searchSelectedIndex = 0;
+                    }
+                    var $currentSearchTab = $searchResultItem.eq(searchSelectedIndex);
+                    $currentSearchTab.addClass('current').siblings('.search_result_item').removeClass('current');
+                    $searchInput.val($currentSearchTab.find('a').attr('title'));
+                }
+            }
+            if ($.inArray(code, arrFnKeyCode) !== -1) {
+                return;
+            }
+            searchTimer = setTimeout(function() {
+                $.ajax('http://search.tianji.com/360search', {
+                    //$.ajax('../js/data.json', {
+                    dataType: 'jsonp',
+                    jsonpCallback: 'callback',
+                    //dataType: 'json',
+                    type: 'get',
+                    data: {
+                        keyword: $.trim($searchInput.val()) //encodeURIComponent()
+                    },
+                    success: function(data) {
+                        /*if (data['statusCode'] !== 'OK') {
+                            return false;
+                        }
+                        data = data['body'];*/
+                        //如果返回数据为空
+                        /*if (!data['users'] && !data['corps'] && !data['jobs']) {
+                            return;
+                        }*/
+                        var html = '';
+                        //重新请求数据后，searchSelectedIndex重置
+                        searchSelectedIndex = -1;
+                        if (data['users']) {
+                            for (var u = 0; u < data['users'].length; u++) {
+                                html += '<li class="search_result_item"><a href="http://www.tianji.com/p/' + data['users'][u]['user_id'] + '" title="' + data['users'][u]['name'] + '">' + data['users'][u]['name'] + '</a></li>'
+                            }
+                        }
+                        if (data['corps']) {
+                            html += '<li class="search_list_title">\u641c\u7d22\u516c\u53f8</li>';
+                            for (var c = 0; c < data['corps'].length; c++) {
+                                html += '<li class="search_result_item"><a href="http://www.tianji.com/corps/' + encodeURIComponent(data['corps'][c]['company_name']) + '" title="' + data['corps'][c]['company_name'] + '">' + data['corps'][c]['company_name'] + '</a></li>'
+                            }
+                        }
+                        if (data['jobs']) {
+                            html += '<li class="search_list_title">\u641c\u7d22\u804c\u4f4d</li>';
+                            for (var j = 0; j < data['jobs'].length; j++) {
+                                html += '<li class="search_result_item"><a href="http://job.tianji.com/career/position/' + data['jobs'][j]['job_id'] + '" title="' + data['jobs'][j]['title'] + '">' + data['jobs'][j]['title'] + '</a></li>'
+                            }
+                        }
+                        html += '<li class="search_result_item search_all_keywords"><a href="http://search.tianji.com/psearch?header_keyword=' + $searchInput.val() + '" title="' + $searchInput.val() + '">\u641c\u7d22\u5168\u90e8 ' + $searchInput.val().substring(0, 10) + '</a></li>';
+                        $('.search_main').html(html);
+                        $('.search_list').slideDown();
+                    },
+                    cache: false
+                });
+            }, 200);
+        }
+    });
+    $('.top_search form').submit(function() {
+        if (searchValue === '') {
+            $searchInput.val('');
+        }
+        $('.search_list').hide();
+    });
     //页面滚动
     $(document).scroll(function() {
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
