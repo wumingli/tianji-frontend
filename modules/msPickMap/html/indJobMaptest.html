@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+	<script type="text/javascript" src="../js/industryDataMap.js"></script>
+	<script type="text/javascript" src="../js/jobDataMap.js"></script>
+
+</head>
+<body>
+	
+	
+	<script type="text/javascript">
+
+	var DataMap = {};
+
+
+	console.log(industryDataMap)
+	console.log(jobDataMap)
+
+	console.log("---------------------------------");
+
+	for(var i in industryDataMap.MapTwo)
+	{
+
+		//console.log(industryDataMap.MapTwo[i])
+		for(var j in industryDataMap.MapTwo[i])
+		{
+			var code = "i"+j;
+			var value = industryDataMap.MapTwo[i][j];
+
+			//console.log(code);
+			//console.log(value);
+
+
+			for(var k in jobDataMap)
+			{
+
+				var _code = "j"+k;
+				var _value = jobDataMap[k];
+
+
+				//console.log(code+"_"+_code);
+				//console.log(value+"/"+_value);
+
+				var c = code+"_"+_code;
+				var v = value+"+"+_value;
+
+				DataMap[c] = v;
+
+
+
+			}
+
+		}
+	}
+
+
+
+	console.log(DataMap);
+
+	var str = JSON.stringify(DataMap);
+
+	document.write(str);
+
+	</script>
+
+</body>
+</html>

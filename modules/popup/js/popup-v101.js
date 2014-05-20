@@ -84,7 +84,7 @@
         }
     })();*/
     var isDragJsLoaded = false;
-    var commonStyle = '<style type="text/css" id="commonStyle">body{overflow-x:hidden}#tianjiPopupContainer{background:#fff;font-size:14px;z-index:99999;height:400px;width:750px;position:absolute;left:50%;margin-left:-375px;top:50%;margin-top:-200px}#tianjiPopupContainer h3{font:bold 14px/45px "Microsoft Yahei";height:45px;text-indent:10px;background:#eee;color:#797979;position:relative;z-index:2}#tianjiPopupContainer_shandow{width:100%;background:#000;opacity:0.6;filter:alpha(opacity=50);position:absolute;z-index:99998;left:0;top:0;height:100%}#tianjiPopupCloseBtn{position:absolute;right:-32px;top:0;width:32px;height:32px;background:#000 url(http://image.tianji.com/tjs/popup/images/icons.png);cursor:pointer;z-index:2;}#tianjiPopupContainer .popup_container{overflow:hidden;width:100%;position:relative;height:100%;}#tianjiPopupContainer .popup_container .popup_page{position:absolute;bottom:15px;left:50%;display:none;z-index:2;}#tianjiPopupContainer .popup_container .popup_page li{float:left;width:10px;height:10px;border-radius:10px;background-color:#ccc;margin-left:5px;text-indent:-100px;overflow:hidden;cursor:pointer}#tianjiPopupContainer .popup_container .popup_page li.currentTab{background-color:#069}#tianjiPopupContainer .popup_container .popup_page_btn{position:absolute;width:19px;height:57px;background:url(http://image.tianji.com/tjs/popup/images/nextAndPreArr.png) no-repeat 0 0;left:20px;top:50%;margin-top:-28px;cursor:pointer;display:none;z-index:2;}#tianjiPopupContainer .popup_container .popup_next_btn{background-position:-19px 0;left:auto;right:20px;display:none}#tianjiPopupContainer .popup_container .popup_loading{background:url(http://image.tianji.com/tjs/popup/images/loading1.gif) center 80% no-repeat;width:100%;height:100%;position:relative}#tianjiPopupContainer .popup_container .popup_loading .popup_hourglass{display:block;width:55px;height:91px;background:url(http://image.tianji.com/tjs/popup/images/loading2.jpg) center center no-repeat;position:absolute;left:50%;top:50%;margin-left:-27px;margin-top:-45px}#tianjiPopupContainer .popup_list{position:relative}#tianjiPopupContainer .popup_list li{float:left}#tianjiPopupContainer .popup_container .no_data_tip_sad,#tianjiPopupContainer .popup_container .no_data_tip_happy{color:#888;padding-left:50px;height:40px;line-height:40px;background:url(http://www.tianji.com/images/case1/new_nav/no_contacts.jpg) no-repeat 0 0;position:absolute;left:50%;top:50%;margin-left:-75px;margin-top:-20px;}#tianjiPopupContainer .popup_container .no_data_tip_happy{background-image:url(http://www.tianji.com/images/case1/normandy/joinin_success.jpg);color:green;}';
+    var commonStyle = '<style type="text/css" id="commonStyle">body{overflow-x:hidden}#tianjiPopupContainer{background:#fff;font-size:14px;z-index:9999999;height:400px;width:750px;position:absolute;left:50%;margin-left:-375px;top:50%;margin-top:-200px}#tianjiPopupContainer h3{font:bold 14px/45px "Microsoft Yahei";height:45px;text-indent:10px;background:#eee;color:#797979;position:relative;z-index:2}#tianjiPopupContainer_shandow{width:100%;background:#000;opacity:0.6;filter:alpha(opacity=50);position:fixed;z-index:9999998;left:0;top:0;height:100%;_position:absolute;}#tianjiPopupCloseBtn{position:absolute;right:-32px;top:0;width:32px;height:32px;background:#000 url(http://image.tianji.com/tjs/popup/images/icons.png);cursor:pointer;z-index:2;}#tianjiPopupContainer .popup_container{overflow:hidden;width:100%;position:relative;height:100%;}#tianjiPopupContainer .popup_container .popup_page{position:absolute;bottom:15px;left:50%;display:none;z-index:2;}#tianjiPopupContainer .popup_container .popup_page li{float:left;width:10px;height:10px;border-radius:10px;background-color:#ccc;margin-left:5px;text-indent:-100px;overflow:hidden;cursor:pointer}#tianjiPopupContainer .popup_container .popup_page li.currentTab{background-color:#069}#tianjiPopupContainer .popup_container .popup_page_btn{position:absolute;width:19px;height:57px;background:url(http://image.tianji.com/tjs/popup/images/nextAndPreArr.png) no-repeat 0 0;left:20px;top:50%;margin-top:-28px;cursor:pointer;display:none;z-index:2;}#tianjiPopupContainer .popup_container .popup_next_btn{background-position:-19px 0;left:auto;right:20px;display:none}#tianjiPopupContainer .popup_container .popup_loading{background:url(http://image.tianji.com/tjs/popup/images/loading1.gif) center 80% no-repeat;width:100%;height:100%;position:relative}#tianjiPopupContainer .popup_container .popup_loading .popup_hourglass{display:block;width:55px;height:91px;background:url(http://image.tianji.com/tjs/popup/images/loading2.jpg) center center no-repeat;position:absolute;left:50%;top:50%;margin-left:-27px;margin-top:-45px}#tianjiPopupContainer .popup_list{position:relative}#tianjiPopupContainer .popup_list li{float:left}#tianjiPopupContainer .popup_container .no_data_tip_sad,#tianjiPopupContainer .popup_container .no_data_tip_happy{color:#888;padding-left:50px;height:40px;line-height:40px;background:url(http://www.tianji.com/images/case1/new_nav/no_contacts.jpg) no-repeat 0 0;position:absolute;left:50%;top:50%;margin-left:-75px;margin-top:-20px;}#tianjiPopupContainer .popup_container .no_data_tip_happy{background-image:url(http://www.tianji.com/images/case1/normandy/joinin_success.jpg);color:green;}';
     //根据类型生成HTML
     function fnPopType(cfg, callback) {
         var html = '',
@@ -320,12 +320,13 @@
         //用户配置样式
         if (isIE6) {
             cfg.position = 'absolute';
+            $('#tianjiPopupContainer_shandow').height($(document).height());
         }
         cfg.boxWidth && $('#tianjiPopupContainer').css({
             width: cfg.boxWidth,
             marginLeft: -cfg.boxWidth / 2,
             position: cfg.position
-        })
+        });
         cfg.boxHeight && $('#tianjiPopupContainer').css({
             height: cfg.boxHeight,
             marginTop: -cfg.boxHeight / 2
@@ -333,7 +334,7 @@
         cfg.titleHeight && $('#tianjiPopupContainer .tianji_popup_title').css('height', cfg.titleHeight);
         //自动计算内侧容器高度
         cfg.showTitle && $('#tianjiPopupContainer .popup_container').css('height', cfg.boxHeight - cfg.titleHeight);
-        $('#tianjiPopupContainer_shandow').height($(document).height());
+        //$('#tianjiPopupContainer_shandow').height($(document).height());
         cfg.ok && cfg.ok();
         //关闭弹窗函数
         function closeBox() {
@@ -376,11 +377,11 @@
                 e.cancelBubble = true;
                 e.stopPropagation();
             });
-        } */
+        } 
         //重置窗口时更新遮罩层高度
         $(window).on('resize', function() {
             $('#tianjiPopupContainer_shandow').length > 0 && $('#tianjiPopupContainer_shandow').height($(document).height());
-        });
+        });*/
         cfg.boxLoad && $.isFunction(cfg.boxLoad) && cfg.boxLoad();
         return false;
     };

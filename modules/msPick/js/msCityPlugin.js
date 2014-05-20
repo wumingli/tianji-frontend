@@ -414,7 +414,7 @@ style:{		//可定义部分样式
 			            {
 			                $this.find(".ms-txt-component").val("");
 			                if($msOk) $msOk.remove();
-			                alert("最多选择5项");
+			                alert("最多选择"+msPick.maxCount+"项");
 			                return;
 			            }
 
@@ -641,7 +641,7 @@ style:{		//可定义部分样式
 			            }else
 			            {
 			            	$(this).find(".ms-cb-cb").attr("checked",false);
-				            alert("最多选择5项");
+				            alert("最多选择"+msPick.maxCount+"项");
 				            return;
 			            }
 			            

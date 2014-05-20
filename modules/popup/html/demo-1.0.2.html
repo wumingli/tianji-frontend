@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>popup demo</title>
+    <link href="http://image.tianji.com/tjs/styles/reset.css" rel="stylesheet" type="text/css" />
+    <!--<link href="../css/style.css" rel="stylesheet" type="text/css" />-->
+    <script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../js/popup-v102.js"></script>
+</head>
+<body>
+    <a href="javascript:void(0);" id="atest" title="" style="margin:20px;font-size:14px;display:inline-block;">另一个弹窗</a>
+    <script type="text/javascript">
+        var popup = new TianjiPopup({
+            name: 'test222',
+            title: '自动弹出的弹窗'
+        });
+        $('#atest').on('click', function() {
+            var popup2 = new TianjiPopup({
+                name: 'test111',
+                title: '另一个弹窗',
+                showLoading: false,
+                showTitle: false
+            });
+        });
+        /*var pop2 = new TianjiPopup();
+        pop2.createDialog();
+        pop2.autoplay();
+        var pop3 = new TianjiPopup();
+        pop3.autoplay();*/
+    </script>
+</body>
+</html>

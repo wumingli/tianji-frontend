@@ -48,7 +48,7 @@
 </p>
 <pre class="brush:javascript">
     tianjiPopup({
-        name: 'tianjiPopupName', //弹窗标识，默认为tianjiPopupName
+        name: 'tianjiPopupName', //弹窗标识，默认为tianjiPopupName【注：与保存关闭状态的cookie有关】
         boxWidth: 700, //弹窗宽度
         boxHeight: 320, //弹窗高度
         title: '弹窗默认标题', //默认标题
@@ -68,7 +68,7 @@
         esc: true, //ESC键关闭弹出层，默认为True
         autoPlay: true, //是否自动播放，默认为true
         cookie: false, //是否开启记住关闭状态，默认为false，设置为true关闭后刷新页面或点击时就不在显示popup，适用于自动弹出.
-                       //注：记住状态与name有关（name默认为tianjiPopupName），若网站有多个弹窗，最好给需要的单独取一个name，以避免影响其他弹窗。
+                       //注：记住状态与name有关（name默认为tianjiPopupName），若网站有多个弹窗，最好给需要的单独取一个name，以避免影响其他弹窗正常弹出。
         content:{
             type: 'ajaxData',   //目前接受值：ajaxData|userDefined|focus，默认值focus，用法见下方说明
             dataUrl: '../js/career_trip.json',
@@ -129,7 +129,15 @@
                 }
             </pre>
         </li>
-        <li>若要页面自动弹出，若有可以点击弹窗元素，trigger该元素的click事件；若无可点击元素，可以在页面里埋一个隐藏元素，然后trigger它的click事件。</li>
+        <li>自动弹出方法（当然你也可以放在window.onload/$(function(){})中）：
+            <pre class="brush:javascript">
+                (function(){
+                    tianjiPopup({
+                        //config codes here
+                    });
+                })();
+            </pre>
+        </li>
         <li>content的style属性支持将样式表放在里面，但你也可以通过引用外部CSS的方式，style为可选项</li>
         <li>目前弹窗类型还不全，仍在完善中</li>
         <li>有问题及时反馈至 <a href="mailto:wumingli@tianji.com?subject=popup%E5%BC%B9%E7%AA%97%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88">wumingli@tianji.com</a></li>

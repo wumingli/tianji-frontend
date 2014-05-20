@@ -56,6 +56,8 @@ div label{vertical-align:middle;position:relative;top:-4px;color:#666}
         <div class="findByCode">公司性质：<span data-dropbox-code="2" data-dropbox-name="companyProperty"></span></div>
         <div class="findByCode">工作经验：<span data-dropbox-code="9" data-dropbox-name="workExperience"></span></div>
         <div class="findByCode">期望薪资：<span data-dropbox-code="5000" data-dropbox-name="salarySingle"></span>-<span data-dropbox-code="8000" data-dropbox-name="salarySingle"></span></div>
+
+        <span data-dropbox-code="1" data-dropbox-name="eduBackground">
     </form>
 </div>
 <script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
@@ -69,6 +71,8 @@ $(function (){
         nodeName: 'div',
         triggerMethod: 'submit'
     });
+
+    /*
     $('#wml-p-data-wrap').dropBox({
         dataName: 'gender',
         css: {
@@ -78,8 +82,32 @@ $(function (){
         name: 'sex',
         text: '男女'
     });
+
+*/
+    $('#wml-p-data-wrap').dropBox({
+        dataName: 'custom',
+        customData: {
+            'custom': {
+                'data': [{
+                    'code': 'f',
+                    'name': '女'
+                },{
+                    'code': 'm',
+                    'name': '男'
+                }],
+                'title': '男女'
+            }
+        },
+        initCode: '901',
+        name:'sex',
+        text:'男女'
+    });
+
+
     $('#wml-p-data-wrap1').dropBox({
-        dataName: 'salary'
+        dataName: 'salary',
+        text:'月薪'
+
     });
     $('#wml-p-data-wrap2').dropBox({
         name: 'companyXXX',

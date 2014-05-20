@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
     var pkg = grunt.file.readJSON('package.json');
-    console.log(grunt.cli.tasks[0]);
+    var taskName = grunt.cli.tasks[0];
+    var testing = taskName.match(/\d+/)[0];
+    console.log('progressing task ' + grunt.cli.tasks[0] + '...');
     //industry json file create
     var jsonIndustry = grunt.file.read('modules/msPickMap/js/industryDataMap.js');
     eval(jsonIndustry);
@@ -218,7 +220,7 @@ module.exports = function(grunt) {
             },
             header_login: {
                 //src: ['gallery/jquery-mCustomScrollbar-concat.min.js', 'gallery/jquery-tipsy.js', 'modules/header2013/js/header2013.js', 'modules/popup-login/js/tj-popup-login.js', 'modules/miniProfile/js/miniCard.js'],
-                src: ['gallery/jquery-mCustomScrollbar-concat.min.js', 'gallery/jquery-tipsy.js', 'modules/header2013/js/header2013.js', 'modules/popup-login/js/tj-popup-login.js'],
+                src: ['gallery/jquery-mCustomScrollbar-concat.min.js', 'gallery/jquery-tipsy.js', 'modules/header2013/js/header2013.js', 'modules/popup-login/js/tj-popup-login.js', 'gallery/jquery.lazyload.min.js', 'modules/js/img-lazyload.js'],
                 dest: 'dist/header2013/js/header-all.js'
             },
             header_unlogin: {
@@ -382,7 +384,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-scp');
     grunt.loadNpmTasks('grunt-release');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
     //执行任务
     grunt.registerTask('test', [], function() {
         var pkg1 = grunt.file.read('package.json')
@@ -394,9 +395,6 @@ module.exports = function(grunt) {
     });
     grunt.registerTask('clear', ['clean']);
     grunt.registerTask('build', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'clean:publicRep', 'compress', 'clean:tempDir']);
-    grunt.registerTask('deploy', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:qa', 'scp:406', 'scp:407', 'scp:409', 'scp:4013', 'scp:4014', 'clean:tempDir']);
-    grunt.registerTask('deploy-7-13', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:407', 'scp:4013', 'clean:tempDir']);
-    grunt.registerTask('deploy4010', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:4010', 'clean:tempDir']);
+    grunt.registerTask('deploy' + testing, ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'compress', 'scp:' + testing, 'clean:tempDir']);
     grunt.registerTask('rel', ['clean:build', 'copy', 'concat', 'uglify', 'cssmin', 'clean:publicRep', 'compress', 'release', 'scp:release', 'clean:tempDir']);
-    grunt.registerTask('image', ['imagemin:static']);
 }

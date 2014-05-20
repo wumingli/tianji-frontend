@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+	<style type="text/css">
+	
+	.red{ display: inline-block; width: 200px; cursor: pointer; background: #ccc; margin-top: 3px; margin-left: 10px; color: #000;}
+	.blue{ display: inline-block; width: 200px; cursor: pointer; background: #ccc; margin-top: 3px; margin-left: 10px; color: blue;}
+
+	.hh{ background: #aaa; height: 100px; margin-top: 5px;}
+
+
+
+	</style>
+	<script type="text/javascript" src="http://image.tianji.com/tjs/gallery/jquery-1.7.2.min.js"></script>
+
+	<script type="text/javascript" src="../js/industryDataMap.js"></script>
+	<script type="text/javascript" src="../js/jobDataMap.js"></script>
+	<script type="text/javascript" src="../js/indJobDataMap.js"></script>
+
+</head>
+<body>
+	
+
+	<input type="button" class="btn" value = "确定" id="btn"  />
+	
+	<br/>
+
+	<div class="hh" id="hh1">
+		
+	</div>
+	<div class="hh" id="hh2">
+		
+	</div>
+	<div class="hh" id="hh3">
+		
+	</div>
+
+	<script type="text/javascript">
+
+	var oDiv1 = document.getElementById("hh1");
+	var oDiv2 = document.getElementById("hh2");
+	var oDiv3 = document.getElementById("hh3");
+	var oBtn = document.getElementById("btn");
+
+
+
+	for(var i in industryDataMap.MapTwo)
+	{
+
+		for(var j in industryDataMap.MapTwo[i])
+		{
+			var code = "i"+j;
+			var value = industryDataMap.MapTwo[i][j];
+
+			var oSpan = document.createElement("span");
+
+			oSpan.setAttribute("code",code);
+			oSpan.innerHTML = value;
+			oSpan.className = "red";
+
+			oSpan.onclick = function(){
+
+				oDiv1.appendChild(this.cloneNode(true))
+			}
+
+			document.body.appendChild(oSpan);
+		}
+
+	}
+
+	document.write("</br>")
+	document.write("</br>")
+	document.write("</br>")
+
+
+	for(var i in jobDataMap)
+	{
+		var code = "j"+i;
+		var value = jobDataMap[i];
+
+
+		var oSpan = document.createElement("span");
+
+		oSpan.setAttribute("code",code);
+		oSpan.innerHTML = value;
+		oSpan.className = "blue";
+
+		oSpan.onclick = function(){
+
+			oDiv2.appendChild(this.cloneNode(true))
+		}
+
+
+		document.body.appendChild(oSpan);
+
+	}
+
+
+	oBtn.onclick = function(){
+
+		console.log("a")
+		var aSpan1 = oDiv1.getElementsByTagName("span");
+		var aSpan2 = oDiv2.getElementsByTagName("span");
+
+		console.log(aSpan1.length)
+		console.log(aSpan2.length)
+
+		for(var i=0,len = aSpan1.length;i<len;i++)
+		{
+			var code = aSpan1[i].getAttribute("code");
+			var value = aSpan1[i].innerHTML;
+
+			console.log(code);
+			console.log(value);
+
+
+			for(var j=0,jlen = aSpan2.length;j<jlen;j++)
+			{
+				var _code = aSpan2[j].getAttribute("code");
+				var _value = aSpan2[j].innerHTML;
+
+				console.log(_code);
+				console.log(_value);
+
+
+				var oSpan = document.createElement("span");
+
+				oSpan.setAttribute("code",code+"_"+_code);
+				oSpan.innerHTML = value+"+"+_value;
+				oSpan.className = "blue";
+
+				oDiv3.appendChild(oSpan);
+
+			}
+
+
+		}
+
+	}
+
+	</script>
+
+
+
+</body>
+</html>

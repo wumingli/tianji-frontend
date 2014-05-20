@@ -76,17 +76,52 @@ var findData = {
 	}
 }
 
+
 $(".industryC").each(function(){
 
-	var code = $(this).attr("code");
-	var name = getCodeOrName.industry(code);
-	$(this).html(name);
+		var code = $(this).attr("code");
+
+		var tempArr = code.split(',');
+
+		if(tempArr.length ==1)
+		{
+			var name = getCodeOrName.industry(code);
+			$(this).html(name);	
+		}
+		if(tempArr.length>1)
+		{
+			var name = "";
+			for(var i=0;i<tempArr.length;i++)
+			{
+				name += getCodeOrName.industry(tempArr[i]);
+			}
+			
+			$(this).html(name);	
+		}
+		
 
 })
+
 $(".jobC").each(function(){
 
 	var code = $(this).attr("code");
-	var name = getCodeOrName.job(code);
-	$(this).html(name);
 
+	var tempArr = code.split(',');
+
+	if(tempArr.length ==1)
+	{
+		var name = getCodeOrName.job(code);
+		$(this).html(name);	
+	}
+	if(tempArr.length>1)
+	{
+		var name = "";
+		for(var i=0;i<tempArr.length;i++)
+		{
+			name += getCodeOrName.job(tempArr[i]);
+		}
+		
+		$(this).html(name);	
+	}
+	
 })

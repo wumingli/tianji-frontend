@@ -19,7 +19,6 @@ $(function() {
     var locLink = window.location.href;
     var isIE6 = ($.browser.msie && $.browser.version == 6.0);
     var isEn = ($('#header .header_menu_two ul.left_menu li:eq(0)').find('a').text() == 'Home');
-    var searchValue = '';
     var isLogin = false;
     //var DD_belatedPNG = DD_belatedPNG || false;
     //页面代码迁移——IE6透明&tipsy
@@ -50,11 +49,15 @@ $(function() {
     var chanel = {
         'home': 0,
         'p': 1,
+        'hr': 1,
         'contacts': 2,
         'job': 3,
         'corps': 4,
         'mba': 5,
-        'ce': 6
+        'ce': 6,
+        'groups': 7,
+        'pub': 7,
+        'events': 7
     };
     var isRemoveCur = (aUrlSplit[1] == 'p' && aUrlSplit.length > 2) || locLink.indexOf('m.tianji') > 0 ||
         locLink.indexOf('bbs.tianji') > 0 || locLink.indexOf('search.tianji') > 0;
@@ -95,9 +98,9 @@ $(function() {
     //登录状态调用
     if ($('.user_unlogin_info').length == 0) {
         //语言切换
-        var $lanLink = $('.user_info .user_item li:eq(1)').find('a');
+        /*var $lanLink = $('.user_info .user_item li:eq(1)').find('a');
         var lanHref = $lanLink.attr('href');
-        $lanLink.attr('href', lanHref.substring(0, lanHref.length - 1) + locLink);
+        $lanLink.attr('href', lanHref.substring(0, lanHref.length - 1) + locLink);*/
         //因跨域页延迟
         setTimeout(function() {
             //封装测试
@@ -665,16 +668,43 @@ $(function() {
             });
 
             //人脉邀请链接： addGaTrach('notification_bar','GoToInvite','CR');
+
+            //添加窗口获得焦点事件，监测用户是否已退出登录
+            var focusTimer = null;
+            $(window).focus(function() {
+                clearTimeout(focusTimer);
+                focusTimer = setTimeout(function() {
+                    __$.get('http://www.tianji.com/front/nav/user?' + Math.random(), function(data) {
+                        if (data['error']) {
+                            window.location.href = 'http://www.tianji.com/index?ifr=o';
+                        }
+                    });
+                }, 300);
+            });
         }, 800);
     }
     //新搜索
     var $searchInput = $('#new_search_input');
+    var $searchLoading = $('.loading_search_result');
     var searchTimer = null;
-    var arrFnKeyCode = [9, 17, 18, 19, 20, 27, 35, 36, 37, 38, 39, 40, 42, 43, 45, 46, 47];
+    var arrFnKeyCode = [9, 18, 19, 20, 27, 35, 36, 37, 38, 39, 40, 42, 43, 45, 46, 47];
     var searchSelectedIndex = -1;
     var timerSearchList = null;
     var timerGetDropbox = null;
     var inputChanged = false;
+    //粘贴事件
+    $.fn.pasteEvents = function(delay) {
+        if (delay == undefined) delay = 20;
+        return $(this).each(function() {
+            var $el = $(this);
+            $el.on("paste", function() {
+                $el.trigger("prepaste");
+                setTimeout(function() {
+                    $el.trigger("postpaste");
+                }, delay);
+            });
+        });
+    };
     //跳到搜索
     function gotoSearch() {
         if (inputChanged) {
@@ -698,6 +728,7 @@ $(function() {
     $searchInput.on({
         focus: function() {
             clearTimers();
+            timerGetDropbox && clearTimeout(timerGetDropbox);
             $(this).addClass('find_bg');
             $(this).siblings('.find_people_button').addClass('find_btn_bg');
 
@@ -717,6 +748,7 @@ $(function() {
         },
         blur: function() {
             clearTimers();
+            $searchLoading.hide();
             $(this).removeClass('find_bg');
             $(this).parents('.top_search').find('.find_people_button').removeClass('find_btn_bg');
             if ($.trim($(this).val()) == '') {
@@ -730,18 +762,28 @@ $(function() {
                 $('.search_list').slideUp();
             }, 500);
         },
-        keydown: function() {
+        keydown: function(e) {
             clearTimers();
+            e = e || window.event;
+            var code = e.keyCode;
             inputChanged = true;
+
+
+            if ($.inArray(code, arrFnKeyCode) === -1 && e.keyCode != 17 && e.keyCode != 16) {
+                $('.loading_search_result').show();
+                $('.search_list').hide();
+            }
         },
         keyup: function(e) {
-            clearTimers();
             //如果为空，直接返回
+
             if ($.trim($searchInput.val()) === '') {
+                $('.search_list,.loading_search_result').hide();
                 $('.search_list').hide().find('.search_main li').remove();
                 inputChanged = false;
                 return false;
             }
+            clearTimers();
             e = e || window.event;
             var code = e.keyCode;
             var $searchResultItem = $('.search_main').find('.search_result_item');
@@ -753,23 +795,21 @@ $(function() {
                     $searchResultItem.removeClass('current');
                 }
             }
-            searchValue = $searchInput.val();
             //上下键选择
             if ($('.search_list').is(':visible')) {
                 if (code === 38 || code === 40) {
                     code === 38 ? (searchSelectedIndex--) : (searchSelectedIndex++);
-                    if (searchSelectedIndex === -1) {
-                        searchSelectedIndex = $searchResultItem.length;
+                    if (searchSelectedIndex < 0) {
+                        searchSelectedIndex = $searchResultItem.length - 1;
                     } else if (searchSelectedIndex === $searchResultItem.length) {
                         searchSelectedIndex = 0;
                     }
                     var $currentSearchTab = $searchResultItem.eq(searchSelectedIndex);
                     $currentSearchTab.addClass('current').siblings('.search_result_item').removeClass('current');
-                    //$searchInput.val($currentSearchTab.find('a').attr('title'));
                 }
             }
             if (code === 13) {
-                $('.search_list').hide();
+                $('.search_list,.loding_search_result').hide();
                 if (searchSelectedIndex !== -1) {
                     window.location.href = $('.search_main').find('.search_result_item').eq(searchSelectedIndex).find('a').eq(0).attr('href');
                 } else {
@@ -780,6 +820,10 @@ $(function() {
             if (!e.shiftKey && $.inArray(code, arrFnKeyCode) !== -1) {
                 return;
             }
+            if (e.keycode == 17) {
+                return;
+            }
+            $('.loading_search_result').show();
             searchTimer = setTimeout(function() {
                 var searchVal = $.trim($searchInput.val());
                 $.ajax('http://search.tianji.com/search360', {
@@ -795,7 +839,7 @@ $(function() {
                     success: function(data) {
                         if (data === null) {
                             $('.search_main li').remove();
-                            $('.search_list').hide();
+                            $('.search_list,.loading_search_result').hide();
                             return;
                         }
                         if ($.trim($searchInput.val()) === '') {
@@ -805,17 +849,17 @@ $(function() {
                         }
                         var html = '';
                         var strNameMore = '',
-                            strCompanyMore = '',
-                            strJobMore = '';
+                            strCompanyMore = 'http://www.tianji.com/corps/search_corp?q=' + searchVal + '&utf8=✓',
+                            strJobMore = 'http://job.tianji.com/career/search/K/' + searchVal + '?cur=1';
                         var strNameLink = '';
                         if (isLogin) {
                             strNameMore = 'http://search.tianji.com/psearch?name=' + searchVal + '&requestFrom=headerSearch';
-                            strCompanyMore = 'http://search.tianji.com/psearch?company=' + searchVal + '&requestFrom=headerSearch';
-                            strJobMore = 'http://search.tianji.com/psearch?title=' + searchVal + '&requestFrom=headerSearch';
+                            /*strCompanyMore = 'http://search.tianji.com/psearch?company=' + searchVal + '&requestFrom=headerSearch';
+                            strJobMore = 'http://search.tianji.com/psearch?title=' + searchVal + '&requestFrom=headerSearch';*/
                         } else {
                             strNameMore = 'http://search.tianji.com/search/n/' + searchVal;
-                            strCompanyMore = 'http://search.tianji.com/search/c/' + searchVal;
-                            strJobMore = 'http://search.tianji.com/search/t/' + searchVal;
+                            /*strCompanyMore = 'http://search.tianji.com/search/c/' + searchVal;
+                            strJobMore = 'http://search.tianji.com/search/t/' + searchVal;*/
                         }
                         //重新请求数据后，searchSelectedIndex重置
                         searchSelectedIndex = -1;
@@ -848,11 +892,13 @@ $(function() {
                             html += '<li class="search_list_title">按职位搜索<a class="search_more_link" href="' + strJobMore + '">更多&gt;&gt;</a></li>';
                             for (var j = 0; j < data['jobList'].length; j++) {
                                 var jData = data['jobList'][j];
-                                html += '<li class="search_result_item"><a href="http://job.tianji.com/career/position/' + jData['jobId'] + '" title="' + jData['companyName'] + ', ' + jData['title'] + '"><dl><dt><img src="' + jData['imageUrl'] + '" /></dt><dd><h4>' + jData['title'] + '</h4><p>公司名称：' + jData['companyName'].substring(0, 15) + '</p></dd></dl></a></li>';
+                                var img = jData['imageUrl'] ? jData['imageUrl'] : 'http://static.tianji.com/images/new_companies/image/photo_2.jpg';
+                                html += '<li class="search_result_item"><a href="http://job.tianji.com/career/position/' + jData['jobId'] + '" title="' + jData['companyName'] + ', ' + jData['title'] + '"><dl><dt><img src="' + img + '" /></dt><dd><h4>' + jData['title'] + '</h4><p>公司名称：' + jData['companyName'].substring(0, 15) + '</p></dd></dl></a></li>';
                             }
                         }
                         //html += '<li class="search_result_item search_all_keywords"><a href="http://search.tianji.com/psearch?header_keyword=' + $searchInput.val() + '" title="查看全部 ' + $searchInput.val() + ' 的搜索结果"><span>∨</span> 查看全部搜索结果 <span>∨</span></a></li>';
                         $('.search_main').html(html);
+                        $('.loading_search_result').hide();
                         $('.search_list').slideDown();
                     },
                     cache: false
@@ -860,12 +906,9 @@ $(function() {
             }, 500);
         }
     });
-    $('.top_search form').submit(function() {
-        if (searchValue === '') {
-            $searchInput.val('');
-        }
-        $('.search_list').hide();
-    });
+    $searchInput.on("postpaste", function() {
+        $(this).trigger('keyup');
+    }).pasteEvents();
     //新搜索end
 
     var timerShowSearch = null,
@@ -899,10 +942,6 @@ $(function() {
                 position: 'fixed',
                 top: 0
             });
-            /*$('#container_index').css('paddingTop', '100px');
-            $('#container').css('marginTop', '115px');
-            $('#bd').css('marginTop', '120px');
-            */
             if ($('.pos100').length == 0) {
                 $('#header').after('<div class="pos100" style="height:100px;"></div>');
             } else {
@@ -917,11 +956,6 @@ $(function() {
             $('#header').css({
                 position: 'relative'
             });
-            /*
-            $('#container_index').css('paddingTop', '0');
-            $('#container').css('marginTop', '15px');
-            $('#bd').css('marginTop', '20px');
-            */
             $('.pos100').hide();
             $headerMenuBg.height(100);
             $headerMenuBg.off('mouseover', showSearch);

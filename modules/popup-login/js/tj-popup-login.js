@@ -35,6 +35,7 @@ $(function() {
         var arrRegPlaceHolder = ['真实姓名', '邮箱/手机', '密码'];
         var arrDataPlaceHolder = $obj.attr('data-reg-placeholder') ? $obj.attr('data-reg-placeholder').split(',') : arrRegPlaceHolder;
         gotoPage = gotoPage || targetLocation;
+        gotoPage = encodeURI(gotoPage);
         //已经存在
         if ($('#tianji-popup-login').length != 0) {
             frameShow();

@@ -47,144 +47,6 @@ $(function() {
         var cArr = this.match(/[^\x00-\xff]/ig);
         return this.length + (cArr == null ? 0 : cArr.length);
     }
-    /*原搜索
-    $(".find_people").focus(function() {
-        $(this).addClass('find_bg');
-        $(this).parents('.top_search').find('.find_people_button').addClass('find_btn_bg');
-        if ($(this)[0].defaultValue == $(this).val()) {
-            $(this).val('');
-        }
-    });
-    $(".find_people").keyup(function() {
-        searchValue = $(this).val();
-    });
-    $(".find_people").blur(function() {
-        $(this).removeClass('find_bg');
-        $(this).parents('.top_search').find('.find_people_button').removeClass('find_btn_bg');
-        if ($.trim($(this).val()) == '') {
-            if (isEn) {
-                $(this).val('Search');
-            } else {
-                $(this).val('搜索');
-            }
-        }
-    });
-    $('.top_search form').submit(function() {
-        $(this).find('.find_people_button').val('');
-        if (searchValue === '') {
-            $(".find_people").val('');
-        }
-    });
-    window.SearchBox = {
-        selectors: {
-            root: $(".top_search"),
-            input: $(".top_search form :text:first"),
-            box: $(".search_list"),
-            highlight: $(".search_main li a b")
-        },
-        keyCode: {
-            UP: 38,
-            DOWN: 40
-        },
-        defalutText: "",
-        host: "http://search.tianji.com/psearch",
-        init: function() {
-            this._bind();
-            return this;
-        },
-        _bind: function() {
-            this.selectors.input.bind("blur", this._hide).bind("keyup", this._keyup);
-            this.selectors.input.bind("input", this._keyup);
-            this.selectors.box.bind("click", this._hide);
-            this.selectors.box.hover(function() {
-                SearchBox.selectors.input.unbind("blur");
-            }, function() {
-                SearchBox.selectors.input.bind("blur", SearchBox._hide);
-            });
-        },
-        _keyup: function(e) {
-            switch (e.which) {
-                case 38:
-                    SearchBox._up();
-                    break;
-                case 40:
-                    SearchBox._down();
-                    break;
-                case 13:
-                    SearchBox._input();
-                    this._hide;
-                    break;
-                default:
-                    SearchBox._input();
-                    break;
-            }
-            SearchBox._select();
-        },
-        _show: function() {
-            SearchBox.selectors.box.show();
-        },
-        _hide: function() {
-            SearchBox.selectors.box.hide();
-        },
-        _up: function() {
-            if ($(".search_list li.current:last").index(".search_list li") > 0) {
-                $(".search_list li.current").removeClass("current").prev("li").addClass("current");
-            }
-        },
-        _down: function() {
-            if ($(".search_list li.current:last").index(".search_list li") < 3) {
-                $(".search_list li.current").removeClass("current").next("li").addClass("current");
-            }
-        },
-        _input: function() {
-            var str = SearchBox.selectors.input.val();
-            SearchBox._resetUrl(encodeURIComponent(str));
-            if (str.length == 0) {
-                SearchBox._hide();
-                SearchBox._resetHighlight();
-            } else {
-                SearchBox._show();
-                str = SearchBox._truncate(str, 13);
-                SearchBox.selectors.highlight.text(str);
-            }
-        },
-        _select: function() {
-            $(".top_search form :hidden[name=header_destination]").val($(".search_list li.current a").attr("data-range"));
-        },
-        // 截断字符
-        _truncate: function(str, len) {
-            var _omission = "…";
-            var _maxLength = len * 2;
-            var len2 = str.length2();
-            //如果用户输入的内容 字节数小于等于10， 则return 原字符串
-            if (len2 <= _maxLength) return str;
-
-            // 否则截断字符
-            // 截取前5个字符，判断字节数是否等于10，如果小于10则补进下一个字符，直到字节数为10,并添加omission
-            var _str = str.substring(0, len);
-            var _len2 = _str.length2();
-
-            while (_len2 < _maxLength) {
-                var _tmpStr = str.substring(0, len++);
-                _len2 = _tmpStr.length2();
-                //判断最后一个字符是中文的情况
-                if (_len2 > _maxLength) break;
-                _str = _tmpStr;
-            }
-            return _str + _omission;
-        },
-        _resetHighlight: function() {
-            SearchBox.selectors.highlight.text(SearchBox.defalutText);
-        },
-        _resetUrl: function(_str) {
-            $(".search_list ul li a[data-range]").each(function() {
-                $(this).attr("href", SearchBox.host + "?header_destination=" + $(this).attr("data-range") + "&header_keyword=" + _str);
-            });
-            $(".search_list .use_hign_search a").attr("href", "http://search.tianji.com/psearch?keyword=" + _str);
-        }
-    }
-    //初始化搜索
-    SearchBox.init();*/
     //标识当前频道
     var urlPath = window.location.pathname;
     var aUrlSplit = urlPath.split('/');
@@ -245,7 +107,7 @@ $(function() {
             //封装测试
             function getUserInfo($$) {
                 if (/tianji.com/.test(hostname)) {
-                    if ( !! $$) {
+                    if (!!$$) {
                         //用户信息
                         $$.get('http://www.tianji.com/front/nav/user?' + Math.random(), function(data) {
                             if (data) {
@@ -910,7 +772,6 @@ $(function() {
             }
             searchTimer = setTimeout(function() {
                 $.ajax('http://search.tianji.com/360search', {
-                    //$.ajax('../js/data.json', {
                     dataType: 'jsonp',
                     jsonpCallback: 'callback',
                     //dataType: 'json',
@@ -919,14 +780,6 @@ $(function() {
                         keyword: $.trim($searchInput.val()) //encodeURIComponent()
                     },
                     success: function(data) {
-                        /*if (data['statusCode'] !== 'OK') {
-                            return false;
-                        }
-                        data = data['body'];*/
-                        //如果返回数据为空
-                        /*if (!data['users'] && !data['corps'] && !data['jobs']) {
-                            return;
-                        }*/
                         var html = '';
                         //重新请求数据后，searchSelectedIndex重置
                         searchSelectedIndex = -1;
